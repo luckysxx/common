@@ -341,6 +341,102 @@ func (x *LogoutResponse) GetSuccess() bool {
 	return false
 }
 
+type VerifyTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerifyTokenRequest) Reset() {
+	*x = VerifyTokenRequest{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyTokenRequest) ProtoMessage() {}
+
+func (x *VerifyTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyTokenRequest.ProtoReflect.Descriptor instead.
+func (*VerifyTokenRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *VerifyTokenRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type VerifyTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerifyTokenResponse) Reset() {
+	*x = VerifyTokenResponse{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerifyTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifyTokenResponse) ProtoMessage() {}
+
+func (x *VerifyTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifyTokenResponse.ProtoReflect.Descriptor instead.
+func (*VerifyTokenResponse) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *VerifyTokenResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *VerifyTokenResponse) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
 var File_proto_auth_auth_api_proto protoreflect.FileDescriptor
 
 const file_proto_auth_auth_api_proto_rawDesc = "" +
@@ -364,11 +460,17 @@ const file_proto_auth_auth_api_proto_rawDesc = "" +
 	"\rLogoutRequest\x12\x1b\n" +
 	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\"*\n" +
 	"\x0eLogoutResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xbb\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"*\n" +
+	"\x12VerifyTokenRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"J\n" +
+	"\x13VerifyTokenResponse\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busername2\xff\x01\n" +
 	"\vAuthService\x120\n" +
 	"\x05Login\x12\x12.user.LoginRequest\x1a\x13.user.LoginResponse\x12E\n" +
 	"\fRefreshToken\x12\x19.user.RefreshTokenRequest\x1a\x1a.user.RefreshTokenResponse\x123\n" +
-	"\x06Logout\x12\x13.user.LogoutRequest\x1a\x14.user.LogoutResponseB'Z%github.com/luckysxx/common/proto/authb\x06proto3"
+	"\x06Logout\x12\x13.user.LogoutRequest\x1a\x14.user.LogoutResponse\x12B\n" +
+	"\vVerifyToken\x12\x18.user.VerifyTokenRequest\x1a\x19.user.VerifyTokenResponseB'Z%github.com/luckysxx/common/proto/authb\x06proto3"
 
 var (
 	file_proto_auth_auth_api_proto_rawDescOnce sync.Once
@@ -382,7 +484,7 @@ func file_proto_auth_auth_api_proto_rawDescGZIP() []byte {
 	return file_proto_auth_auth_api_proto_rawDescData
 }
 
-var file_proto_auth_auth_api_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_proto_auth_auth_api_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_proto_auth_auth_api_proto_goTypes = []any{
 	(*LoginRequest)(nil),         // 0: user.LoginRequest
 	(*LoginResponse)(nil),        // 1: user.LoginResponse
@@ -390,16 +492,20 @@ var file_proto_auth_auth_api_proto_goTypes = []any{
 	(*RefreshTokenResponse)(nil), // 3: user.RefreshTokenResponse
 	(*LogoutRequest)(nil),        // 4: user.LogoutRequest
 	(*LogoutResponse)(nil),       // 5: user.LogoutResponse
+	(*VerifyTokenRequest)(nil),   // 6: user.VerifyTokenRequest
+	(*VerifyTokenResponse)(nil),  // 7: user.VerifyTokenResponse
 }
 var file_proto_auth_auth_api_proto_depIdxs = []int32{
 	0, // 0: user.AuthService.Login:input_type -> user.LoginRequest
 	2, // 1: user.AuthService.RefreshToken:input_type -> user.RefreshTokenRequest
 	4, // 2: user.AuthService.Logout:input_type -> user.LogoutRequest
-	1, // 3: user.AuthService.Login:output_type -> user.LoginResponse
-	3, // 4: user.AuthService.RefreshToken:output_type -> user.RefreshTokenResponse
-	5, // 5: user.AuthService.Logout:output_type -> user.LogoutResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	6, // 3: user.AuthService.VerifyToken:input_type -> user.VerifyTokenRequest
+	1, // 4: user.AuthService.Login:output_type -> user.LoginResponse
+	3, // 5: user.AuthService.RefreshToken:output_type -> user.RefreshTokenResponse
+	5, // 6: user.AuthService.Logout:output_type -> user.LogoutResponse
+	7, // 7: user.AuthService.VerifyToken:output_type -> user.VerifyTokenResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -416,7 +522,7 @@ func file_proto_auth_auth_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_auth_auth_api_proto_rawDesc), len(file_proto_auth_auth_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
