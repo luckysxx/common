@@ -2,10 +2,8 @@ module github.com/luckysxx/common/rpc
 
 go 1.25.5
 
-replace github.com/luckysxx/common/proto => ../proto
-
 require (
-	github.com/luckysxx/common/proto v0.0.0
+	github.com/luckysxx/common/proto v0.0.0-20260325063141-5d09c9e23840
 	google.golang.org/grpc v1.79.3
 )
 
