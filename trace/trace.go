@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/google/uuid"
+	oteltrace "go.opentelemetry.io/otel/trace"
 )
 
 type contextKey string
@@ -13,20 +14,20 @@ const (
 	HeaderTraceID string     = "x-trace-id"
 )
 
-// NewTraceID generates a fresh UUID for tracing requests.
 func NewTraceID() string {
-	return uuid.New().String()
+	return uuid.NewString()
 }
-
-// IntoContext injects the given trace ID into the context.
 func IntoContext(ctx context.Context, traceID string) context.Context {
 	return context.WithValue(ctx, TraceIDKey, traceID)
 }
 
-// FromContext extracts the trace ID from the context. Returns empty string if not found.
 func FromContext(ctx context.Context) string {
 	if ctx == nil {
 		return ""
+	}
+	span := oteltrace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		return span.SpanContext().TraceID().String()
 	}
 	if val, ok := ctx.Value(TraceIDKey).(string); ok {
 		return val
