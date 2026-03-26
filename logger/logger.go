@@ -1,10 +1,13 @@
 package logger
 
 import (
+	"context"
 	"os"
 
+	"github.com/luckysxx/common/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	oteltrace "go.opentelemetry.io/otel/trace"
 )
 
 // 创建一个新的 Logger 实例
@@ -82,4 +85,33 @@ func NewLogger(serviceName string) *zap.Logger {
 	logger = logger.With(zap.String("service", serviceName))
 
 	return logger
+}
+
+// Ctx 从 context 中提取 OpenTelemetry 的 TraceID 和 SpanID，返回一个自动携带这些字段的子 Logger。
+// 子 Logger 是轻量级的（只多了一个指针 + 几个字段），不会影响全局 Logger。
+//
+// 使用方式：
+//
+//	logger.Ctx(ctx, log).Info("创建用户成功", zap.String("user_id", uid))
+//
+// 输出效果：
+//
+//	{"level":"INFO", "message":"创建用户成功", "trace_id":"abc123...", "span_id":"def456...", "user_id":"u-001"}
+func Ctx(ctx context.Context, log *zap.Logger) *zap.Logger {
+	// 优先从 OTel Span 中获取（标准方式）
+	span := oteltrace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		return log.With(
+			zap.String("trace_id", span.SpanContext().TraceID().String()),
+			zap.String("span_id", span.SpanContext().SpanID().String()),
+		)
+	}
+
+	// 降级：从我们自定义的 context key 中取（兼容没有 OTel 的场景）
+	traceID := trace.FromContext(ctx)
+	if traceID != "" {
+		return log.With(zap.String("trace_id", traceID))
+	}
+
+	return log
 }
