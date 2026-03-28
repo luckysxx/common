@@ -8,21 +8,21 @@ import (
 	"go.uber.org/zap"
 )
 
-type redisLimiter struct {
+type fixedWindowLimiter struct {
 	cli    *redis.Client
 	logger *zap.Logger
 }
 
-// NewRedisLimiter creates a new Redis-based rate limiter.
-func NewRedisLimiter(cli *redis.Client, logger *zap.Logger) Limiter {
-	return &redisLimiter{
+// NewFixedWindowLimiter creates a new Redis-based rate limiter.
+func NewFixedWindowLimiter(cli *redis.Client, logger *zap.Logger) Limiter {
+	return &fixedWindowLimiter{
 		cli:    cli,
 		logger: logger,
 	}
 }
 
 // Allow uses a fixed window counter to rate limit requests.
-func (r *redisLimiter) Allow(ctx context.Context, key string, limit int, window time.Duration) error {
+func (r *fixedWindowLimiter) Allow(ctx context.Context, key string, limit int, window time.Duration) error {
 	// 使用 Redis 管道 (Pipeline) 原子性地执行 INCR 和 EXPIRE
 	pipe := r.cli.TxPipeline()     //开启管道
 	incrReq := pipe.Incr(ctx, key) //给key增加1

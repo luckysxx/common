@@ -17,4 +17,25 @@ message RegisterResponse {
 
 service UserService {
     rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc GetProfile (GetProfileRequest) returns (ProfileResponse);
+    rpc UpdateProfile (UpdateProfileRequest) returns (ProfileResponse);
+}
+
+message GetProfileRequest {
+    int64 user_id = 1;
+}
+
+message UpdateProfileRequest {
+    int64 user_id = 1;
+    string nickname = 2;
+    string avatar_url = 3;
+    string bio = 4;
+}
+
+message ProfileResponse {
+    int64 user_id = 1;
+    string nickname = 2;
+    string avatar_url = 3;
+    string bio = 4;
+    string updated_at = 5;
 }
