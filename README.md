@@ -12,7 +12,7 @@
 | `common/health` | 统一的健康检查接口与探测封装 |
 | `common/logger` | 基于 Zap 的日志能力与 Gin 中间件 |
 | `common/metrics` | Gin / gRPC 指标采集封装 |
-| `common/mq` | 跨服务共享的 Kafka Topic 与事件契约 |
+| `common/mq` | 跨服务共享的事件契约、Outbox 抽象与 CDC 集成约定 |
 | `common/otel` | OpenTelemetry Tracer 初始化 |
 | `common/postgres` | PostgreSQL 数据库连接池初始化与封装 |
 | `common/proto` | 共享的 Protobuf 定义与生成代码 |
