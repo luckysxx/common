@@ -6,14 +6,18 @@
 
 | 模块 | 说明 |
 |------|------|
+| `common/conf` | 基于 Viper 的基础配置加载与环境隔离 |
 | `common/crypto` | 密码哈希与校验工具 |
 | `common/errs` | 统一错误码与错误封装 |
+| `common/health` | 统一的健康检查接口与探测封装 |
 | `common/logger` | 基于 Zap 的日志能力与 Gin 中间件 |
 | `common/metrics` | Gin / gRPC 指标采集封装 |
+| `common/mq` | 跨服务共享的 Kafka Topic 与事件契约 |
 | `common/otel` | OpenTelemetry Tracer 初始化 |
+| `common/postgres` | PostgreSQL 数据库连接池初始化与封装 |
 | `common/proto` | 共享的 Protobuf 定义与生成代码 |
 | `common/ratelimiter` | 多种限流算法实现 |
-| `common/redis` | Redis 初始化与封装 |
+| `common/redis` | Redis 连接池初始化与统一封装 |
 | `common/rpc` | 跨服务 gRPC 客户端封装 |
 | `common/trace` | Trace ID 相关工具 |
 
@@ -27,4 +31,3 @@
 
 - 忽略 macOS 缓存文件、编辑器目录和 Go 编译产物。
 - 如果误生成了 `.DS_Store` 或临时文件，删除后再提交，避免污染下游服务仓库。
-
