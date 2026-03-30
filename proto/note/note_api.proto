@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option go_package = "github.com/luckysxx/common/proto/note";
+
+package note;
+
+service NoteService {
+    rpc CreatePaste (CreatePasteRequest) returns (PasteResponse);
+    rpc GetPaste (GetPasteRequest) returns (PasteResponse);
+    rpc ListPastes (ListPastesRequest) returns (ListPastesResponse);
+    rpc UpdatePaste (UpdatePasteRequest) returns (PasteResponse);
+}
+
+message CreatePasteRequest {
+    string title = 1;
+    string content = 2;
+    string language = 3;
+    string visibility = 4;
+}
+
+message GetPasteRequest {
+    int64 paste_id = 1;
+}
+
+message ListPastesRequest {
+}
+
+message UpdatePasteRequest {
+    int64 paste_id = 1;
+    string title = 2;
+    string content = 3;
+    string language = 4;
+    string visibility = 5;
+}
+
+message PasteResponse {
+    int64 id = 1;
+    int64 owner_id = 2;
+    string title = 3;
+    string short_link = 4;
+    string content = 5;
+    string language = 6;
+    string visibility = 7;
+    string created_at = 8;
+    string updated_at = 9;
+}
+
+message ListPastesResponse {
+    repeated PasteResponse pastes = 1;
+}
