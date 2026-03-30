@@ -12,6 +12,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"go.opentelemetry.io/otel/trace"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 )
@@ -88,9 +89,20 @@ func GRPCMetricsInterceptor() grpc.UnaryServerInterceptor {
 		code := status.Code(err).String()
 		dur := time.Since(start).Seconds()
 
-		// 记录请求计数和延时
+		// 记录请求计数和延时，尝试注入 TraceID Exemplar
 		grpcRequestTotal.WithLabelValues(info.FullMethod, code).Inc()
-		grpcRequestDuration.WithLabelValues(info.FullMethod, code).Observe(dur)
+		
+		observer := grpcRequestDuration.WithLabelValues(info.FullMethod, code)
+		span := trace.SpanFromContext(ctx)
+		if span.SpanContext().IsValid() {
+			if exemplarObserver, ok := observer.(prometheus.ExemplarObserver); ok {
+				exemplarObserver.ObserveWithExemplar(dur, prometheus.Labels{"trace_id": span.SpanContext().TraceID().String()})
+			} else {
+				observer.Observe(dur)
+			}
+		} else {
+			observer.Observe(dur)
+		}
 
 		return resp, err
 	}

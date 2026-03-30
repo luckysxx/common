@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"go.opentelemetry.io/otel/trace"
 )
 
 // ==================== 指标定义 ====================
@@ -93,8 +94,18 @@ func GinMetrics() gin.HandlerFunc {
 
 		// 请求计数 +1
 		httpRequestTotal.WithLabelValues(c.Request.Method, c.FullPath(), status).Inc()
-		// 将本次耗时"投入"到直方图的对应 bucket 中
-		httpRequestDuration.WithLabelValues(c.Request.Method, c.FullPath(), status).Observe(duration)
+		// 将本次耗时"投入"到直方图的对应 bucket 中，并尝试附带 TraceID (Exemplar)
+		observer := httpRequestDuration.WithLabelValues(c.Request.Method, c.FullPath(), status)
+		span := trace.SpanFromContext(c.Request.Context())
+		if span.SpanContext().IsValid() {
+			if exemplarObserver, ok := observer.(prometheus.ExemplarObserver); ok {
+				exemplarObserver.ObserveWithExemplar(duration, prometheus.Labels{"trace_id": span.SpanContext().TraceID().String()})
+			} else {
+				observer.Observe(duration)
+			}
+		} else {
+			observer.Observe(duration)
+		}
 	}
 }
 

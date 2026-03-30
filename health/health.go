@@ -14,6 +14,8 @@ package health
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"net/http"
 	"sync"
 	"time"
@@ -52,6 +54,13 @@ func (c *Checker) Register(r *gin.Engine) {
 	r.GET("/readyz", c.readiness)
 }
 
+// RegisterHTTP 将 /healthz 和 /readyz 注册到标准库 http.ServeMux。
+// 适用于纯 gRPC 进程旁路启动一个轻量 HTTP 管理端口的场景。
+func (c *Checker) RegisterHTTP(mux *http.ServeMux) {
+	mux.HandleFunc("/healthz", c.livenessHTTP)
+	mux.HandleFunc("/readyz", c.readinessHTTP)
+}
+
 // liveness 存活探针：进程在跑就返回 200。
 // K8s 用这个判断是否需要重启容器。
 func (c *Checker) liveness(ctx *gin.Context) {
@@ -61,15 +70,27 @@ func (c *Checker) liveness(ctx *gin.Context) {
 // readiness 就绪探针：逐一检查所有依赖，全部通过才返回 200。
 // K8s 用这个判断是否把流量路由到该 Pod。
 func (c *Checker) readiness(ctx *gin.Context) {
-	c.mu.RLock()
-	checks := make(map[string]CheckFunc, len(c.checks))
-	for k, v := range c.checks {
-		checks[k] = v
-	}
-	c.mu.RUnlock()
+	status, body := c.readinessPayload(ctx.Request.Context())
+	ctx.JSON(status, body)
+}
 
-	// 给每个检查项 2 秒超时，防止慢依赖拖垮探针
-	checkCtx, cancel := context.WithTimeout(ctx.Request.Context(), 2*time.Second)
+// livenessHTTP 是标准库 http 版本的存活探针。
+func (c *Checker) livenessHTTP(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, map[string]string{"status": "alive"})
+}
+
+// readinessHTTP 是标准库 http 版本的就绪探针。
+func (c *Checker) readinessHTTP(w http.ResponseWriter, r *http.Request) {
+	status, body := c.readinessPayload(r.Context())
+	writeJSON(w, status, body)
+}
+
+// Evaluate 执行所有检查项，返回整体是否健康以及逐项结果。
+// 这个方法适合给 gRPC 原生健康检查、后台巡检等非 HTTP 场景复用。
+func (c *Checker) Evaluate(parent context.Context) (bool, map[string]string) {
+	checks := c.snapshotChecks()
+
+	checkCtx, cancel := context.WithTimeout(parent, 2*time.Second)
 	defer cancel()
 
 	results := make(map[string]string, len(checks))
@@ -84,6 +105,13 @@ func (c *Checker) readiness(ctx *gin.Context) {
 		}
 	}
 
+	return allHealthy, results
+}
+
+// readinessPayload 统一执行所有检查项，生成 readiness 响应体。
+func (c *Checker) readinessPayload(parent context.Context) (int, map[string]any) {
+	allHealthy, results := c.Evaluate(parent)
+
 	status := http.StatusOK
 	overall := "ready"
 	if !allHealthy {
@@ -91,8 +119,27 @@ func (c *Checker) readiness(ctx *gin.Context) {
 		overall = "not_ready"
 	}
 
-	ctx.JSON(status, gin.H{
+	return status, map[string]any{
 		"status": overall,
 		"checks": results,
-	})
+	}
+}
+
+func (c *Checker) snapshotChecks() map[string]CheckFunc {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+
+	checks := make(map[string]CheckFunc, len(c.checks))
+	for k, v := range c.checks {
+		checks[k] = v
+	}
+	return checks
+}
+
+func writeJSON(w http.ResponseWriter, status int, body any) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	if err := json.NewEncoder(w).Encode(body); err != nil && !errors.Is(err, context.Canceled) {
+		return
+	}
 }

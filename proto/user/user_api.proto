@@ -30,6 +30,7 @@ message UpdateProfileRequest {
     string nickname = 2;
     string avatar_url = 3;
     string bio = 4;
+    string birthday = 5;
 }
 
 message ProfileResponse {
@@ -38,4 +39,5 @@ message ProfileResponse {
     string avatar_url = 3;
     string bio = 4;
     string updated_at = 5;
+    string birthday = 6;
 }

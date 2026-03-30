@@ -183,6 +183,7 @@ type UpdateProfileRequest struct {
 	Nickname      string                 `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	AvatarUrl     string                 `protobuf:"bytes,3,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
+	Birthday      string                 `protobuf:"bytes,5,opt,name=birthday,proto3" json:"birthday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -245,6 +246,13 @@ func (x *UpdateProfileRequest) GetBio() string {
 	return ""
 }
 
+func (x *UpdateProfileRequest) GetBirthday() string {
+	if x != nil {
+		return x.Birthday
+	}
+	return ""
+}
+
 type ProfileResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -252,6 +260,7 @@ type ProfileResponse struct {
 	AvatarUrl     string                 `protobuf:"bytes,3,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
 	UpdatedAt     string                 `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Birthday      string                 `protobuf:"bytes,6,opt,name=birthday,proto3" json:"birthday,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -321,6 +330,13 @@ func (x *ProfileResponse) GetUpdatedAt() string {
 	return ""
 }
 
+func (x *ProfileResponse) GetBirthday() string {
+	if x != nil {
+		return x.Birthday
+	}
+	return ""
+}
+
 var File_user_user_api_proto protoreflect.FileDescriptor
 
 const file_user_user_api_proto_rawDesc = "" +
@@ -334,13 +350,14 @@ const file_user_user_api_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\",\n" +
 	"\x11GetProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"|\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x98\x01\n" +
 	"\x14UpdateProfileRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bnickname\x18\x02 \x01(\tR\bnickname\x12\x1d\n" +
 	"\n" +
 	"avatar_url\x18\x03 \x01(\tR\tavatarUrl\x12\x10\n" +
-	"\x03bio\x18\x04 \x01(\tR\x03bio\"\x96\x01\n" +
+	"\x03bio\x18\x04 \x01(\tR\x03bio\x12\x1a\n" +
+	"\bbirthday\x18\x05 \x01(\tR\bbirthday\"\xb2\x01\n" +
 	"\x0fProfileResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bnickname\x18\x02 \x01(\tR\bnickname\x12\x1d\n" +
@@ -348,7 +365,8 @@ const file_user_user_api_proto_rawDesc = "" +
 	"avatar_url\x18\x03 \x01(\tR\tavatarUrl\x12\x10\n" +
 	"\x03bio\x18\x04 \x01(\tR\x03bio\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\tR\tupdatedAt2\xca\x01\n" +
+	"updated_at\x18\x05 \x01(\tR\tupdatedAt\x12\x1a\n" +
+	"\bbirthday\x18\x06 \x01(\tR\bbirthday2\xca\x01\n" +
 	"\vUserService\x129\n" +
 	"\bRegister\x12\x15.user.RegisterRequest\x1a\x16.user.RegisterResponse\x12<\n" +
 	"\n" +

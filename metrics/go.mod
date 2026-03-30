@@ -5,6 +5,7 @@ go 1.25.5
 require (
 	github.com/gin-gonic/gin v1.12.0
 	github.com/prometheus/client_golang v1.23.2
+	go.opentelemetry.io/otel/trace v1.42.0
 	google.golang.org/grpc v1.79.3
 )
 

@@ -21,6 +21,13 @@ func Init(cfg Config, log *zap.Logger) *redis.Client {
 		Addr:     cfg.Addr,
 		Password: cfg.Password,
 		DB:       cfg.DB,
+
+		// 连接池配置
+		PoolSize:        20,                // 最大连接数（默认 10*CPU，显式设置避免依赖运行环境）
+		MinIdleConns:    5,                 // 最小空闲连接（预热，减少冷启动延迟）
+		MaxIdleConns:    10,                // 最大空闲连接
+		ConnMaxIdleTime: 5 * time.Minute,   // 空闲超时回收
+		ConnMaxLifetime: 30 * time.Minute,  // 连接最大存活时间
 	})
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
