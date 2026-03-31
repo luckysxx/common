@@ -5,46 +5,184 @@ option go_package = "github.com/luckysxx/common/proto/note";
 package note;
 
 service NoteService {
-    rpc CreatePaste (CreatePasteRequest) returns (PasteResponse);
-    rpc GetPaste (GetPasteRequest) returns (PasteResponse);
-    rpc ListPastes (ListPastesRequest) returns (ListPastesResponse);
-    rpc UpdatePaste (UpdatePasteRequest) returns (PasteResponse);
+    // --- 已有 ---
+    rpc CreateSnippet (CreateSnippetRequest) returns (SnippetResponse);
+    rpc GetSnippet (GetSnippetRequest) returns (SnippetResponse);
+    rpc ListSnippets (ListSnippetsRequest) returns (ListSnippetsResponse);
+    rpc UpdateSnippet (UpdateSnippetRequest) returns (SnippetResponse);
+
+    // --- 新增：片段扩展 ---
+    rpc DeleteSnippet (DeleteSnippetRequest) returns (DeleteSnippetResponse);
+    rpc SearchSnippets (SearchSnippetsRequest) returns (ListSnippetsResponse);
+    rpc GetPublicSnippet (GetPublicSnippetRequest) returns (SnippetResponse);
+    rpc FavoriteSnippet (FavoriteSnippetRequest) returns (FavoriteSnippetResponse);
+    rpc UnfavoriteSnippet (UnfavoriteSnippetRequest) returns (FavoriteSnippetResponse);
+    rpc CreateSnippetFromTemplate (CreateSnippetFromTemplateRequest) returns (SnippetResponse);
+
+    // --- 新增：工作区列表 ---
+    rpc ListRecentSnippets (ListSnippetsRequest) returns (ListSnippetsResponse);
+    rpc ListSharedSnippets (ListSnippetsRequest) returns (ListSnippetsResponse);
+    rpc ListFavoriteSnippets (ListSnippetsRequest) returns (ListSnippetsResponse);
+
+    // --- 新增：分组 ---
+    rpc ListGroups (ListGroupsRequest) returns (ListGroupsResponse);
+    rpc CreateGroup (CreateGroupRequest) returns (GroupResponse);
+    rpc UpdateGroup (UpdateGroupRequest) returns (GroupResponse);
+    rpc DeleteGroup (DeleteGroupRequest) returns (DeleteGroupResponse);
+
+    // --- 新增：标签 ---
+    rpc ListTags (ListTagsRequest) returns (ListTagsResponse);
+    rpc CreateTag (CreateTagRequest) returns (TagResponse);
+    rpc DeleteTag (DeleteTagRequest) returns (DeleteTagResponse);
+
+    // --- 新增：模板与上传 ---
+    rpc ListTemplates (ListTemplatesRequest) returns (ListTemplatesResponse);
+    rpc GetTemplate (GetTemplateRequest) returns (TemplateResponse);
+    rpc UploadFile (UploadFileRequest) returns (UploadFileResponse);
 }
 
-message CreatePasteRequest {
+// ── 已有请求与响应 ──
+
+message CreateSnippetRequest {
     string title = 1;
     string content = 2;
     string language = 3;
     string visibility = 4;
 }
 
-message GetPasteRequest {
-    int64 paste_id = 1;
+message GetSnippetRequest {
+    int64 snippet_id = 1;
 }
 
-message ListPastesRequest {
+message ListSnippetsRequest {
 }
 
-message UpdatePasteRequest {
-    int64 paste_id = 1;
+message UpdateSnippetRequest {
+    int64 snippet_id = 1;
     string title = 2;
     string content = 3;
     string language = 4;
     string visibility = 5;
 }
 
-message PasteResponse {
+message SnippetResponse {
     int64 id = 1;
     int64 owner_id = 2;
     string title = 3;
-    string short_link = 4;
+    string type = 4;
     string content = 5;
-    string language = 6;
-    string visibility = 7;
-    string created_at = 8;
-    string updated_at = 9;
+    string file_url = 6;
+    int64 file_size = 7;
+    string mime_type = 8;
+    string language = 9;
+    string visibility = 10;
+    int64 group_id = 11;
+    string created_at = 12;
+    string updated_at = 13;
 }
 
-message ListPastesResponse {
-    repeated PasteResponse pastes = 1;
+message ListSnippetsResponse {
+    repeated SnippetResponse snippets = 1;
+}
+
+// ── 扩展请求与响应 ──
+
+message DeleteSnippetRequest {
+    int64 snippet_id = 1;
+}
+message DeleteSnippetResponse {
+    int64 id = 1;
+}
+
+message SearchSnippetsRequest {
+    string query = 1;
+}
+
+message GetPublicSnippetRequest {
+    int64 snippet_id = 1;
+}
+
+message FavoriteSnippetRequest {
+    int64 snippet_id = 1;
+}
+message UnfavoriteSnippetRequest {
+    int64 snippet_id = 1;
+}
+message FavoriteSnippetResponse {
+    int64 snippet_id = 1;
+    bool favorite = 2;
+}
+
+message CreateSnippetFromTemplateRequest {
+    int64 template_id = 1;
+    string title = 2;
+    string visibility = 3;
+}
+
+// ── Group Messages ──
+message GroupResponse {
+    int64 id = 1;
+    string name = 2;
+}
+message ListGroupsRequest {}
+message ListGroupsResponse {
+    repeated GroupResponse groups = 1;
+}
+message CreateGroupRequest {
+    string name = 1;
+}
+message UpdateGroupRequest {
+    int64 group_id = 1;
+    string name = 2;
+}
+message DeleteGroupRequest {
+    int64 group_id = 1;
+}
+message DeleteGroupResponse {
+    int64 id = 1;
+}
+
+// ── Tag Messages ──
+message TagResponse {
+    int64 id = 1;
+    string name = 2;
+}
+message ListTagsRequest {}
+message ListTagsResponse {
+    repeated TagResponse tags = 1;
+}
+message CreateTagRequest {
+    string name = 1;
+}
+message DeleteTagRequest {
+    int64 tag_id = 1;
+}
+message DeleteTagResponse {
+    int64 id = 1;
+}
+
+// ── Template Messages ──
+message TemplateResponse {
+    string id = 1;
+    string name = 2;
+    string language = 3;
+    string content = 4;
+}
+message ListTemplatesRequest {}
+message ListTemplatesResponse {
+    repeated TemplateResponse templates = 1;
+}
+message GetTemplateRequest {
+    string template_id = 1;
+}
+
+// ── Upload ──
+message UploadFileRequest {
+    bytes file_data = 1;
+    string filename = 2;
+}
+message UploadFileResponse {
+    string id = 1;
+    string filename = 2;
+    int64 size = 3;
 }

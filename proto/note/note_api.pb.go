@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreatePasteRequest struct {
+type CreateSnippetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
@@ -31,20 +31,20 @@ type CreatePasteRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreatePasteRequest) Reset() {
-	*x = CreatePasteRequest{}
+func (x *CreateSnippetRequest) Reset() {
+	*x = CreateSnippetRequest{}
 	mi := &file_note_note_api_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreatePasteRequest) String() string {
+func (x *CreateSnippetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePasteRequest) ProtoMessage() {}
+func (*CreateSnippetRequest) ProtoMessage() {}
 
-func (x *CreatePasteRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateSnippetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_note_note_api_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,60 +56,60 @@ func (x *CreatePasteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePasteRequest.ProtoReflect.Descriptor instead.
-func (*CreatePasteRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateSnippetRequest.ProtoReflect.Descriptor instead.
+func (*CreateSnippetRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreatePasteRequest) GetTitle() string {
+func (x *CreateSnippetRequest) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
 }
 
-func (x *CreatePasteRequest) GetContent() string {
+func (x *CreateSnippetRequest) GetContent() string {
 	if x != nil {
 		return x.Content
 	}
 	return ""
 }
 
-func (x *CreatePasteRequest) GetLanguage() string {
+func (x *CreateSnippetRequest) GetLanguage() string {
 	if x != nil {
 		return x.Language
 	}
 	return ""
 }
 
-func (x *CreatePasteRequest) GetVisibility() string {
+func (x *CreateSnippetRequest) GetVisibility() string {
 	if x != nil {
 		return x.Visibility
 	}
 	return ""
 }
 
-type GetPasteRequest struct {
+type GetSnippetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PasteId       int64                  `protobuf:"varint,1,opt,name=paste_id,json=pasteId,proto3" json:"paste_id,omitempty"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPasteRequest) Reset() {
-	*x = GetPasteRequest{}
+func (x *GetSnippetRequest) Reset() {
+	*x = GetSnippetRequest{}
 	mi := &file_note_note_api_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPasteRequest) String() string {
+func (x *GetSnippetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPasteRequest) ProtoMessage() {}
+func (*GetSnippetRequest) ProtoMessage() {}
 
-func (x *GetPasteRequest) ProtoReflect() protoreflect.Message {
+func (x *GetSnippetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_note_note_api_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -121,38 +121,38 @@ func (x *GetPasteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPasteRequest.ProtoReflect.Descriptor instead.
-func (*GetPasteRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetSnippetRequest.ProtoReflect.Descriptor instead.
+func (*GetSnippetRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetPasteRequest) GetPasteId() int64 {
+func (x *GetSnippetRequest) GetSnippetId() int64 {
 	if x != nil {
-		return x.PasteId
+		return x.SnippetId
 	}
 	return 0
 }
 
-type ListPastesRequest struct {
+type ListSnippetsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListPastesRequest) Reset() {
-	*x = ListPastesRequest{}
+func (x *ListSnippetsRequest) Reset() {
+	*x = ListSnippetsRequest{}
 	mi := &file_note_note_api_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListPastesRequest) String() string {
+func (x *ListSnippetsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListPastesRequest) ProtoMessage() {}
+func (*ListSnippetsRequest) ProtoMessage() {}
 
-func (x *ListPastesRequest) ProtoReflect() protoreflect.Message {
+func (x *ListSnippetsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_note_note_api_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -164,14 +164,14 @@ func (x *ListPastesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListPastesRequest.ProtoReflect.Descriptor instead.
-func (*ListPastesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListSnippetsRequest.ProtoReflect.Descriptor instead.
+func (*ListSnippetsRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{2}
 }
 
-type UpdatePasteRequest struct {
+type UpdateSnippetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PasteId       int64                  `protobuf:"varint,1,opt,name=paste_id,json=pasteId,proto3" json:"paste_id,omitempty"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
 	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 	Language      string                 `protobuf:"bytes,4,opt,name=language,proto3" json:"language,omitempty"`
@@ -180,20 +180,20 @@ type UpdatePasteRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdatePasteRequest) Reset() {
-	*x = UpdatePasteRequest{}
+func (x *UpdateSnippetRequest) Reset() {
+	*x = UpdateSnippetRequest{}
 	mi := &file_note_note_api_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdatePasteRequest) String() string {
+func (x *UpdateSnippetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdatePasteRequest) ProtoMessage() {}
+func (*UpdateSnippetRequest) ProtoMessage() {}
 
-func (x *UpdatePasteRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateSnippetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_note_note_api_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -205,75 +205,79 @@ func (x *UpdatePasteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdatePasteRequest.ProtoReflect.Descriptor instead.
-func (*UpdatePasteRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateSnippetRequest.ProtoReflect.Descriptor instead.
+func (*UpdateSnippetRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdatePasteRequest) GetPasteId() int64 {
+func (x *UpdateSnippetRequest) GetSnippetId() int64 {
 	if x != nil {
-		return x.PasteId
+		return x.SnippetId
 	}
 	return 0
 }
 
-func (x *UpdatePasteRequest) GetTitle() string {
+func (x *UpdateSnippetRequest) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
 }
 
-func (x *UpdatePasteRequest) GetContent() string {
+func (x *UpdateSnippetRequest) GetContent() string {
 	if x != nil {
 		return x.Content
 	}
 	return ""
 }
 
-func (x *UpdatePasteRequest) GetLanguage() string {
+func (x *UpdateSnippetRequest) GetLanguage() string {
 	if x != nil {
 		return x.Language
 	}
 	return ""
 }
 
-func (x *UpdatePasteRequest) GetVisibility() string {
+func (x *UpdateSnippetRequest) GetVisibility() string {
 	if x != nil {
 		return x.Visibility
 	}
 	return ""
 }
 
-type PasteResponse struct {
+type SnippetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	OwnerId       int64                  `protobuf:"varint,2,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
 	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	ShortLink     string                 `protobuf:"bytes,4,opt,name=short_link,json=shortLink,proto3" json:"short_link,omitempty"`
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Language      string                 `protobuf:"bytes,6,opt,name=language,proto3" json:"language,omitempty"`
-	Visibility    string                 `protobuf:"bytes,7,opt,name=visibility,proto3" json:"visibility,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,6,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize      int64                  `protobuf:"varint,7,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	MimeType      string                 `protobuf:"bytes,8,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	Language      string                 `protobuf:"bytes,9,opt,name=language,proto3" json:"language,omitempty"`
+	Visibility    string                 `protobuf:"bytes,10,opt,name=visibility,proto3" json:"visibility,omitempty"`
+	GroupId       int64                  `protobuf:"varint,11,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PasteResponse) Reset() {
-	*x = PasteResponse{}
+func (x *SnippetResponse) Reset() {
+	*x = SnippetResponse{}
 	mi := &file_note_note_api_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PasteResponse) String() string {
+func (x *SnippetResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PasteResponse) ProtoMessage() {}
+func (*SnippetResponse) ProtoMessage() {}
 
-func (x *PasteResponse) ProtoReflect() protoreflect.Message {
+func (x *SnippetResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_note_note_api_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -285,95 +289,123 @@ func (x *PasteResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PasteResponse.ProtoReflect.Descriptor instead.
-func (*PasteResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SnippetResponse.ProtoReflect.Descriptor instead.
+func (*SnippetResponse) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *PasteResponse) GetId() int64 {
+func (x *SnippetResponse) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *PasteResponse) GetOwnerId() int64 {
+func (x *SnippetResponse) GetOwnerId() int64 {
 	if x != nil {
 		return x.OwnerId
 	}
 	return 0
 }
 
-func (x *PasteResponse) GetTitle() string {
+func (x *SnippetResponse) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
 }
 
-func (x *PasteResponse) GetShortLink() string {
+func (x *SnippetResponse) GetType() string {
 	if x != nil {
-		return x.ShortLink
+		return x.Type
 	}
 	return ""
 }
 
-func (x *PasteResponse) GetContent() string {
+func (x *SnippetResponse) GetContent() string {
 	if x != nil {
 		return x.Content
 	}
 	return ""
 }
 
-func (x *PasteResponse) GetLanguage() string {
+func (x *SnippetResponse) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *SnippetResponse) GetFileSize() int64 {
+	if x != nil {
+		return x.FileSize
+	}
+	return 0
+}
+
+func (x *SnippetResponse) GetMimeType() string {
+	if x != nil {
+		return x.MimeType
+	}
+	return ""
+}
+
+func (x *SnippetResponse) GetLanguage() string {
 	if x != nil {
 		return x.Language
 	}
 	return ""
 }
 
-func (x *PasteResponse) GetVisibility() string {
+func (x *SnippetResponse) GetVisibility() string {
 	if x != nil {
 		return x.Visibility
 	}
 	return ""
 }
 
-func (x *PasteResponse) GetCreatedAt() string {
+func (x *SnippetResponse) GetGroupId() int64 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
+
+func (x *SnippetResponse) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return ""
 }
 
-func (x *PasteResponse) GetUpdatedAt() string {
+func (x *SnippetResponse) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return ""
 }
 
-type ListPastesResponse struct {
+type ListSnippetsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Pastes        []*PasteResponse       `protobuf:"bytes,1,rep,name=pastes,proto3" json:"pastes,omitempty"`
+	Snippets      []*SnippetResponse     `protobuf:"bytes,1,rep,name=snippets,proto3" json:"snippets,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListPastesResponse) Reset() {
-	*x = ListPastesResponse{}
+func (x *ListSnippetsResponse) Reset() {
+	*x = ListSnippetsResponse{}
 	mi := &file_note_note_api_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListPastesResponse) String() string {
+func (x *ListSnippetsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListPastesResponse) ProtoMessage() {}
+func (*ListSnippetsResponse) ProtoMessage() {}
 
-func (x *ListPastesResponse) ProtoReflect() protoreflect.Message {
+func (x *ListSnippetsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_note_note_api_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -385,64 +417,1427 @@ func (x *ListPastesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListPastesResponse.ProtoReflect.Descriptor instead.
-func (*ListPastesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListSnippetsResponse.ProtoReflect.Descriptor instead.
+func (*ListSnippetsResponse) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ListPastesResponse) GetPastes() []*PasteResponse {
+func (x *ListSnippetsResponse) GetSnippets() []*SnippetResponse {
 	if x != nil {
-		return x.Pastes
+		return x.Snippets
 	}
 	return nil
+}
+
+type DeleteSnippetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSnippetRequest) Reset() {
+	*x = DeleteSnippetRequest{}
+	mi := &file_note_note_api_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSnippetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSnippetRequest) ProtoMessage() {}
+
+func (x *DeleteSnippetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSnippetRequest.ProtoReflect.Descriptor instead.
+func (*DeleteSnippetRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DeleteSnippetRequest) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+type DeleteSnippetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSnippetResponse) Reset() {
+	*x = DeleteSnippetResponse{}
+	mi := &file_note_note_api_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSnippetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSnippetResponse) ProtoMessage() {}
+
+func (x *DeleteSnippetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSnippetResponse.ProtoReflect.Descriptor instead.
+func (*DeleteSnippetResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteSnippetResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type SearchSnippetsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchSnippetsRequest) Reset() {
+	*x = SearchSnippetsRequest{}
+	mi := &file_note_note_api_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchSnippetsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchSnippetsRequest) ProtoMessage() {}
+
+func (x *SearchSnippetsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchSnippetsRequest.ProtoReflect.Descriptor instead.
+func (*SearchSnippetsRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *SearchSnippetsRequest) GetQuery() string {
+	if x != nil {
+		return x.Query
+	}
+	return ""
+}
+
+type GetPublicSnippetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPublicSnippetRequest) Reset() {
+	*x = GetPublicSnippetRequest{}
+	mi := &file_note_note_api_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPublicSnippetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPublicSnippetRequest) ProtoMessage() {}
+
+func (x *GetPublicSnippetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPublicSnippetRequest.ProtoReflect.Descriptor instead.
+func (*GetPublicSnippetRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetPublicSnippetRequest) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+type FavoriteSnippetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FavoriteSnippetRequest) Reset() {
+	*x = FavoriteSnippetRequest{}
+	mi := &file_note_note_api_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FavoriteSnippetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FavoriteSnippetRequest) ProtoMessage() {}
+
+func (x *FavoriteSnippetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FavoriteSnippetRequest.ProtoReflect.Descriptor instead.
+func (*FavoriteSnippetRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *FavoriteSnippetRequest) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+type UnfavoriteSnippetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnfavoriteSnippetRequest) Reset() {
+	*x = UnfavoriteSnippetRequest{}
+	mi := &file_note_note_api_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnfavoriteSnippetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnfavoriteSnippetRequest) ProtoMessage() {}
+
+func (x *UnfavoriteSnippetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnfavoriteSnippetRequest.ProtoReflect.Descriptor instead.
+func (*UnfavoriteSnippetRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UnfavoriteSnippetRequest) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+type FavoriteSnippetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	Favorite      bool                   `protobuf:"varint,2,opt,name=favorite,proto3" json:"favorite,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FavoriteSnippetResponse) Reset() {
+	*x = FavoriteSnippetResponse{}
+	mi := &file_note_note_api_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FavoriteSnippetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FavoriteSnippetResponse) ProtoMessage() {}
+
+func (x *FavoriteSnippetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FavoriteSnippetResponse.ProtoReflect.Descriptor instead.
+func (*FavoriteSnippetResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *FavoriteSnippetResponse) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+func (x *FavoriteSnippetResponse) GetFavorite() bool {
+	if x != nil {
+		return x.Favorite
+	}
+	return false
+}
+
+type CreateSnippetFromTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TemplateId    int64                  `protobuf:"varint,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Visibility    string                 `protobuf:"bytes,3,opt,name=visibility,proto3" json:"visibility,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSnippetFromTemplateRequest) Reset() {
+	*x = CreateSnippetFromTemplateRequest{}
+	mi := &file_note_note_api_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSnippetFromTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSnippetFromTemplateRequest) ProtoMessage() {}
+
+func (x *CreateSnippetFromTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSnippetFromTemplateRequest.ProtoReflect.Descriptor instead.
+func (*CreateSnippetFromTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CreateSnippetFromTemplateRequest) GetTemplateId() int64 {
+	if x != nil {
+		return x.TemplateId
+	}
+	return 0
+}
+
+func (x *CreateSnippetFromTemplateRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *CreateSnippetFromTemplateRequest) GetVisibility() string {
+	if x != nil {
+		return x.Visibility
+	}
+	return ""
+}
+
+// ── Group Messages ──
+type GroupResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GroupResponse) Reset() {
+	*x = GroupResponse{}
+	mi := &file_note_note_api_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GroupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GroupResponse) ProtoMessage() {}
+
+func (x *GroupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GroupResponse.ProtoReflect.Descriptor instead.
+func (*GroupResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GroupResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GroupResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ListGroupsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGroupsRequest) Reset() {
+	*x = ListGroupsRequest{}
+	mi := &file_note_note_api_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGroupsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGroupsRequest) ProtoMessage() {}
+
+func (x *ListGroupsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGroupsRequest.ProtoReflect.Descriptor instead.
+func (*ListGroupsRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{15}
+}
+
+type ListGroupsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Groups        []*GroupResponse       `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGroupsResponse) Reset() {
+	*x = ListGroupsResponse{}
+	mi := &file_note_note_api_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGroupsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGroupsResponse) ProtoMessage() {}
+
+func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGroupsResponse.ProtoReflect.Descriptor instead.
+func (*ListGroupsResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListGroupsResponse) GetGroups() []*GroupResponse {
+	if x != nil {
+		return x.Groups
+	}
+	return nil
+}
+
+type CreateGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateGroupRequest) Reset() {
+	*x = CreateGroupRequest{}
+	mi := &file_note_note_api_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateGroupRequest) ProtoMessage() {}
+
+func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateGroupRequest.ProtoReflect.Descriptor instead.
+func (*CreateGroupRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *CreateGroupRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type UpdateGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateGroupRequest) Reset() {
+	*x = UpdateGroupRequest{}
+	mi := &file_note_note_api_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateGroupRequest) ProtoMessage() {}
+
+func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateGroupRequest.ProtoReflect.Descriptor instead.
+func (*UpdateGroupRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UpdateGroupRequest) GetGroupId() int64 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
+
+func (x *UpdateGroupRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type DeleteGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteGroupRequest) Reset() {
+	*x = DeleteGroupRequest{}
+	mi := &file_note_note_api_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteGroupRequest) ProtoMessage() {}
+
+func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteGroupRequest.ProtoReflect.Descriptor instead.
+func (*DeleteGroupRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *DeleteGroupRequest) GetGroupId() int64 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
+
+type DeleteGroupResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteGroupResponse) Reset() {
+	*x = DeleteGroupResponse{}
+	mi := &file_note_note_api_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteGroupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteGroupResponse) ProtoMessage() {}
+
+func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteGroupResponse.ProtoReflect.Descriptor instead.
+func (*DeleteGroupResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *DeleteGroupResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// ── Tag Messages ──
+type TagResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TagResponse) Reset() {
+	*x = TagResponse{}
+	mi := &file_note_note_api_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TagResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TagResponse) ProtoMessage() {}
+
+func (x *TagResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TagResponse.ProtoReflect.Descriptor instead.
+func (*TagResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *TagResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *TagResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ListTagsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTagsRequest) Reset() {
+	*x = ListTagsRequest{}
+	mi := &file_note_note_api_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTagsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTagsRequest) ProtoMessage() {}
+
+func (x *ListTagsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTagsRequest.ProtoReflect.Descriptor instead.
+func (*ListTagsRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{22}
+}
+
+type ListTagsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Tags          []*TagResponse         `protobuf:"bytes,1,rep,name=tags,proto3" json:"tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTagsResponse) Reset() {
+	*x = ListTagsResponse{}
+	mi := &file_note_note_api_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTagsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTagsResponse) ProtoMessage() {}
+
+func (x *ListTagsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTagsResponse.ProtoReflect.Descriptor instead.
+func (*ListTagsResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListTagsResponse) GetTags() []*TagResponse {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+type CreateTagRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTagRequest) Reset() {
+	*x = CreateTagRequest{}
+	mi := &file_note_note_api_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTagRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTagRequest) ProtoMessage() {}
+
+func (x *CreateTagRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTagRequest.ProtoReflect.Descriptor instead.
+func (*CreateTagRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *CreateTagRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type DeleteTagRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TagId         int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTagRequest) Reset() {
+	*x = DeleteTagRequest{}
+	mi := &file_note_note_api_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTagRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTagRequest) ProtoMessage() {}
+
+func (x *DeleteTagRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTagRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTagRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *DeleteTagRequest) GetTagId() int64 {
+	if x != nil {
+		return x.TagId
+	}
+	return 0
+}
+
+type DeleteTagResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTagResponse) Reset() {
+	*x = DeleteTagResponse{}
+	mi := &file_note_note_api_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTagResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTagResponse) ProtoMessage() {}
+
+func (x *DeleteTagResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTagResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTagResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *DeleteTagResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// ── Template Messages ──
+type TemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Language      string                 `protobuf:"bytes,3,opt,name=language,proto3" json:"language,omitempty"`
+	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TemplateResponse) Reset() {
+	*x = TemplateResponse{}
+	mi := &file_note_note_api_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TemplateResponse) ProtoMessage() {}
+
+func (x *TemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TemplateResponse.ProtoReflect.Descriptor instead.
+func (*TemplateResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *TemplateResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *TemplateResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *TemplateResponse) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+func (x *TemplateResponse) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type ListTemplatesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplatesRequest) Reset() {
+	*x = ListTemplatesRequest{}
+	mi := &file_note_note_api_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplatesRequest) ProtoMessage() {}
+
+func (x *ListTemplatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplatesRequest.ProtoReflect.Descriptor instead.
+func (*ListTemplatesRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{28}
+}
+
+type ListTemplatesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Templates     []*TemplateResponse    `protobuf:"bytes,1,rep,name=templates,proto3" json:"templates,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTemplatesResponse) Reset() {
+	*x = ListTemplatesResponse{}
+	mi := &file_note_note_api_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTemplatesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTemplatesResponse) ProtoMessage() {}
+
+func (x *ListTemplatesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTemplatesResponse.ProtoReflect.Descriptor instead.
+func (*ListTemplatesResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListTemplatesResponse) GetTemplates() []*TemplateResponse {
+	if x != nil {
+		return x.Templates
+	}
+	return nil
+}
+
+type GetTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TemplateId    string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTemplateRequest) Reset() {
+	*x = GetTemplateRequest{}
+	mi := &file_note_note_api_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTemplateRequest) ProtoMessage() {}
+
+func (x *GetTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTemplateRequest.ProtoReflect.Descriptor instead.
+func (*GetTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *GetTemplateRequest) GetTemplateId() string {
+	if x != nil {
+		return x.TemplateId
+	}
+	return ""
+}
+
+// ── Upload ──
+type UploadFileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FileData      []byte                 `protobuf:"bytes,1,opt,name=file_data,json=fileData,proto3" json:"file_data,omitempty"`
+	Filename      string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadFileRequest) Reset() {
+	*x = UploadFileRequest{}
+	mi := &file_note_note_api_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadFileRequest) ProtoMessage() {}
+
+func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
+func (*UploadFileRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *UploadFileRequest) GetFileData() []byte {
+	if x != nil {
+		return x.FileData
+	}
+	return nil
+}
+
+func (x *UploadFileRequest) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+type UploadFileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Filename      string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadFileResponse) Reset() {
+	*x = UploadFileResponse{}
+	mi := &file_note_note_api_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadFileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadFileResponse) ProtoMessage() {}
+
+func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadFileResponse.ProtoReflect.Descriptor instead.
+func (*UploadFileResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *UploadFileResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UploadFileResponse) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *UploadFileResponse) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
 }
 
 var File_note_note_api_proto protoreflect.FileDescriptor
 
 const file_note_note_api_proto_rawDesc = "" +
 	"\n" +
-	"\x13note/note_api.proto\x12\x04note\"\x80\x01\n" +
-	"\x12CreatePasteRequest\x12\x14\n" +
+	"\x13note/note_api.proto\x12\x04note\"\x82\x01\n" +
+	"\x14CreateSnippetRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1a\n" +
 	"\blanguage\x18\x03 \x01(\tR\blanguage\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x04 \x01(\tR\n" +
-	"visibility\",\n" +
-	"\x0fGetPasteRequest\x12\x19\n" +
-	"\bpaste_id\x18\x01 \x01(\x03R\apasteId\"\x13\n" +
-	"\x11ListPastesRequest\"\x9b\x01\n" +
-	"\x12UpdatePasteRequest\x12\x19\n" +
-	"\bpaste_id\x18\x01 \x01(\x03R\apasteId\x12\x14\n" +
+	"visibility\"2\n" +
+	"\x11GetSnippetRequest\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\x15\n" +
+	"\x13ListSnippetsRequest\"\xa1\x01\n" +
+	"\x14UpdateSnippetRequest\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x03 \x01(\tR\acontent\x12\x1a\n" +
 	"\blanguage\x18\x04 \x01(\tR\blanguage\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x05 \x01(\tR\n" +
-	"visibility\"\x83\x02\n" +
-	"\rPasteResponse\x12\x0e\n" +
+	"visibility\"\xea\x02\n" +
+	"\x0fSnippetResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\x03R\aownerId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1d\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x12\x18\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x12\x19\n" +
+	"\bfile_url\x18\x06 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\a \x01(\x03R\bfileSize\x12\x1b\n" +
+	"\tmime_type\x18\b \x01(\tR\bmimeType\x12\x1a\n" +
+	"\blanguage\x18\t \x01(\tR\blanguage\x12\x1e\n" +
 	"\n" +
-	"short_link\x18\x04 \x01(\tR\tshortLink\x12\x18\n" +
-	"\acontent\x18\x05 \x01(\tR\acontent\x12\x1a\n" +
-	"\blanguage\x18\x06 \x01(\tR\blanguage\x12\x1e\n" +
+	"visibility\x18\n" +
+	" \x01(\tR\n" +
+	"visibility\x12\x19\n" +
+	"\bgroup_id\x18\v \x01(\x03R\agroupId\x12\x1d\n" +
 	"\n" +
-	"visibility\x18\a \x01(\tR\n" +
-	"visibility\x12\x1d\n" +
+	"created_at\x18\f \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\"I\n" +
+	"\x14ListSnippetsResponse\x121\n" +
+	"\bsnippets\x18\x01 \x03(\v2\x15.note.SnippetResponseR\bsnippets\"5\n" +
+	"\x14DeleteSnippetRequest\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\tR\tupdatedAt\"A\n" +
-	"\x12ListPastesResponse\x12+\n" +
-	"\x06pastes\x18\x01 \x03(\v2\x13.note.PasteResponseR\x06pastes2\x82\x02\n" +
-	"\vNoteService\x12<\n" +
-	"\vCreatePaste\x12\x18.note.CreatePasteRequest\x1a\x13.note.PasteResponse\x126\n" +
-	"\bGetPaste\x12\x15.note.GetPasteRequest\x1a\x13.note.PasteResponse\x12?\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"'\n" +
+	"\x15DeleteSnippetResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"-\n" +
+	"\x15SearchSnippetsRequest\x12\x14\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\"8\n" +
+	"\x17GetPublicSnippetRequest\x12\x1d\n" +
 	"\n" +
-	"ListPastes\x12\x17.note.ListPastesRequest\x1a\x18.note.ListPastesResponse\x12<\n" +
-	"\vUpdatePaste\x12\x18.note.UpdatePasteRequest\x1a\x13.note.PasteResponseB'Z%github.com/luckysxx/common/proto/noteb\x06proto3"
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"7\n" +
+	"\x16FavoriteSnippetRequest\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"9\n" +
+	"\x18UnfavoriteSnippetRequest\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"T\n" +
+	"\x17FavoriteSnippetResponse\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\x12\x1a\n" +
+	"\bfavorite\x18\x02 \x01(\bR\bfavorite\"y\n" +
+	" CreateSnippetFromTemplateRequest\x12\x1f\n" +
+	"\vtemplate_id\x18\x01 \x01(\x03R\n" +
+	"templateId\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1e\n" +
+	"\n" +
+	"visibility\x18\x03 \x01(\tR\n" +
+	"visibility\"3\n" +
+	"\rGroupResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\x13\n" +
+	"\x11ListGroupsRequest\"A\n" +
+	"\x12ListGroupsResponse\x12+\n" +
+	"\x06groups\x18\x01 \x03(\v2\x13.note.GroupResponseR\x06groups\"(\n" +
+	"\x12CreateGroupRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"C\n" +
+	"\x12UpdateGroupRequest\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"/\n" +
+	"\x12DeleteGroupRequest\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\"%\n" +
+	"\x13DeleteGroupResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"1\n" +
+	"\vTagResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\x11\n" +
+	"\x0fListTagsRequest\"9\n" +
+	"\x10ListTagsResponse\x12%\n" +
+	"\x04tags\x18\x01 \x03(\v2\x11.note.TagResponseR\x04tags\"&\n" +
+	"\x10CreateTagRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\")\n" +
+	"\x10DeleteTagRequest\x12\x15\n" +
+	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\"#\n" +
+	"\x11DeleteTagResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"l\n" +
+	"\x10TemplateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
+	"\blanguage\x18\x03 \x01(\tR\blanguage\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\"\x16\n" +
+	"\x14ListTemplatesRequest\"M\n" +
+	"\x15ListTemplatesResponse\x124\n" +
+	"\ttemplates\x18\x01 \x03(\v2\x16.note.TemplateResponseR\ttemplates\"5\n" +
+	"\x12GetTemplateRequest\x12\x1f\n" +
+	"\vtemplate_id\x18\x01 \x01(\tR\n" +
+	"templateId\"L\n" +
+	"\x11UploadFileRequest\x12\x1b\n" +
+	"\tfile_data\x18\x01 \x01(\fR\bfileData\x12\x1a\n" +
+	"\bfilename\x18\x02 \x01(\tR\bfilename\"T\n" +
+	"\x12UploadFileResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size2\xe0\f\n" +
+	"\vNoteService\x12B\n" +
+	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\x12<\n" +
+	"\n" +
+	"GetSnippet\x12\x17.note.GetSnippetRequest\x1a\x15.note.SnippetResponse\x12E\n" +
+	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12B\n" +
+	"\rUpdateSnippet\x12\x1a.note.UpdateSnippetRequest\x1a\x15.note.SnippetResponse\x12H\n" +
+	"\rDeleteSnippet\x12\x1a.note.DeleteSnippetRequest\x1a\x1b.note.DeleteSnippetResponse\x12I\n" +
+	"\x0eSearchSnippets\x12\x1b.note.SearchSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12H\n" +
+	"\x10GetPublicSnippet\x12\x1d.note.GetPublicSnippetRequest\x1a\x15.note.SnippetResponse\x12N\n" +
+	"\x0fFavoriteSnippet\x12\x1c.note.FavoriteSnippetRequest\x1a\x1d.note.FavoriteSnippetResponse\x12R\n" +
+	"\x11UnfavoriteSnippet\x12\x1e.note.UnfavoriteSnippetRequest\x1a\x1d.note.FavoriteSnippetResponse\x12Z\n" +
+	"\x19CreateSnippetFromTemplate\x12&.note.CreateSnippetFromTemplateRequest\x1a\x15.note.SnippetResponse\x12K\n" +
+	"\x12ListRecentSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12K\n" +
+	"\x12ListSharedSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12M\n" +
+	"\x14ListFavoriteSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12?\n" +
+	"\n" +
+	"ListGroups\x12\x17.note.ListGroupsRequest\x1a\x18.note.ListGroupsResponse\x12<\n" +
+	"\vCreateGroup\x12\x18.note.CreateGroupRequest\x1a\x13.note.GroupResponse\x12<\n" +
+	"\vUpdateGroup\x12\x18.note.UpdateGroupRequest\x1a\x13.note.GroupResponse\x12B\n" +
+	"\vDeleteGroup\x12\x18.note.DeleteGroupRequest\x1a\x19.note.DeleteGroupResponse\x129\n" +
+	"\bListTags\x12\x15.note.ListTagsRequest\x1a\x16.note.ListTagsResponse\x126\n" +
+	"\tCreateTag\x12\x16.note.CreateTagRequest\x1a\x11.note.TagResponse\x12<\n" +
+	"\tDeleteTag\x12\x16.note.DeleteTagRequest\x1a\x17.note.DeleteTagResponse\x12H\n" +
+	"\rListTemplates\x12\x1a.note.ListTemplatesRequest\x1a\x1b.note.ListTemplatesResponse\x12?\n" +
+	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\x12?\n" +
+	"\n" +
+	"UploadFile\x12\x17.note.UploadFileRequest\x1a\x18.note.UploadFileResponseB'Z%github.com/luckysxx/common/proto/noteb\x06proto3"
 
 var (
 	file_note_note_api_proto_rawDescOnce sync.Once
@@ -456,30 +1851,98 @@ func file_note_note_api_proto_rawDescGZIP() []byte {
 	return file_note_note_api_proto_rawDescData
 }
 
-var file_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_note_note_api_proto_goTypes = []any{
-	(*CreatePasteRequest)(nil), // 0: note.CreatePasteRequest
-	(*GetPasteRequest)(nil),    // 1: note.GetPasteRequest
-	(*ListPastesRequest)(nil),  // 2: note.ListPastesRequest
-	(*UpdatePasteRequest)(nil), // 3: note.UpdatePasteRequest
-	(*PasteResponse)(nil),      // 4: note.PasteResponse
-	(*ListPastesResponse)(nil), // 5: note.ListPastesResponse
+	(*CreateSnippetRequest)(nil),             // 0: note.CreateSnippetRequest
+	(*GetSnippetRequest)(nil),                // 1: note.GetSnippetRequest
+	(*ListSnippetsRequest)(nil),              // 2: note.ListSnippetsRequest
+	(*UpdateSnippetRequest)(nil),             // 3: note.UpdateSnippetRequest
+	(*SnippetResponse)(nil),                  // 4: note.SnippetResponse
+	(*ListSnippetsResponse)(nil),             // 5: note.ListSnippetsResponse
+	(*DeleteSnippetRequest)(nil),             // 6: note.DeleteSnippetRequest
+	(*DeleteSnippetResponse)(nil),            // 7: note.DeleteSnippetResponse
+	(*SearchSnippetsRequest)(nil),            // 8: note.SearchSnippetsRequest
+	(*GetPublicSnippetRequest)(nil),          // 9: note.GetPublicSnippetRequest
+	(*FavoriteSnippetRequest)(nil),           // 10: note.FavoriteSnippetRequest
+	(*UnfavoriteSnippetRequest)(nil),         // 11: note.UnfavoriteSnippetRequest
+	(*FavoriteSnippetResponse)(nil),          // 12: note.FavoriteSnippetResponse
+	(*CreateSnippetFromTemplateRequest)(nil), // 13: note.CreateSnippetFromTemplateRequest
+	(*GroupResponse)(nil),                    // 14: note.GroupResponse
+	(*ListGroupsRequest)(nil),                // 15: note.ListGroupsRequest
+	(*ListGroupsResponse)(nil),               // 16: note.ListGroupsResponse
+	(*CreateGroupRequest)(nil),               // 17: note.CreateGroupRequest
+	(*UpdateGroupRequest)(nil),               // 18: note.UpdateGroupRequest
+	(*DeleteGroupRequest)(nil),               // 19: note.DeleteGroupRequest
+	(*DeleteGroupResponse)(nil),              // 20: note.DeleteGroupResponse
+	(*TagResponse)(nil),                      // 21: note.TagResponse
+	(*ListTagsRequest)(nil),                  // 22: note.ListTagsRequest
+	(*ListTagsResponse)(nil),                 // 23: note.ListTagsResponse
+	(*CreateTagRequest)(nil),                 // 24: note.CreateTagRequest
+	(*DeleteTagRequest)(nil),                 // 25: note.DeleteTagRequest
+	(*DeleteTagResponse)(nil),                // 26: note.DeleteTagResponse
+	(*TemplateResponse)(nil),                 // 27: note.TemplateResponse
+	(*ListTemplatesRequest)(nil),             // 28: note.ListTemplatesRequest
+	(*ListTemplatesResponse)(nil),            // 29: note.ListTemplatesResponse
+	(*GetTemplateRequest)(nil),               // 30: note.GetTemplateRequest
+	(*UploadFileRequest)(nil),                // 31: note.UploadFileRequest
+	(*UploadFileResponse)(nil),               // 32: note.UploadFileResponse
 }
 var file_note_note_api_proto_depIdxs = []int32{
-	4, // 0: note.ListPastesResponse.pastes:type_name -> note.PasteResponse
-	0, // 1: note.NoteService.CreatePaste:input_type -> note.CreatePasteRequest
-	1, // 2: note.NoteService.GetPaste:input_type -> note.GetPasteRequest
-	2, // 3: note.NoteService.ListPastes:input_type -> note.ListPastesRequest
-	3, // 4: note.NoteService.UpdatePaste:input_type -> note.UpdatePasteRequest
-	4, // 5: note.NoteService.CreatePaste:output_type -> note.PasteResponse
-	4, // 6: note.NoteService.GetPaste:output_type -> note.PasteResponse
-	5, // 7: note.NoteService.ListPastes:output_type -> note.ListPastesResponse
-	4, // 8: note.NoteService.UpdatePaste:output_type -> note.PasteResponse
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4,  // 0: note.ListSnippetsResponse.snippets:type_name -> note.SnippetResponse
+	14, // 1: note.ListGroupsResponse.groups:type_name -> note.GroupResponse
+	21, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
+	27, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
+	0,  // 4: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
+	1,  // 5: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
+	2,  // 6: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
+	3,  // 7: note.NoteService.UpdateSnippet:input_type -> note.UpdateSnippetRequest
+	6,  // 8: note.NoteService.DeleteSnippet:input_type -> note.DeleteSnippetRequest
+	8,  // 9: note.NoteService.SearchSnippets:input_type -> note.SearchSnippetsRequest
+	9,  // 10: note.NoteService.GetPublicSnippet:input_type -> note.GetPublicSnippetRequest
+	10, // 11: note.NoteService.FavoriteSnippet:input_type -> note.FavoriteSnippetRequest
+	11, // 12: note.NoteService.UnfavoriteSnippet:input_type -> note.UnfavoriteSnippetRequest
+	13, // 13: note.NoteService.CreateSnippetFromTemplate:input_type -> note.CreateSnippetFromTemplateRequest
+	2,  // 14: note.NoteService.ListRecentSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 15: note.NoteService.ListSharedSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 16: note.NoteService.ListFavoriteSnippets:input_type -> note.ListSnippetsRequest
+	15, // 17: note.NoteService.ListGroups:input_type -> note.ListGroupsRequest
+	17, // 18: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
+	18, // 19: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
+	19, // 20: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
+	22, // 21: note.NoteService.ListTags:input_type -> note.ListTagsRequest
+	24, // 22: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
+	25, // 23: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
+	28, // 24: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
+	30, // 25: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
+	31, // 26: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
+	4,  // 27: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
+	4,  // 28: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
+	5,  // 29: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 30: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
+	7,  // 31: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
+	5,  // 32: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 33: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
+	12, // 34: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	12, // 35: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	4,  // 36: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
+	5,  // 37: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 38: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 39: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
+	16, // 40: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
+	14, // 41: note.NoteService.CreateGroup:output_type -> note.GroupResponse
+	14, // 42: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
+	20, // 43: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
+	23, // 44: note.NoteService.ListTags:output_type -> note.ListTagsResponse
+	21, // 45: note.NoteService.CreateTag:output_type -> note.TagResponse
+	26, // 46: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
+	29, // 47: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
+	27, // 48: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
+	32, // 49: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
+	27, // [27:50] is the sub-list for method output_type
+	4,  // [4:27] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_note_note_api_proto_init() }
@@ -493,7 +1956,7 @@ func file_note_note_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_note_note_api_proto_rawDesc), len(file_note_note_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   33,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
