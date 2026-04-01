@@ -35,4 +35,20 @@ CDC 职责：
 2. 使用 Debezium Outbox Event Router 将记录转成 Kafka 消息
 3. 按统一 Topic/Key 约定投递到消息总线
 
+推荐同时显式配置：
+
+```json
+"transforms.outbox.route.by.field": "type",
+"transforms.outbox.route.topic.replacement": "${routedByValue}",
+"transforms.outbox.table.expand.json.payload": "true"
+```
+
+这样最终业务 Topic 会直接等于 Outbox 中的 `type` 值，例如：
+
+- `type = user.registered`
+- Topic = `user.registered`
+- Kafka value = JSON 对象，而不是 base64 或普通字符串
+
+否则 Debezium 可能会使用默认前缀，生成类似 `outbox.event.user.registered` 的 Topic。
+
 这份约定的目标是让服务只关心“追加事件”，而不是自管 Relay、轮询和重试。
