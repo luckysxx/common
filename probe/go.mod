@@ -4,8 +4,8 @@ go 1.25.5
 
 require (
 	github.com/gin-gonic/gin v1.12.0
-	github.com/luckysxx/common/health v0.0.0
-	github.com/luckysxx/common/metrics v0.0.0
+	github.com/luckysxx/common/health v0.2.1
+	github.com/luckysxx/common/metrics v0.3.1
 	github.com/prometheus/client_golang v1.23.2
 	github.com/redis/go-redis/v9 v9.18.0
 	go.uber.org/zap v1.27.1
