@@ -14,8 +14,9 @@ import (
 
 // Config 通用 Postgres 连接配置
 type Config struct {
-	Driver string `mapstructure:"driver"`
-	Source string `mapstructure:"source"`
+	Driver      string `mapstructure:"driver"`
+	Source      string `mapstructure:"source"`
+	AutoMigrate bool   `mapstructure:"auto_migrate"`
 }
 
 // PoolConfig 连接池参数（所有字段均提供合理默认值，各服务可按需覆盖）

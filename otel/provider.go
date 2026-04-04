@@ -12,11 +12,17 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.24.0"
 )
 
+// Config 通用 OpenTelemetry 配置
+type Config struct {
+	ServiceName    string `mapstructure:"service_name"`
+	JaegerEndpoint string `mapstructure:"jaeger_endpoint"`
+}
+
 // InitTracer 初始化 OpenTelemetry 分布式追踪
-//   - serviceName: 当前服务名称（如 "api-gateway"），会在 Jaeger UI 中显示
-//   - jaegerEndpoint: Jaeger OTLP 接收器地址（如 "localhost:4318"），不带协议前缀
+//   - cfg.ServiceName: 当前服务名称（如 "api-gateway"），会在 Jaeger UI 中显示
+//   - cfg.JaegerEndpoint: Jaeger OTLP 接收器地址（如 "localhost:4318"），不带协议前缀
 //   - 返回 shutdown 函数：在 main 退出时调用，flush 缓冲区中未发送的 Span 数据
-func InitTracer(serviceName, jaegerEndpoint string) (func(context.Context) error, error) {
+func InitTracer(cfg Config) (func(context.Context) error, error) {
 	ctx := context.Background()
 
 	// 1. 创建 Exporter（导出器）
@@ -24,7 +30,7 @@ func InitTracer(serviceName, jaegerEndpoint string) (func(context.Context) error
 	// WithEndpoint 只需要 host:port，不带 http:// 前缀
 	// WithInsecure 表示用明文 HTTP（开发环境），生产环境应该用 TLS
 	exporter, err := otlptrace.New(ctx, otlptracehttp.NewClient(
-		otlptracehttp.WithEndpoint(jaegerEndpoint),
+		otlptracehttp.WithEndpoint(cfg.JaegerEndpoint),
 		otlptracehttp.WithInsecure(),
 	))
 	if err != nil {
@@ -35,7 +41,7 @@ func InitTracer(serviceName, jaegerEndpoint string) (func(context.Context) error
 	// 告诉 Jaeger「这些 Span 数据来自哪个服务」
 	// semconv.ServiceName 是 OpenTelemetry 语义约定中定义的标准属性
 	res, err := resource.New(ctx, resource.WithAttributes(
-		semconv.ServiceName(serviceName),
+		semconv.ServiceName(cfg.ServiceName),
 	))
 	if err != nil {
 		return nil, err

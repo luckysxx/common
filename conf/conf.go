@@ -1,8 +1,8 @@
-// Package conf 提供微服务间共享的通用配置类型定义和统一的 Viper 配置加载函数。
+// Package conf 提供统一的 Viper 配置加载函数和少量通用配置类型。
 //
 // 设计原则：
-//   - 只抽取各服务完全重复的配置类型（Database / Redis / OTel / Server / IDGenerator）
-//   - 服务专有的配置（如 JWTConfig / KafkaConfig / ChatConfig）仍由各服务自行定义
+//   - 基础设施配置类型（Redis / Postgres）定义在各自的 common 包中
+//   - 只保留无对应包的通用类型（OTel / Server / IDGenerator）
 //   - 各服务通过嵌入公共类型来组合自己的 Config 结构体
 package conf
 
@@ -13,26 +13,6 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
-
-// DatabaseConfig 通用数据库配置
-type DatabaseConfig struct {
-	Driver      string `mapstructure:"driver"`
-	Source      string `mapstructure:"source"`
-	AutoMigrate bool   `mapstructure:"auto_migrate"`
-}
-
-// RedisConfig 通用 Redis 配置
-type RedisConfig struct {
-	Addr     string `mapstructure:"addr"`
-	Password string `mapstructure:"password"`
-	DB       int    `mapstructure:"db"`
-}
-
-// OTelConfig 通用可观测性配置
-type OTelConfig struct {
-	JaegerEndpoint string `mapstructure:"jaeger_endpoint"`
-	ServiceName    string `mapstructure:"service_name"`
-}
 
 // ServerConfig 通用 HTTP 服务器配置
 type ServerConfig struct {
