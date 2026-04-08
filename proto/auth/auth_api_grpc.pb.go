@@ -19,10 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_Login_FullMethodName        = "/user.AuthService/Login"
-	AuthService_RefreshToken_FullMethodName = "/user.AuthService/RefreshToken"
-	AuthService_Logout_FullMethodName       = "/user.AuthService/Logout"
-	AuthService_VerifyToken_FullMethodName  = "/user.AuthService/VerifyToken"
+	AuthService_Login_FullMethodName              = "/user.AuthService/Login"
+	AuthService_RefreshToken_FullMethodName       = "/user.AuthService/RefreshToken"
+	AuthService_Logout_FullMethodName             = "/user.AuthService/Logout"
+	AuthService_VerifyToken_FullMethodName        = "/user.AuthService/VerifyToken"
+	AuthService_SendPhoneCode_FullMethodName      = "/user.AuthService/SendPhoneCode"
+	AuthService_PhoneAuthEntry_FullMethodName     = "/user.AuthService/PhoneAuthEntry"
+	AuthService_PhonePasswordLogin_FullMethodName = "/user.AuthService/PhonePasswordLogin"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -33,6 +36,9 @@ type AuthServiceClient interface {
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	VerifyToken(ctx context.Context, in *VerifyTokenRequest, opts ...grpc.CallOption) (*VerifyTokenResponse, error)
+	SendPhoneCode(ctx context.Context, in *SendPhoneCodeRequest, opts ...grpc.CallOption) (*SendPhoneCodeResponse, error)
+	PhoneAuthEntry(ctx context.Context, in *PhoneAuthEntryRequest, opts ...grpc.CallOption) (*PhoneAuthEntryResponse, error)
+	PhonePasswordLogin(ctx context.Context, in *PhonePasswordLoginRequest, opts ...grpc.CallOption) (*PhonePasswordLoginResponse, error)
 }
 
 type authServiceClient struct {
@@ -83,6 +89,36 @@ func (c *authServiceClient) VerifyToken(ctx context.Context, in *VerifyTokenRequ
 	return out, nil
 }
 
+func (c *authServiceClient) SendPhoneCode(ctx context.Context, in *SendPhoneCodeRequest, opts ...grpc.CallOption) (*SendPhoneCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPhoneCodeResponse)
+	err := c.cc.Invoke(ctx, AuthService_SendPhoneCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) PhoneAuthEntry(ctx context.Context, in *PhoneAuthEntryRequest, opts ...grpc.CallOption) (*PhoneAuthEntryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PhoneAuthEntryResponse)
+	err := c.cc.Invoke(ctx, AuthService_PhoneAuthEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) PhonePasswordLogin(ctx context.Context, in *PhonePasswordLoginRequest, opts ...grpc.CallOption) (*PhonePasswordLoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PhonePasswordLoginResponse)
+	err := c.cc.Invoke(ctx, AuthService_PhonePasswordLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -91,6 +127,9 @@ type AuthServiceServer interface {
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	VerifyToken(context.Context, *VerifyTokenRequest) (*VerifyTokenResponse, error)
+	SendPhoneCode(context.Context, *SendPhoneCodeRequest) (*SendPhoneCodeResponse, error)
+	PhoneAuthEntry(context.Context, *PhoneAuthEntryRequest) (*PhoneAuthEntryResponse, error)
+	PhonePasswordLogin(context.Context, *PhonePasswordLoginRequest) (*PhonePasswordLoginResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -112,6 +151,15 @@ func (UnimplementedAuthServiceServer) Logout(context.Context, *LogoutRequest) (*
 }
 func (UnimplementedAuthServiceServer) VerifyToken(context.Context, *VerifyTokenRequest) (*VerifyTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method VerifyToken not implemented")
+}
+func (UnimplementedAuthServiceServer) SendPhoneCode(context.Context, *SendPhoneCodeRequest) (*SendPhoneCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendPhoneCode not implemented")
+}
+func (UnimplementedAuthServiceServer) PhoneAuthEntry(context.Context, *PhoneAuthEntryRequest) (*PhoneAuthEntryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PhoneAuthEntry not implemented")
+}
+func (UnimplementedAuthServiceServer) PhonePasswordLogin(context.Context, *PhonePasswordLoginRequest) (*PhonePasswordLoginResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PhonePasswordLogin not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -206,6 +254,60 @@ func _AuthService_VerifyToken_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_SendPhoneCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPhoneCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).SendPhoneCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_SendPhoneCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).SendPhoneCode(ctx, req.(*SendPhoneCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_PhoneAuthEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PhoneAuthEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).PhoneAuthEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_PhoneAuthEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).PhoneAuthEntry(ctx, req.(*PhoneAuthEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_PhonePasswordLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PhonePasswordLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).PhonePasswordLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_PhonePasswordLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).PhonePasswordLogin(ctx, req.(*PhonePasswordLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +330,18 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyToken",
 			Handler:    _AuthService_VerifyToken_Handler,
+		},
+		{
+			MethodName: "SendPhoneCode",
+			Handler:    _AuthService_SendPhoneCode_Handler,
+		},
+		{
+			MethodName: "PhoneAuthEntry",
+			Handler:    _AuthService_PhoneAuthEntry_Handler,
+		},
+		{
+			MethodName: "PhonePasswordLogin",
+			Handler:    _AuthService_PhonePasswordLogin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

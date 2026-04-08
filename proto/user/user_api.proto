@@ -5,14 +5,16 @@ option go_package = "github.com/luckysxx/common/proto/user";
 package user;
 
 message RegisterRequest {
-    string email = 1;
-    string username = 2;
-    string password = 3;
+    string phone = 1;
+    string email = 2;
+    string username = 3;
+    string password = 4;
 }
 
 message RegisterResponse {
     int64 user_id = 1;
     string username = 2;
+    string phone = 3;
 }
 
 service UserService {

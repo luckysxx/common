@@ -437,6 +437,454 @@ func (x *VerifyTokenResponse) GetUsername() string {
 	return ""
 }
 
+type SendPhoneCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phone         string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
+	Scene         string                 `protobuf:"bytes,2,opt,name=scene,proto3" json:"scene,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendPhoneCodeRequest) Reset() {
+	*x = SendPhoneCodeRequest{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendPhoneCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendPhoneCodeRequest) ProtoMessage() {}
+
+func (x *SendPhoneCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendPhoneCodeRequest.ProtoReflect.Descriptor instead.
+func (*SendPhoneCodeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *SendPhoneCodeRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *SendPhoneCodeRequest) GetScene() string {
+	if x != nil {
+		return x.Scene
+	}
+	return ""
+}
+
+type SendPhoneCodeResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Action          string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
+	CooldownSeconds int32                  `protobuf:"varint,2,opt,name=cooldown_seconds,json=cooldownSeconds,proto3" json:"cooldown_seconds,omitempty"`
+	Message         string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	DebugCode       string                 `protobuf:"bytes,4,opt,name=debug_code,json=debugCode,proto3" json:"debug_code,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SendPhoneCodeResponse) Reset() {
+	*x = SendPhoneCodeResponse{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendPhoneCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendPhoneCodeResponse) ProtoMessage() {}
+
+func (x *SendPhoneCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendPhoneCodeResponse.ProtoReflect.Descriptor instead.
+func (*SendPhoneCodeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SendPhoneCodeResponse) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *SendPhoneCodeResponse) GetCooldownSeconds() int32 {
+	if x != nil {
+		return x.CooldownSeconds
+	}
+	return 0
+}
+
+func (x *SendPhoneCodeResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *SendPhoneCodeResponse) GetDebugCode() string {
+	if x != nil {
+		return x.DebugCode
+	}
+	return ""
+}
+
+type PhoneAuthEntryRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Phone            string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
+	VerificationCode string                 `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`
+	AppCode          string                 `protobuf:"bytes,3,opt,name=app_code,json=appCode,proto3" json:"app_code,omitempty"`
+	DeviceId         string                 `protobuf:"bytes,4,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *PhoneAuthEntryRequest) Reset() {
+	*x = PhoneAuthEntryRequest{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PhoneAuthEntryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PhoneAuthEntryRequest) ProtoMessage() {}
+
+func (x *PhoneAuthEntryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PhoneAuthEntryRequest.ProtoReflect.Descriptor instead.
+func (*PhoneAuthEntryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PhoneAuthEntryRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryRequest) GetVerificationCode() string {
+	if x != nil {
+		return x.VerificationCode
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryRequest) GetAppCode() string {
+	if x != nil {
+		return x.AppCode
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+type PhoneAuthEntryResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Action          string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
+	AccessToken     string                 `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken    string                 `protobuf:"bytes,3,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	UserId          int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username        string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	Email           string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Phone           string                 `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone,omitempty"`
+	ShouldBindEmail bool                   `protobuf:"varint,8,opt,name=should_bind_email,json=shouldBindEmail,proto3" json:"should_bind_email,omitempty"`
+	Message         string                 `protobuf:"bytes,9,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *PhoneAuthEntryResponse) Reset() {
+	*x = PhoneAuthEntryResponse{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PhoneAuthEntryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PhoneAuthEntryResponse) ProtoMessage() {}
+
+func (x *PhoneAuthEntryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PhoneAuthEntryResponse.ProtoReflect.Descriptor instead.
+func (*PhoneAuthEntryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PhoneAuthEntryResponse) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PhoneAuthEntryResponse) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryResponse) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *PhoneAuthEntryResponse) GetShouldBindEmail() bool {
+	if x != nil {
+		return x.ShouldBindEmail
+	}
+	return false
+}
+
+func (x *PhoneAuthEntryResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type PhonePasswordLoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phone         string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	AppCode       string                 `protobuf:"bytes,3,opt,name=app_code,json=appCode,proto3" json:"app_code,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,4,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PhonePasswordLoginRequest) Reset() {
+	*x = PhonePasswordLoginRequest{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PhonePasswordLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PhonePasswordLoginRequest) ProtoMessage() {}
+
+func (x *PhonePasswordLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PhonePasswordLoginRequest.ProtoReflect.Descriptor instead.
+func (*PhonePasswordLoginRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PhonePasswordLoginRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginRequest) GetAppCode() string {
+	if x != nil {
+		return x.AppCode
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+type PhonePasswordLoginResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username      string                 `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
+	Phone         string                 `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
+	Message       string                 `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PhonePasswordLoginResponse) Reset() {
+	*x = PhonePasswordLoginResponse{}
+	mi := &file_proto_auth_auth_api_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PhonePasswordLoginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PhonePasswordLoginResponse) ProtoMessage() {}
+
+func (x *PhonePasswordLoginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_auth_api_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PhonePasswordLoginResponse.ProtoReflect.Descriptor instead.
+func (*PhonePasswordLoginResponse) Descriptor() ([]byte, []int) {
+	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *PhonePasswordLoginResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PhonePasswordLoginResponse) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginResponse) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *PhonePasswordLoginResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_proto_auth_auth_api_proto protoreflect.FileDescriptor
 
 const file_proto_auth_auth_api_proto_rawDesc = "" +
@@ -465,12 +913,51 @@ const file_proto_auth_auth_api_proto_rawDesc = "" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"J\n" +
 	"\x13VerifyTokenResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busername2\xff\x01\n" +
+	"\busername\x18\x02 \x01(\tR\busername\"B\n" +
+	"\x14SendPhoneCodeRequest\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x14\n" +
+	"\x05scene\x18\x02 \x01(\tR\x05scene\"\x93\x01\n" +
+	"\x15SendPhoneCodeResponse\x12\x16\n" +
+	"\x06action\x18\x01 \x01(\tR\x06action\x12)\n" +
+	"\x10cooldown_seconds\x18\x02 \x01(\x05R\x0fcooldownSeconds\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"debug_code\x18\x04 \x01(\tR\tdebugCode\"\x92\x01\n" +
+	"\x15PhoneAuthEntryRequest\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\x12+\n" +
+	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12\x19\n" +
+	"\bapp_code\x18\x03 \x01(\tR\aappCode\x12\x1b\n" +
+	"\tdevice_id\x18\x04 \x01(\tR\bdeviceId\"\x9f\x02\n" +
+	"\x16PhoneAuthEntryResponse\x12\x16\n" +
+	"\x06action\x18\x01 \x01(\tR\x06action\x12!\n" +
+	"\faccess_token\x18\x02 \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x03 \x01(\tR\frefreshToken\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\busername\x18\x05 \x01(\tR\busername\x12\x14\n" +
+	"\x05email\x18\x06 \x01(\tR\x05email\x12\x14\n" +
+	"\x05phone\x18\a \x01(\tR\x05phone\x12*\n" +
+	"\x11should_bind_email\x18\b \x01(\bR\x0fshouldBindEmail\x12\x18\n" +
+	"\amessage\x18\t \x01(\tR\amessage\"\x85\x01\n" +
+	"\x19PhonePasswordLoginRequest\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x19\n" +
+	"\bapp_code\x18\x03 \x01(\tR\aappCode\x12\x1b\n" +
+	"\tdevice_id\x18\x04 \x01(\tR\bdeviceId\"\xc9\x01\n" +
+	"\x1aPhonePasswordLoginResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\busername\x18\x04 \x01(\tR\busername\x12\x14\n" +
+	"\x05phone\x18\x05 \x01(\tR\x05phone\x12\x18\n" +
+	"\amessage\x18\x06 \x01(\tR\amessage2\xef\x03\n" +
 	"\vAuthService\x120\n" +
 	"\x05Login\x12\x12.user.LoginRequest\x1a\x13.user.LoginResponse\x12E\n" +
 	"\fRefreshToken\x12\x19.user.RefreshTokenRequest\x1a\x1a.user.RefreshTokenResponse\x123\n" +
 	"\x06Logout\x12\x13.user.LogoutRequest\x1a\x14.user.LogoutResponse\x12B\n" +
-	"\vVerifyToken\x12\x18.user.VerifyTokenRequest\x1a\x19.user.VerifyTokenResponseB'Z%github.com/luckysxx/common/proto/authb\x06proto3"
+	"\vVerifyToken\x12\x18.user.VerifyTokenRequest\x1a\x19.user.VerifyTokenResponse\x12H\n" +
+	"\rSendPhoneCode\x12\x1a.user.SendPhoneCodeRequest\x1a\x1b.user.SendPhoneCodeResponse\x12K\n" +
+	"\x0ePhoneAuthEntry\x12\x1b.user.PhoneAuthEntryRequest\x1a\x1c.user.PhoneAuthEntryResponse\x12W\n" +
+	"\x12PhonePasswordLogin\x12\x1f.user.PhonePasswordLoginRequest\x1a .user.PhonePasswordLoginResponseB'Z%github.com/luckysxx/common/proto/authb\x06proto3"
 
 var (
 	file_proto_auth_auth_api_proto_rawDescOnce sync.Once
@@ -484,31 +971,43 @@ func file_proto_auth_auth_api_proto_rawDescGZIP() []byte {
 	return file_proto_auth_auth_api_proto_rawDescData
 }
 
-var file_proto_auth_auth_api_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_proto_auth_auth_api_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_proto_auth_auth_api_proto_goTypes = []any{
-	(*LoginRequest)(nil),         // 0: user.LoginRequest
-	(*LoginResponse)(nil),        // 1: user.LoginResponse
-	(*RefreshTokenRequest)(nil),  // 2: user.RefreshTokenRequest
-	(*RefreshTokenResponse)(nil), // 3: user.RefreshTokenResponse
-	(*LogoutRequest)(nil),        // 4: user.LogoutRequest
-	(*LogoutResponse)(nil),       // 5: user.LogoutResponse
-	(*VerifyTokenRequest)(nil),   // 6: user.VerifyTokenRequest
-	(*VerifyTokenResponse)(nil),  // 7: user.VerifyTokenResponse
+	(*LoginRequest)(nil),               // 0: user.LoginRequest
+	(*LoginResponse)(nil),              // 1: user.LoginResponse
+	(*RefreshTokenRequest)(nil),        // 2: user.RefreshTokenRequest
+	(*RefreshTokenResponse)(nil),       // 3: user.RefreshTokenResponse
+	(*LogoutRequest)(nil),              // 4: user.LogoutRequest
+	(*LogoutResponse)(nil),             // 5: user.LogoutResponse
+	(*VerifyTokenRequest)(nil),         // 6: user.VerifyTokenRequest
+	(*VerifyTokenResponse)(nil),        // 7: user.VerifyTokenResponse
+	(*SendPhoneCodeRequest)(nil),       // 8: user.SendPhoneCodeRequest
+	(*SendPhoneCodeResponse)(nil),      // 9: user.SendPhoneCodeResponse
+	(*PhoneAuthEntryRequest)(nil),      // 10: user.PhoneAuthEntryRequest
+	(*PhoneAuthEntryResponse)(nil),     // 11: user.PhoneAuthEntryResponse
+	(*PhonePasswordLoginRequest)(nil),  // 12: user.PhonePasswordLoginRequest
+	(*PhonePasswordLoginResponse)(nil), // 13: user.PhonePasswordLoginResponse
 }
 var file_proto_auth_auth_api_proto_depIdxs = []int32{
-	0, // 0: user.AuthService.Login:input_type -> user.LoginRequest
-	2, // 1: user.AuthService.RefreshToken:input_type -> user.RefreshTokenRequest
-	4, // 2: user.AuthService.Logout:input_type -> user.LogoutRequest
-	6, // 3: user.AuthService.VerifyToken:input_type -> user.VerifyTokenRequest
-	1, // 4: user.AuthService.Login:output_type -> user.LoginResponse
-	3, // 5: user.AuthService.RefreshToken:output_type -> user.RefreshTokenResponse
-	5, // 6: user.AuthService.Logout:output_type -> user.LogoutResponse
-	7, // 7: user.AuthService.VerifyToken:output_type -> user.VerifyTokenResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: user.AuthService.Login:input_type -> user.LoginRequest
+	2,  // 1: user.AuthService.RefreshToken:input_type -> user.RefreshTokenRequest
+	4,  // 2: user.AuthService.Logout:input_type -> user.LogoutRequest
+	6,  // 3: user.AuthService.VerifyToken:input_type -> user.VerifyTokenRequest
+	8,  // 4: user.AuthService.SendPhoneCode:input_type -> user.SendPhoneCodeRequest
+	10, // 5: user.AuthService.PhoneAuthEntry:input_type -> user.PhoneAuthEntryRequest
+	12, // 6: user.AuthService.PhonePasswordLogin:input_type -> user.PhonePasswordLoginRequest
+	1,  // 7: user.AuthService.Login:output_type -> user.LoginResponse
+	3,  // 8: user.AuthService.RefreshToken:output_type -> user.RefreshTokenResponse
+	5,  // 9: user.AuthService.Logout:output_type -> user.LogoutResponse
+	7,  // 10: user.AuthService.VerifyToken:output_type -> user.VerifyTokenResponse
+	9,  // 11: user.AuthService.SendPhoneCode:output_type -> user.SendPhoneCodeResponse
+	11, // 12: user.AuthService.PhoneAuthEntry:output_type -> user.PhoneAuthEntryResponse
+	13, // 13: user.AuthService.PhonePasswordLogin:output_type -> user.PhonePasswordLoginResponse
+	7,  // [7:14] is the sub-list for method output_type
+	0,  // [0:7] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_auth_auth_api_proto_init() }
@@ -522,7 +1021,7 @@ func file_proto_auth_auth_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_auth_auth_api_proto_rawDesc), len(file_proto_auth_auth_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
