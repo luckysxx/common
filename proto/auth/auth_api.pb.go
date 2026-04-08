@@ -255,7 +255,8 @@ func (x *RefreshTokenResponse) GetRefreshToken() string {
 
 type LogoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	AppCode       string                 `protobuf:"bytes,1,opt,name=app_code,json=appCode,proto3" json:"app_code,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -288,6 +289,13 @@ func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
 func (*LogoutRequest) Descriptor() ([]byte, []int) {
 	return file_proto_auth_auth_api_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *LogoutRequest) GetAppCode() string {
+	if x != nil {
+		return x.AppCode
+	}
+	return ""
 }
 
 func (x *LogoutRequest) GetDeviceId() string {
@@ -904,9 +912,10 @@ const file_proto_auth_auth_api_proto_rawDesc = "" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"^\n" +
 	"\x14RefreshTokenResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\",\n" +
-	"\rLogoutRequest\x12\x1b\n" +
-	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\"*\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"G\n" +
+	"\rLogoutRequest\x12\x19\n" +
+	"\bapp_code\x18\x01 \x01(\tR\aappCode\x12\x1b\n" +
+	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\"*\n" +
 	"\x0eLogoutResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"*\n" +
 	"\x12VerifyTokenRequest\x12\x14\n" +

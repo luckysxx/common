@@ -28,7 +28,8 @@ message RefreshTokenResponse {
 }
 
 message LogoutRequest {
-    string device_id = 1;
+    string app_code = 1;
+    string device_id = 2;
 }
 
 message LogoutResponse {
