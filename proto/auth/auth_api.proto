@@ -16,6 +16,7 @@ message LoginResponse {
     string refresh_token = 2;
     int64 user_id = 3;
     string username = 4;
+    string sso_token = 5;
 }
 
 message RefreshTokenRequest {
@@ -25,6 +26,19 @@ message RefreshTokenRequest {
 message RefreshTokenResponse {
     string access_token = 1;
     string refresh_token = 2;
+}
+
+message ExchangeSSORequest {
+    string sso_token = 1;
+    string app_code = 2;
+    string device_id = 3;
+}
+
+message ExchangeSSOResponse {
+    string access_token = 1;
+    string refresh_token = 2;
+    int64 user_id = 3;
+    string username = 4;
 }
 
 message LogoutRequest {
@@ -74,6 +88,7 @@ message PhoneAuthEntryResponse {
     string phone = 7;
     bool should_bind_email = 8;
     string message = 9;
+    string sso_token = 10;
 }
 
 message PhonePasswordLoginRequest {
@@ -90,11 +105,13 @@ message PhonePasswordLoginResponse {
     string username = 4;
     string phone = 5;
     string message = 6;
+    string sso_token = 7;
 }
 
 service AuthService {
     rpc Login (LoginRequest) returns (LoginResponse);
     rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+    rpc ExchangeSSO (ExchangeSSORequest) returns (ExchangeSSOResponse);
     rpc Logout (LogoutRequest) returns (LogoutResponse);
     rpc VerifyToken (VerifyTokenRequest) returns (VerifyTokenResponse);
     rpc SendPhoneCode (SendPhoneCodeRequest) returns (SendPhoneCodeResponse);

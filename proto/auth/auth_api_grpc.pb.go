@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	AuthService_Login_FullMethodName              = "/user.AuthService/Login"
 	AuthService_RefreshToken_FullMethodName       = "/user.AuthService/RefreshToken"
+	AuthService_ExchangeSSO_FullMethodName        = "/user.AuthService/ExchangeSSO"
 	AuthService_Logout_FullMethodName             = "/user.AuthService/Logout"
 	AuthService_VerifyToken_FullMethodName        = "/user.AuthService/VerifyToken"
 	AuthService_SendPhoneCode_FullMethodName      = "/user.AuthService/SendPhoneCode"
@@ -34,6 +35,7 @@ const (
 type AuthServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
+	ExchangeSSO(ctx context.Context, in *ExchangeSSORequest, opts ...grpc.CallOption) (*ExchangeSSOResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	VerifyToken(ctx context.Context, in *VerifyTokenRequest, opts ...grpc.CallOption) (*VerifyTokenResponse, error)
 	SendPhoneCode(ctx context.Context, in *SendPhoneCodeRequest, opts ...grpc.CallOption) (*SendPhoneCodeResponse, error)
@@ -63,6 +65,16 @@ func (c *authServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RefreshTokenResponse)
 	err := c.cc.Invoke(ctx, AuthService_RefreshToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) ExchangeSSO(ctx context.Context, in *ExchangeSSORequest, opts ...grpc.CallOption) (*ExchangeSSOResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExchangeSSOResponse)
+	err := c.cc.Invoke(ctx, AuthService_ExchangeSSO_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -125,6 +137,7 @@ func (c *authServiceClient) PhonePasswordLogin(ctx context.Context, in *PhonePas
 type AuthServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error)
+	ExchangeSSO(context.Context, *ExchangeSSORequest) (*ExchangeSSOResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	VerifyToken(context.Context, *VerifyTokenRequest) (*VerifyTokenResponse, error)
 	SendPhoneCode(context.Context, *SendPhoneCodeRequest) (*SendPhoneCodeResponse, error)
@@ -145,6 +158,9 @@ func (UnimplementedAuthServiceServer) Login(context.Context, *LoginRequest) (*Lo
 }
 func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RefreshToken not implemented")
+}
+func (UnimplementedAuthServiceServer) ExchangeSSO(context.Context, *ExchangeSSORequest) (*ExchangeSSOResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExchangeSSO not implemented")
 }
 func (UnimplementedAuthServiceServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Logout not implemented")
@@ -214,6 +230,24 @@ func _AuthService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_ExchangeSSO_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExchangeSSORequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ExchangeSSO(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ExchangeSSO_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ExchangeSSO(ctx, req.(*ExchangeSSORequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -322,6 +356,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshToken",
 			Handler:    _AuthService_RefreshToken_Handler,
+		},
+		{
+			MethodName: "ExchangeSSO",
+			Handler:    _AuthService_ExchangeSSO_Handler,
 		},
 		{
 			MethodName: "Logout",

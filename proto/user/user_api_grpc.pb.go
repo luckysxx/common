@@ -19,9 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_Register_FullMethodName      = "/user.UserService/Register"
-	UserService_GetProfile_FullMethodName    = "/user.UserService/GetProfile"
-	UserService_UpdateProfile_FullMethodName = "/user.UserService/UpdateProfile"
+	UserService_Register_FullMethodName          = "/user.UserService/Register"
+	UserService_ChangePassword_FullMethodName    = "/user.UserService/ChangePassword"
+	UserService_LogoutAllSessions_FullMethodName = "/user.UserService/LogoutAllSessions"
+	UserService_BindEmail_FullMethodName         = "/user.UserService/BindEmail"
+	UserService_SetPassword_FullMethodName       = "/user.UserService/SetPassword"
+	UserService_GetProfile_FullMethodName        = "/user.UserService/GetProfile"
+	UserService_UpdateProfile_FullMethodName     = "/user.UserService/UpdateProfile"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -29,6 +33,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
+	LogoutAllSessions(ctx context.Context, in *LogoutAllSessionsRequest, opts ...grpc.CallOption) (*LogoutAllSessionsResponse, error)
+	BindEmail(ctx context.Context, in *BindEmailRequest, opts ...grpc.CallOption) (*BindEmailResponse, error)
+	SetPassword(ctx context.Context, in *SetPasswordRequest, opts ...grpc.CallOption) (*SetPasswordResponse, error)
 	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
 	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*ProfileResponse, error)
 }
@@ -45,6 +53,46 @@ func (c *userServiceClient) Register(ctx context.Context, in *RegisterRequest, o
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterResponse)
 	err := c.cc.Invoke(ctx, UserService_Register_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ChangePasswordResponse)
+	err := c.cc.Invoke(ctx, UserService_ChangePassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) LogoutAllSessions(ctx context.Context, in *LogoutAllSessionsRequest, opts ...grpc.CallOption) (*LogoutAllSessionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LogoutAllSessionsResponse)
+	err := c.cc.Invoke(ctx, UserService_LogoutAllSessions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) BindEmail(ctx context.Context, in *BindEmailRequest, opts ...grpc.CallOption) (*BindEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BindEmailResponse)
+	err := c.cc.Invoke(ctx, UserService_BindEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) SetPassword(ctx context.Context, in *SetPasswordRequest, opts ...grpc.CallOption) (*SetPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPasswordResponse)
+	err := c.cc.Invoke(ctx, UserService_SetPassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,6 +124,10 @@ func (c *userServiceClient) UpdateProfile(ctx context.Context, in *UpdateProfile
 // for forward compatibility.
 type UserServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
+	LogoutAllSessions(context.Context, *LogoutAllSessionsRequest) (*LogoutAllSessionsResponse, error)
+	BindEmail(context.Context, *BindEmailRequest) (*BindEmailResponse, error)
+	SetPassword(context.Context, *SetPasswordRequest) (*SetPasswordResponse, error)
 	GetProfile(context.Context, *GetProfileRequest) (*ProfileResponse, error)
 	UpdateProfile(context.Context, *UpdateProfileRequest) (*ProfileResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
@@ -90,6 +142,18 @@ type UnimplementedUserServiceServer struct{}
 
 func (UnimplementedUserServiceServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedUserServiceServer) ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ChangePassword not implemented")
+}
+func (UnimplementedUserServiceServer) LogoutAllSessions(context.Context, *LogoutAllSessionsRequest) (*LogoutAllSessionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LogoutAllSessions not implemented")
+}
+func (UnimplementedUserServiceServer) BindEmail(context.Context, *BindEmailRequest) (*BindEmailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BindEmail not implemented")
+}
+func (UnimplementedUserServiceServer) SetPassword(context.Context, *SetPasswordRequest) (*SetPasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPassword not implemented")
 }
 func (UnimplementedUserServiceServer) GetProfile(context.Context, *GetProfileRequest) (*ProfileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetProfile not implemented")
@@ -132,6 +196,78 @@ func _UserService_Register_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ChangePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ChangePassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ChangePassword(ctx, req.(*ChangePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_LogoutAllSessions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogoutAllSessionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).LogoutAllSessions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_LogoutAllSessions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).LogoutAllSessions(ctx, req.(*LogoutAllSessionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_BindEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BindEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).BindEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_BindEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).BindEmail(ctx, req.(*BindEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_SetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).SetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_SetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).SetPassword(ctx, req.(*SetPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -182,6 +318,22 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Register",
 			Handler:    _UserService_Register_Handler,
+		},
+		{
+			MethodName: "ChangePassword",
+			Handler:    _UserService_ChangePassword_Handler,
+		},
+		{
+			MethodName: "LogoutAllSessions",
+			Handler:    _UserService_LogoutAllSessions_Handler,
+		},
+		{
+			MethodName: "BindEmail",
+			Handler:    _UserService_BindEmail_Handler,
+		},
+		{
+			MethodName: "SetPassword",
+			Handler:    _UserService_SetPassword_Handler,
 		},
 		{
 			MethodName: "GetProfile",
