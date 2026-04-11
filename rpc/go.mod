@@ -3,7 +3,7 @@ module github.com/luckysxx/common/rpc
 go 1.25.5
 
 require (
-	github.com/luckysxx/common/proto v1.0.0
+	github.com/luckysxx/common/proto v1.3.0
 	google.golang.org/grpc v1.79.3
 )
 

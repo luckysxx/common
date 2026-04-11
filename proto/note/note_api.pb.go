@@ -7,6 +7,7 @@
 package note
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -517,9 +518,13 @@ func (x *DeleteSnippetResponse) GetId() int64 {
 	return 0
 }
 
+// SearchSnippetsRequest 结构化搜索请求（重设计）
 type SearchSnippetsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	Keyword       string                 `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	Language      string                 `protobuf:"bytes,2,opt,name=language,proto3" json:"language,omitempty"`
+	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset        int32                  `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -554,11 +559,32 @@ func (*SearchSnippetsRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SearchSnippetsRequest) GetQuery() string {
+func (x *SearchSnippetsRequest) GetKeyword() string {
 	if x != nil {
-		return x.Query
+		return x.Keyword
 	}
 	return ""
+}
+
+func (x *SearchSnippetsRequest) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+func (x *SearchSnippetsRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *SearchSnippetsRequest) GetOffset() int32 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
 }
 
 type GetPublicSnippetRequest struct {
@@ -1697,7 +1723,7 @@ var File_note_note_api_proto protoreflect.FileDescriptor
 
 const file_note_note_api_proto_rawDesc = "" +
 	"\n" +
-	"\x13note/note_api.proto\x12\x04note\"\x82\x01\n" +
+	"\x13note/note_api.proto\x12\x04note\x1a\x1cgoogle/api/annotations.proto\"\x82\x01\n" +
 	"\x14CreateSnippetRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1a\n" +
@@ -1743,9 +1769,12 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\n" +
 	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"'\n" +
 	"\x15DeleteSnippetResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"-\n" +
-	"\x15SearchSnippetsRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\"8\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"{\n" +
+	"\x15SearchSnippetsRequest\x12\x18\n" +
+	"\akeyword\x18\x01 \x01(\tR\akeyword\x12\x1a\n" +
+	"\blanguage\x18\x02 \x01(\tR\blanguage\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06offset\x18\x04 \x01(\x05R\x06offset\"8\n" +
 	"\x17GetPublicSnippetRequest\x12\x1d\n" +
 	"\n" +
 	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"7\n" +
@@ -1810,32 +1839,32 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\x12UploadFileResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
-	"\x04size\x18\x03 \x01(\x03R\x04size2\xe0\f\n" +
-	"\vNoteService\x12B\n" +
-	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\x12<\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size2\xbc\x13\n" +
+	"\vNoteService\x12h\n" +
+	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/v1/notes/me/snippets\x12e\n" +
+	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/v1/notes/snippets\x12i\n" +
 	"\n" +
-	"GetSnippet\x12\x17.note.GetSnippetRequest\x1a\x15.note.SnippetResponse\x12E\n" +
-	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12B\n" +
-	"\rUpdateSnippet\x12\x1a.note.UpdateSnippetRequest\x1a\x15.note.SnippetResponse\x12H\n" +
-	"\rDeleteSnippet\x12\x1a.note.DeleteSnippetRequest\x1a\x1b.note.DeleteSnippetResponse\x12I\n" +
-	"\x0eSearchSnippets\x12\x1b.note.SearchSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12H\n" +
-	"\x10GetPublicSnippet\x12\x1d.note.GetPublicSnippetRequest\x1a\x15.note.SnippetResponse\x12N\n" +
-	"\x0fFavoriteSnippet\x12\x1c.note.FavoriteSnippetRequest\x1a\x1d.note.FavoriteSnippetResponse\x12R\n" +
-	"\x11UnfavoriteSnippet\x12\x1e.note.UnfavoriteSnippetRequest\x1a\x1d.note.FavoriteSnippetResponse\x12Z\n" +
-	"\x19CreateSnippetFromTemplate\x12&.note.CreateSnippetFromTemplateRequest\x1a\x15.note.SnippetResponse\x12K\n" +
-	"\x12ListRecentSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12K\n" +
-	"\x12ListSharedSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12M\n" +
-	"\x14ListFavoriteSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\x12?\n" +
+	"GetSnippet\x12\x17.note.GetSnippetRequest\x1a\x15.note.SnippetResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/v1/notes/snippets/{snippet_id}\x12r\n" +
+	"\rUpdateSnippet\x12\x1a.note.UpdateSnippetRequest\x1a\x15.note.SnippetResponse\".\x82\xd3\xe4\x93\x02(:\x01*\x1a#/api/v1/notes/snippets/{snippet_id}\x12u\n" +
+	"\rDeleteSnippet\x12\x1a.note.DeleteSnippetRequest\x1a\x1b.note.DeleteSnippetResponse\"+\x82\xd3\xe4\x93\x02%*#/api/v1/notes/snippets/{snippet_id}\x12p\n" +
+	"\x0eSearchSnippets\x12\x1b.note.SearchSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/notes/snippets/search\x12H\n" +
+	"\x10GetPublicSnippet\x12\x1d.note.GetPublicSnippetRequest\x1a\x15.note.SnippetResponse\x12\x84\x01\n" +
+	"\x0fFavoriteSnippet\x12\x1c.note.FavoriteSnippetRequest\x1a\x1d.note.FavoriteSnippetResponse\"4\x82\xd3\xe4\x93\x02.\",/api/v1/notes/snippets/{snippet_id}/favorite\x12\x88\x01\n" +
+	"\x11UnfavoriteSnippet\x12\x1e.note.UnfavoriteSnippetRequest\x1a\x1d.note.FavoriteSnippetResponse\"4\x82\xd3\xe4\x93\x02.*,/api/v1/notes/snippets/{snippet_id}/favorite\x12\x8b\x01\n" +
+	"\x19CreateSnippetFromTemplate\x12&.note.CreateSnippetFromTemplateRequest\x1a\x15.note.SnippetResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/api/v1/notes/snippets/from-template\x12u\n" +
+	"\x12ListRecentSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /api/v1/notes/me/snippets/recent\x12u\n" +
+	"\x12ListSharedSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /api/v1/notes/me/snippets/shared\x12z\n" +
+	"\x14ListFavoriteSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/v1/notes/me/snippets/favorites\x12]\n" +
 	"\n" +
-	"ListGroups\x12\x17.note.ListGroupsRequest\x1a\x18.note.ListGroupsResponse\x12<\n" +
-	"\vCreateGroup\x12\x18.note.CreateGroupRequest\x1a\x13.note.GroupResponse\x12<\n" +
-	"\vUpdateGroup\x12\x18.note.UpdateGroupRequest\x1a\x13.note.GroupResponse\x12B\n" +
-	"\vDeleteGroup\x12\x18.note.DeleteGroupRequest\x1a\x19.note.DeleteGroupResponse\x129\n" +
-	"\bListTags\x12\x15.note.ListTagsRequest\x1a\x16.note.ListTagsResponse\x126\n" +
-	"\tCreateTag\x12\x16.note.CreateTagRequest\x1a\x11.note.TagResponse\x12<\n" +
-	"\tDeleteTag\x12\x16.note.DeleteTagRequest\x1a\x17.note.DeleteTagResponse\x12H\n" +
-	"\rListTemplates\x12\x1a.note.ListTemplatesRequest\x1a\x1b.note.ListTemplatesResponse\x12?\n" +
-	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\x12?\n" +
+	"ListGroups\x12\x17.note.ListGroupsRequest\x1a\x18.note.ListGroupsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/notes/groups\x12]\n" +
+	"\vCreateGroup\x12\x18.note.CreateGroupRequest\x1a\x13.note.GroupResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/notes/groups\x12h\n" +
+	"\vUpdateGroup\x12\x18.note.UpdateGroupRequest\x1a\x13.note.GroupResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\x1a\x1f/api/v1/notes/groups/{group_id}\x12k\n" +
+	"\vDeleteGroup\x12\x18.note.DeleteGroupRequest\x1a\x19.note.DeleteGroupResponse\"'\x82\xd3\xe4\x93\x02!*\x1f/api/v1/notes/groups/{group_id}\x12U\n" +
+	"\bListTags\x12\x15.note.ListTagsRequest\x1a\x16.note.ListTagsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/notes/tags\x12U\n" +
+	"\tCreateTag\x12\x16.note.CreateTagRequest\x1a\x11.note.TagResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/notes/tags\x12a\n" +
+	"\tDeleteTag\x12\x16.note.DeleteTagRequest\x1a\x17.note.DeleteTagResponse\"#\x82\xd3\xe4\x93\x02\x1d*\x1b/api/v1/notes/tags/{tag_id}\x12i\n" +
+	"\rListTemplates\x12\x1a.note.ListTemplatesRequest\x1a\x1b.note.ListTemplatesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/notes/templates\x12n\n" +
+	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/notes/templates/{template_id}\x12?\n" +
 	"\n" +
 	"UploadFile\x12\x17.note.UploadFileRequest\x1a\x18.note.UploadFileResponseB'Z%github.com/luckysxx/common/proto/noteb\x06proto3"
 
@@ -1892,9 +1921,9 @@ var file_note_note_api_proto_depIdxs = []int32{
 	14, // 1: note.ListGroupsResponse.groups:type_name -> note.GroupResponse
 	21, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
 	27, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
-	0,  // 4: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
-	1,  // 5: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
-	2,  // 6: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 4: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
+	0,  // 5: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
+	1,  // 6: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
 	3,  // 7: note.NoteService.UpdateSnippet:input_type -> note.UpdateSnippetRequest
 	6,  // 8: note.NoteService.DeleteSnippet:input_type -> note.DeleteSnippetRequest
 	8,  // 9: note.NoteService.SearchSnippets:input_type -> note.SearchSnippetsRequest
@@ -1915,9 +1944,9 @@ var file_note_note_api_proto_depIdxs = []int32{
 	28, // 24: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
 	30, // 25: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
 	31, // 26: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
-	4,  // 27: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
-	4,  // 28: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
-	5,  // 29: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 27: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 28: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
+	4,  // 29: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
 	4,  // 30: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
 	7,  // 31: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
 	5,  // 32: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse

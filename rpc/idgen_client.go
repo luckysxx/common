@@ -14,7 +14,11 @@ var idgenClient pb.IDGeneratorClient
 
 // InitIDGenClient 初始化全局的 ID Generator gRPC 客户端
 func InitIDGenClient(targetAddr string) error {
-	conn, err := grpc.NewClient(targetAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(
+		targetAddr,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithDefaultServiceConfig(`{"loadBalancingConfig": [{"round_robin": {}}]}`),
+	)
 	if err != nil {
 		return fmt.Errorf("无法连接到发号器服务 %s: %w", targetAddr, err)
 	}

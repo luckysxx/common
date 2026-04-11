@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	NoteService_ListSnippets_FullMethodName              = "/note.NoteService/ListSnippets"
 	NoteService_CreateSnippet_FullMethodName             = "/note.NoteService/CreateSnippet"
 	NoteService_GetSnippet_FullMethodName                = "/note.NoteService/GetSnippet"
-	NoteService_ListSnippets_FullMethodName              = "/note.NoteService/ListSnippets"
 	NoteService_UpdateSnippet_FullMethodName             = "/note.NoteService/UpdateSnippet"
 	NoteService_DeleteSnippet_FullMethodName             = "/note.NoteService/DeleteSnippet"
 	NoteService_SearchSnippets_FullMethodName            = "/note.NoteService/SearchSnippets"
@@ -48,34 +48,30 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NoteServiceClient interface {
-	// --- 已有 ---
+	ListSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	CreateSnippet(ctx context.Context, in *CreateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	GetSnippet(ctx context.Context, in *GetSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
-	ListSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	UpdateSnippet(ctx context.Context, in *UpdateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
-	// --- 新增：片段扩展 ---
 	DeleteSnippet(ctx context.Context, in *DeleteSnippetRequest, opts ...grpc.CallOption) (*DeleteSnippetResponse, error)
 	SearchSnippets(ctx context.Context, in *SearchSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
+	// 公开片段 — 不加 http 注解，保留手写 handler（无需鉴权）
 	GetPublicSnippet(ctx context.Context, in *GetPublicSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	FavoriteSnippet(ctx context.Context, in *FavoriteSnippetRequest, opts ...grpc.CallOption) (*FavoriteSnippetResponse, error)
 	UnfavoriteSnippet(ctx context.Context, in *UnfavoriteSnippetRequest, opts ...grpc.CallOption) (*FavoriteSnippetResponse, error)
 	CreateSnippetFromTemplate(ctx context.Context, in *CreateSnippetFromTemplateRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
-	// --- 新增：工作区列表 ---
 	ListRecentSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	ListSharedSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	ListFavoriteSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
-	// --- 新增：分组 ---
 	ListGroups(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsResponse, error)
 	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	UpdateGroup(ctx context.Context, in *UpdateGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*DeleteGroupResponse, error)
-	// --- 新增：标签 ---
 	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*TagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
-	// --- 新增：模板与上传 ---
 	ListTemplates(ctx context.Context, in *ListTemplatesRequest, opts ...grpc.CallOption) (*ListTemplatesResponse, error)
 	GetTemplate(ctx context.Context, in *GetTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
+	// 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
 	UploadFile(ctx context.Context, in *UploadFileRequest, opts ...grpc.CallOption) (*UploadFileResponse, error)
 }
 
@@ -85,6 +81,16 @@ type noteServiceClient struct {
 
 func NewNoteServiceClient(cc grpc.ClientConnInterface) NoteServiceClient {
 	return &noteServiceClient{cc}
+}
+
+func (c *noteServiceClient) ListSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSnippetsResponse)
+	err := c.cc.Invoke(ctx, NoteService_ListSnippets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *noteServiceClient) CreateSnippet(ctx context.Context, in *CreateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error) {
@@ -101,16 +107,6 @@ func (c *noteServiceClient) GetSnippet(ctx context.Context, in *GetSnippetReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SnippetResponse)
 	err := c.cc.Invoke(ctx, NoteService_GetSnippet_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *noteServiceClient) ListSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListSnippetsResponse)
-	err := c.cc.Invoke(ctx, NoteService_ListSnippets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -321,34 +317,30 @@ func (c *noteServiceClient) UploadFile(ctx context.Context, in *UploadFileReques
 // All implementations must embed UnimplementedNoteServiceServer
 // for forward compatibility.
 type NoteServiceServer interface {
-	// --- 已有 ---
+	ListSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	CreateSnippet(context.Context, *CreateSnippetRequest) (*SnippetResponse, error)
 	GetSnippet(context.Context, *GetSnippetRequest) (*SnippetResponse, error)
-	ListSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	UpdateSnippet(context.Context, *UpdateSnippetRequest) (*SnippetResponse, error)
-	// --- 新增：片段扩展 ---
 	DeleteSnippet(context.Context, *DeleteSnippetRequest) (*DeleteSnippetResponse, error)
 	SearchSnippets(context.Context, *SearchSnippetsRequest) (*ListSnippetsResponse, error)
+	// 公开片段 — 不加 http 注解，保留手写 handler（无需鉴权）
 	GetPublicSnippet(context.Context, *GetPublicSnippetRequest) (*SnippetResponse, error)
 	FavoriteSnippet(context.Context, *FavoriteSnippetRequest) (*FavoriteSnippetResponse, error)
 	UnfavoriteSnippet(context.Context, *UnfavoriteSnippetRequest) (*FavoriteSnippetResponse, error)
 	CreateSnippetFromTemplate(context.Context, *CreateSnippetFromTemplateRequest) (*SnippetResponse, error)
-	// --- 新增：工作区列表 ---
 	ListRecentSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	ListSharedSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	ListFavoriteSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
-	// --- 新增：分组 ---
 	ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsResponse, error)
 	CreateGroup(context.Context, *CreateGroupRequest) (*GroupResponse, error)
 	UpdateGroup(context.Context, *UpdateGroupRequest) (*GroupResponse, error)
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupResponse, error)
-	// --- 新增：标签 ---
 	ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*TagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
-	// --- 新增：模板与上传 ---
 	ListTemplates(context.Context, *ListTemplatesRequest) (*ListTemplatesResponse, error)
 	GetTemplate(context.Context, *GetTemplateRequest) (*TemplateResponse, error)
+	// 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
 	UploadFile(context.Context, *UploadFileRequest) (*UploadFileResponse, error)
 	mustEmbedUnimplementedNoteServiceServer()
 }
@@ -360,14 +352,14 @@ type NoteServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNoteServiceServer struct{}
 
+func (UnimplementedNoteServiceServer) ListSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSnippets not implemented")
+}
 func (UnimplementedNoteServiceServer) CreateSnippet(context.Context, *CreateSnippetRequest) (*SnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateSnippet not implemented")
 }
 func (UnimplementedNoteServiceServer) GetSnippet(context.Context, *GetSnippetRequest) (*SnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSnippet not implemented")
-}
-func (UnimplementedNoteServiceServer) ListSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListSnippets not implemented")
 }
 func (UnimplementedNoteServiceServer) UpdateSnippet(context.Context, *UpdateSnippetRequest) (*SnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateSnippet not implemented")
@@ -450,6 +442,24 @@ func RegisterNoteServiceServer(s grpc.ServiceRegistrar, srv NoteServiceServer) {
 	s.RegisterService(&NoteService_ServiceDesc, srv)
 }
 
+func _NoteService_ListSnippets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSnippetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).ListSnippets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_ListSnippets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).ListSnippets(ctx, req.(*ListSnippetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NoteService_CreateSnippet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateSnippetRequest)
 	if err := dec(in); err != nil {
@@ -482,24 +492,6 @@ func _NoteService_GetSnippet_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoteServiceServer).GetSnippet(ctx, req.(*GetSnippetRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NoteService_ListSnippets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSnippetsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NoteServiceServer).ListSnippets(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NoteService_ListSnippets_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NoteServiceServer).ListSnippets(ctx, req.(*ListSnippetsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -872,16 +864,16 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NoteServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "ListSnippets",
+			Handler:    _NoteService_ListSnippets_Handler,
+		},
+		{
 			MethodName: "CreateSnippet",
 			Handler:    _NoteService_CreateSnippet_Handler,
 		},
 		{
 			MethodName: "GetSnippet",
 			Handler:    _NoteService_GetSnippet_Handler,
-		},
-		{
-			MethodName: "ListSnippets",
-			Handler:    _NoteService_ListSnippets_Handler,
 		},
 		{
 			MethodName: "UpdateSnippet",
