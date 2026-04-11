@@ -836,6 +836,15 @@ type GroupResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	OwnerId       int64                  `protobuf:"varint,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	ParentId      *int64                 `protobuf:"varint,4,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Visibility    string                 `protobuf:"bytes,6,opt,name=visibility,proto3" json:"visibility,omitempty"`
+	SortOrder     int32                  `protobuf:"varint,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	ChildrenCount int32                  `protobuf:"varint,8,opt,name=children_count,json=childrenCount,proto3" json:"children_count,omitempty"`
+	SnippetCount  int32                  `protobuf:"varint,9,opt,name=snippet_count,json=snippetCount,proto3" json:"snippet_count,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -884,6 +893,69 @@ func (x *GroupResponse) GetName() string {
 	return ""
 }
 
+func (x *GroupResponse) GetOwnerId() int64 {
+	if x != nil {
+		return x.OwnerId
+	}
+	return 0
+}
+
+func (x *GroupResponse) GetParentId() int64 {
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
+	}
+	return 0
+}
+
+func (x *GroupResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *GroupResponse) GetVisibility() string {
+	if x != nil {
+		return x.Visibility
+	}
+	return ""
+}
+
+func (x *GroupResponse) GetSortOrder() int32 {
+	if x != nil {
+		return x.SortOrder
+	}
+	return 0
+}
+
+func (x *GroupResponse) GetChildrenCount() int32 {
+	if x != nil {
+		return x.ChildrenCount
+	}
+	return 0
+}
+
+func (x *GroupResponse) GetSnippetCount() int32 {
+	if x != nil {
+		return x.SnippetCount
+	}
+	return 0
+}
+
+func (x *GroupResponse) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *GroupResponse) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
 type ListGroupsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -920,6 +992,50 @@ func (*ListGroupsRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{15}
 }
 
+type GetGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGroupRequest) Reset() {
+	*x = GetGroupRequest{}
+	mi := &file_note_note_api_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGroupRequest) ProtoMessage() {}
+
+func (x *GetGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGroupRequest.ProtoReflect.Descriptor instead.
+func (*GetGroupRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetGroupRequest) GetGroupId() int64 {
+	if x != nil {
+		return x.GroupId
+	}
+	return 0
+}
+
 type ListGroupsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Groups        []*GroupResponse       `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
@@ -929,7 +1045,7 @@ type ListGroupsResponse struct {
 
 func (x *ListGroupsResponse) Reset() {
 	*x = ListGroupsResponse{}
-	mi := &file_note_note_api_proto_msgTypes[16]
+	mi := &file_note_note_api_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -941,7 +1057,7 @@ func (x *ListGroupsResponse) String() string {
 func (*ListGroupsResponse) ProtoMessage() {}
 
 func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[16]
+	mi := &file_note_note_api_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -954,7 +1070,7 @@ func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{16}
+	return file_note_note_api_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListGroupsResponse) GetGroups() []*GroupResponse {
@@ -967,13 +1083,16 @@ func (x *ListGroupsResponse) GetGroups() []*GroupResponse {
 type CreateGroupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ParentId      *int64                 `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Visibility    string                 `protobuf:"bytes,4,opt,name=visibility,proto3" json:"visibility,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateGroupRequest) Reset() {
 	*x = CreateGroupRequest{}
-	mi := &file_note_note_api_proto_msgTypes[17]
+	mi := &file_note_note_api_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -985,7 +1104,7 @@ func (x *CreateGroupRequest) String() string {
 func (*CreateGroupRequest) ProtoMessage() {}
 
 func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[17]
+	mi := &file_note_note_api_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -998,7 +1117,7 @@ func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGroupRequest.ProtoReflect.Descriptor instead.
 func (*CreateGroupRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{17}
+	return file_note_note_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateGroupRequest) GetName() string {
@@ -1008,17 +1127,42 @@ func (x *CreateGroupRequest) GetName() string {
 	return ""
 }
 
+func (x *CreateGroupRequest) GetParentId() int64 {
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
+	}
+	return 0
+}
+
+func (x *CreateGroupRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateGroupRequest) GetVisibility() string {
+	if x != nil {
+		return x.Visibility
+	}
+	return ""
+}
+
 type UpdateGroupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ParentId      *int64                 `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3,oneof" json:"parent_id,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Visibility    string                 `protobuf:"bytes,5,opt,name=visibility,proto3" json:"visibility,omitempty"`
+	SortOrder     *int32                 `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3,oneof" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateGroupRequest) Reset() {
 	*x = UpdateGroupRequest{}
-	mi := &file_note_note_api_proto_msgTypes[18]
+	mi := &file_note_note_api_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1030,7 +1174,7 @@ func (x *UpdateGroupRequest) String() string {
 func (*UpdateGroupRequest) ProtoMessage() {}
 
 func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[18]
+	mi := &file_note_note_api_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1043,7 +1187,7 @@ func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateGroupRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{18}
+	return file_note_note_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateGroupRequest) GetGroupId() int64 {
@@ -1060,6 +1204,34 @@ func (x *UpdateGroupRequest) GetName() string {
 	return ""
 }
 
+func (x *UpdateGroupRequest) GetParentId() int64 {
+	if x != nil && x.ParentId != nil {
+		return *x.ParentId
+	}
+	return 0
+}
+
+func (x *UpdateGroupRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateGroupRequest) GetVisibility() string {
+	if x != nil {
+		return x.Visibility
+	}
+	return ""
+}
+
+func (x *UpdateGroupRequest) GetSortOrder() int32 {
+	if x != nil && x.SortOrder != nil {
+		return *x.SortOrder
+	}
+	return 0
+}
+
 type DeleteGroupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	GroupId       int64                  `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
@@ -1069,7 +1241,7 @@ type DeleteGroupRequest struct {
 
 func (x *DeleteGroupRequest) Reset() {
 	*x = DeleteGroupRequest{}
-	mi := &file_note_note_api_proto_msgTypes[19]
+	mi := &file_note_note_api_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1081,7 +1253,7 @@ func (x *DeleteGroupRequest) String() string {
 func (*DeleteGroupRequest) ProtoMessage() {}
 
 func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[19]
+	mi := &file_note_note_api_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +1266,7 @@ func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupRequest.ProtoReflect.Descriptor instead.
 func (*DeleteGroupRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{19}
+	return file_note_note_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DeleteGroupRequest) GetGroupId() int64 {
@@ -1113,7 +1285,7 @@ type DeleteGroupResponse struct {
 
 func (x *DeleteGroupResponse) Reset() {
 	*x = DeleteGroupResponse{}
-	mi := &file_note_note_api_proto_msgTypes[20]
+	mi := &file_note_note_api_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1125,7 +1297,7 @@ func (x *DeleteGroupResponse) String() string {
 func (*DeleteGroupResponse) ProtoMessage() {}
 
 func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[20]
+	mi := &file_note_note_api_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1138,7 +1310,7 @@ func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupResponse.ProtoReflect.Descriptor instead.
 func (*DeleteGroupResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{20}
+	return file_note_note_api_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DeleteGroupResponse) GetId() int64 {
@@ -1153,13 +1325,16 @@ type TagResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	OwnerId       int64                  `protobuf:"varint,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	Color         string                 `protobuf:"bytes,4,opt,name=color,proto3" json:"color,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TagResponse) Reset() {
 	*x = TagResponse{}
-	mi := &file_note_note_api_proto_msgTypes[21]
+	mi := &file_note_note_api_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1171,7 +1346,7 @@ func (x *TagResponse) String() string {
 func (*TagResponse) ProtoMessage() {}
 
 func (x *TagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[21]
+	mi := &file_note_note_api_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1184,7 +1359,7 @@ func (x *TagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagResponse.ProtoReflect.Descriptor instead.
 func (*TagResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{21}
+	return file_note_note_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *TagResponse) GetId() int64 {
@@ -1201,6 +1376,27 @@ func (x *TagResponse) GetName() string {
 	return ""
 }
 
+func (x *TagResponse) GetOwnerId() int64 {
+	if x != nil {
+		return x.OwnerId
+	}
+	return 0
+}
+
+func (x *TagResponse) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
+func (x *TagResponse) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
 type ListTagsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1209,7 +1405,7 @@ type ListTagsRequest struct {
 
 func (x *ListTagsRequest) Reset() {
 	*x = ListTagsRequest{}
-	mi := &file_note_note_api_proto_msgTypes[22]
+	mi := &file_note_note_api_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1221,7 +1417,7 @@ func (x *ListTagsRequest) String() string {
 func (*ListTagsRequest) ProtoMessage() {}
 
 func (x *ListTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[22]
+	mi := &file_note_note_api_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1234,7 +1430,7 @@ func (x *ListTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTagsRequest.ProtoReflect.Descriptor instead.
 func (*ListTagsRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{22}
+	return file_note_note_api_proto_rawDescGZIP(), []int{23}
 }
 
 type ListTagsResponse struct {
@@ -1246,7 +1442,7 @@ type ListTagsResponse struct {
 
 func (x *ListTagsResponse) Reset() {
 	*x = ListTagsResponse{}
-	mi := &file_note_note_api_proto_msgTypes[23]
+	mi := &file_note_note_api_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1258,7 +1454,7 @@ func (x *ListTagsResponse) String() string {
 func (*ListTagsResponse) ProtoMessage() {}
 
 func (x *ListTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[23]
+	mi := &file_note_note_api_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1271,7 +1467,7 @@ func (x *ListTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTagsResponse.ProtoReflect.Descriptor instead.
 func (*ListTagsResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{23}
+	return file_note_note_api_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListTagsResponse) GetTags() []*TagResponse {
@@ -1284,13 +1480,14 @@ func (x *ListTagsResponse) GetTags() []*TagResponse {
 type CreateTagRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Color         string                 `protobuf:"bytes,2,opt,name=color,proto3" json:"color,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateTagRequest) Reset() {
 	*x = CreateTagRequest{}
-	mi := &file_note_note_api_proto_msgTypes[24]
+	mi := &file_note_note_api_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1302,7 +1499,7 @@ func (x *CreateTagRequest) String() string {
 func (*CreateTagRequest) ProtoMessage() {}
 
 func (x *CreateTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[24]
+	mi := &file_note_note_api_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1315,12 +1512,79 @@ func (x *CreateTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTagRequest.ProtoReflect.Descriptor instead.
 func (*CreateTagRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{24}
+	return file_note_note_api_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CreateTagRequest) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateTagRequest) GetColor() string {
+	if x != nil {
+		return x.Color
+	}
+	return ""
+}
+
+type UpdateTagRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TagId         int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Color         string                 `protobuf:"bytes,3,opt,name=color,proto3" json:"color,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTagRequest) Reset() {
+	*x = UpdateTagRequest{}
+	mi := &file_note_note_api_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTagRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTagRequest) ProtoMessage() {}
+
+func (x *UpdateTagRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTagRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTagRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *UpdateTagRequest) GetTagId() int64 {
+	if x != nil {
+		return x.TagId
+	}
+	return 0
+}
+
+func (x *UpdateTagRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateTagRequest) GetColor() string {
+	if x != nil {
+		return x.Color
 	}
 	return ""
 }
@@ -1334,7 +1598,7 @@ type DeleteTagRequest struct {
 
 func (x *DeleteTagRequest) Reset() {
 	*x = DeleteTagRequest{}
-	mi := &file_note_note_api_proto_msgTypes[25]
+	mi := &file_note_note_api_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1346,7 +1610,7 @@ func (x *DeleteTagRequest) String() string {
 func (*DeleteTagRequest) ProtoMessage() {}
 
 func (x *DeleteTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[25]
+	mi := &file_note_note_api_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1359,7 +1623,7 @@ func (x *DeleteTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTagRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTagRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{25}
+	return file_note_note_api_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DeleteTagRequest) GetTagId() int64 {
@@ -1378,7 +1642,7 @@ type DeleteTagResponse struct {
 
 func (x *DeleteTagResponse) Reset() {
 	*x = DeleteTagResponse{}
-	mi := &file_note_note_api_proto_msgTypes[26]
+	mi := &file_note_note_api_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1390,7 +1654,7 @@ func (x *DeleteTagResponse) String() string {
 func (*DeleteTagResponse) ProtoMessage() {}
 
 func (x *DeleteTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[26]
+	mi := &file_note_note_api_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1403,7 +1667,7 @@ func (x *DeleteTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTagResponse.ProtoReflect.Descriptor instead.
 func (*DeleteTagResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{26}
+	return file_note_note_api_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteTagResponse) GetId() int64 {
@@ -1426,7 +1690,7 @@ type TemplateResponse struct {
 
 func (x *TemplateResponse) Reset() {
 	*x = TemplateResponse{}
-	mi := &file_note_note_api_proto_msgTypes[27]
+	mi := &file_note_note_api_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1438,7 +1702,7 @@ func (x *TemplateResponse) String() string {
 func (*TemplateResponse) ProtoMessage() {}
 
 func (x *TemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[27]
+	mi := &file_note_note_api_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1451,7 +1715,7 @@ func (x *TemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TemplateResponse.ProtoReflect.Descriptor instead.
 func (*TemplateResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{27}
+	return file_note_note_api_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *TemplateResponse) GetId() string {
@@ -1490,7 +1754,7 @@ type ListTemplatesRequest struct {
 
 func (x *ListTemplatesRequest) Reset() {
 	*x = ListTemplatesRequest{}
-	mi := &file_note_note_api_proto_msgTypes[28]
+	mi := &file_note_note_api_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1502,7 +1766,7 @@ func (x *ListTemplatesRequest) String() string {
 func (*ListTemplatesRequest) ProtoMessage() {}
 
 func (x *ListTemplatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[28]
+	mi := &file_note_note_api_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1515,7 +1779,7 @@ func (x *ListTemplatesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTemplatesRequest.ProtoReflect.Descriptor instead.
 func (*ListTemplatesRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{28}
+	return file_note_note_api_proto_rawDescGZIP(), []int{30}
 }
 
 type ListTemplatesResponse struct {
@@ -1527,7 +1791,7 @@ type ListTemplatesResponse struct {
 
 func (x *ListTemplatesResponse) Reset() {
 	*x = ListTemplatesResponse{}
-	mi := &file_note_note_api_proto_msgTypes[29]
+	mi := &file_note_note_api_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1539,7 +1803,7 @@ func (x *ListTemplatesResponse) String() string {
 func (*ListTemplatesResponse) ProtoMessage() {}
 
 func (x *ListTemplatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[29]
+	mi := &file_note_note_api_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1552,7 +1816,7 @@ func (x *ListTemplatesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTemplatesResponse.ProtoReflect.Descriptor instead.
 func (*ListTemplatesResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{29}
+	return file_note_note_api_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListTemplatesResponse) GetTemplates() []*TemplateResponse {
@@ -1571,7 +1835,7 @@ type GetTemplateRequest struct {
 
 func (x *GetTemplateRequest) Reset() {
 	*x = GetTemplateRequest{}
-	mi := &file_note_note_api_proto_msgTypes[30]
+	mi := &file_note_note_api_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1583,7 +1847,7 @@ func (x *GetTemplateRequest) String() string {
 func (*GetTemplateRequest) ProtoMessage() {}
 
 func (x *GetTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[30]
+	mi := &file_note_note_api_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1596,7 +1860,7 @@ func (x *GetTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTemplateRequest.ProtoReflect.Descriptor instead.
 func (*GetTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{30}
+	return file_note_note_api_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetTemplateRequest) GetTemplateId() string {
@@ -1617,7 +1881,7 @@ type UploadFileRequest struct {
 
 func (x *UploadFileRequest) Reset() {
 	*x = UploadFileRequest{}
-	mi := &file_note_note_api_proto_msgTypes[31]
+	mi := &file_note_note_api_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1629,7 +1893,7 @@ func (x *UploadFileRequest) String() string {
 func (*UploadFileRequest) ProtoMessage() {}
 
 func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[31]
+	mi := &file_note_note_api_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1642,7 +1906,7 @@ func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadFileRequest) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{31}
+	return file_note_note_api_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *UploadFileRequest) GetFileData() []byte {
@@ -1670,7 +1934,7 @@ type UploadFileResponse struct {
 
 func (x *UploadFileResponse) Reset() {
 	*x = UploadFileResponse{}
-	mi := &file_note_note_api_proto_msgTypes[32]
+	mi := &file_note_note_api_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1682,7 +1946,7 @@ func (x *UploadFileResponse) String() string {
 func (*UploadFileResponse) ProtoMessage() {}
 
 func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_note_note_api_proto_msgTypes[32]
+	mi := &file_note_note_api_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1695,7 +1959,7 @@ func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileResponse.ProtoReflect.Descriptor instead.
 func (*UploadFileResponse) Descriptor() ([]byte, []int) {
-	return file_note_note_api_proto_rawDescGZIP(), []int{32}
+	return file_note_note_api_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *UploadFileResponse) GetId() string {
@@ -1794,30 +2058,75 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x03 \x01(\tR\n" +
-	"visibility\"3\n" +
+	"visibility\"\xe9\x02\n" +
 	"\rGroupResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"\x13\n" +
-	"\x11ListGroupsRequest\"A\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
+	"\bowner_id\x18\x03 \x01(\x03R\aownerId\x12 \n" +
+	"\tparent_id\x18\x04 \x01(\x03H\x00R\bparentId\x88\x01\x01\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1e\n" +
+	"\n" +
+	"visibility\x18\x06 \x01(\tR\n" +
+	"visibility\x12\x1d\n" +
+	"\n" +
+	"sort_order\x18\a \x01(\x05R\tsortOrder\x12%\n" +
+	"\x0echildren_count\x18\b \x01(\x05R\rchildrenCount\x12#\n" +
+	"\rsnippet_count\x18\t \x01(\x05R\fsnippetCount\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\v \x01(\tR\tupdatedAtB\f\n" +
+	"\n" +
+	"_parent_id\"\x13\n" +
+	"\x11ListGroupsRequest\",\n" +
+	"\x0fGetGroupRequest\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\"A\n" +
 	"\x12ListGroupsResponse\x12+\n" +
-	"\x06groups\x18\x01 \x03(\v2\x13.note.GroupResponseR\x06groups\"(\n" +
+	"\x06groups\x18\x01 \x03(\v2\x13.note.GroupResponseR\x06groups\"\x9a\x01\n" +
 	"\x12CreateGroupRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"C\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
+	"\tparent_id\x18\x02 \x01(\x03H\x00R\bparentId\x88\x01\x01\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1e\n" +
+	"\n" +
+	"visibility\x18\x04 \x01(\tR\n" +
+	"visibilityB\f\n" +
+	"\n" +
+	"_parent_id\"\xe8\x01\n" +
 	"\x12UpdateGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"/\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\tparent_id\x18\x03 \x01(\x03H\x00R\bparentId\x88\x01\x01\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1e\n" +
+	"\n" +
+	"visibility\x18\x05 \x01(\tR\n" +
+	"visibility\x12\"\n" +
+	"\n" +
+	"sort_order\x18\x06 \x01(\x05H\x01R\tsortOrder\x88\x01\x01B\f\n" +
+	"\n" +
+	"_parent_idB\r\n" +
+	"\v_sort_order\"/\n" +
 	"\x12DeleteGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\x03R\agroupId\"%\n" +
 	"\x13DeleteGroupResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"1\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x81\x01\n" +
 	"\vTagResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"\x11\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
+	"\bowner_id\x18\x03 \x01(\x03R\aownerId\x12\x14\n" +
+	"\x05color\x18\x04 \x01(\tR\x05color\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\tR\tcreatedAt\"\x11\n" +
 	"\x0fListTagsRequest\"9\n" +
 	"\x10ListTagsResponse\x12%\n" +
-	"\x04tags\x18\x01 \x03(\v2\x11.note.TagResponseR\x04tags\"&\n" +
+	"\x04tags\x18\x01 \x03(\v2\x11.note.TagResponseR\x04tags\"<\n" +
 	"\x10CreateTagRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\")\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05color\x18\x02 \x01(\tR\x05color\"S\n" +
+	"\x10UpdateTagRequest\x12\x15\n" +
+	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05color\x18\x03 \x01(\tR\x05color\")\n" +
 	"\x10DeleteTagRequest\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\"#\n" +
 	"\x11DeleteTagResponse\x12\x0e\n" +
@@ -1839,7 +2148,7 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\x12UploadFileResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
-	"\x04size\x18\x03 \x01(\x03R\x04size2\xbc\x13\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size2\xfd\x14\n" +
 	"\vNoteService\x12h\n" +
 	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/v1/notes/me/snippets\x12e\n" +
 	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/v1/notes/snippets\x12i\n" +
@@ -1856,12 +2165,14 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\x12ListSharedSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /api/v1/notes/me/snippets/shared\x12z\n" +
 	"\x14ListFavoriteSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/v1/notes/me/snippets/favorites\x12]\n" +
 	"\n" +
-	"ListGroups\x12\x17.note.ListGroupsRequest\x1a\x18.note.ListGroupsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/notes/groups\x12]\n" +
+	"ListGroups\x12\x17.note.ListGroupsRequest\x1a\x18.note.ListGroupsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/notes/groups\x12_\n" +
+	"\bGetGroup\x12\x15.note.GetGroupRequest\x1a\x13.note.GroupResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/api/v1/notes/groups/{group_id}\x12]\n" +
 	"\vCreateGroup\x12\x18.note.CreateGroupRequest\x1a\x13.note.GroupResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/notes/groups\x12h\n" +
 	"\vUpdateGroup\x12\x18.note.UpdateGroupRequest\x1a\x13.note.GroupResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\x1a\x1f/api/v1/notes/groups/{group_id}\x12k\n" +
 	"\vDeleteGroup\x12\x18.note.DeleteGroupRequest\x1a\x19.note.DeleteGroupResponse\"'\x82\xd3\xe4\x93\x02!*\x1f/api/v1/notes/groups/{group_id}\x12U\n" +
 	"\bListTags\x12\x15.note.ListTagsRequest\x1a\x16.note.ListTagsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/notes/tags\x12U\n" +
-	"\tCreateTag\x12\x16.note.CreateTagRequest\x1a\x11.note.TagResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/notes/tags\x12a\n" +
+	"\tCreateTag\x12\x16.note.CreateTagRequest\x1a\x11.note.TagResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/notes/tags\x12^\n" +
+	"\tUpdateTag\x12\x16.note.UpdateTagRequest\x1a\x11.note.TagResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/v1/notes/tags/{tag_id}\x12a\n" +
 	"\tDeleteTag\x12\x16.note.DeleteTagRequest\x1a\x17.note.DeleteTagResponse\"#\x82\xd3\xe4\x93\x02\x1d*\x1b/api/v1/notes/tags/{tag_id}\x12i\n" +
 	"\rListTemplates\x12\x1a.note.ListTemplatesRequest\x1a\x1b.note.ListTemplatesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/notes/templates\x12n\n" +
 	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/notes/templates/{template_id}\x12?\n" +
@@ -1880,7 +2191,7 @@ func file_note_note_api_proto_rawDescGZIP() []byte {
 	return file_note_note_api_proto_rawDescData
 }
 
-var file_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_note_note_api_proto_goTypes = []any{
 	(*CreateSnippetRequest)(nil),             // 0: note.CreateSnippetRequest
 	(*GetSnippetRequest)(nil),                // 1: note.GetSnippetRequest
@@ -1898,29 +2209,31 @@ var file_note_note_api_proto_goTypes = []any{
 	(*CreateSnippetFromTemplateRequest)(nil), // 13: note.CreateSnippetFromTemplateRequest
 	(*GroupResponse)(nil),                    // 14: note.GroupResponse
 	(*ListGroupsRequest)(nil),                // 15: note.ListGroupsRequest
-	(*ListGroupsResponse)(nil),               // 16: note.ListGroupsResponse
-	(*CreateGroupRequest)(nil),               // 17: note.CreateGroupRequest
-	(*UpdateGroupRequest)(nil),               // 18: note.UpdateGroupRequest
-	(*DeleteGroupRequest)(nil),               // 19: note.DeleteGroupRequest
-	(*DeleteGroupResponse)(nil),              // 20: note.DeleteGroupResponse
-	(*TagResponse)(nil),                      // 21: note.TagResponse
-	(*ListTagsRequest)(nil),                  // 22: note.ListTagsRequest
-	(*ListTagsResponse)(nil),                 // 23: note.ListTagsResponse
-	(*CreateTagRequest)(nil),                 // 24: note.CreateTagRequest
-	(*DeleteTagRequest)(nil),                 // 25: note.DeleteTagRequest
-	(*DeleteTagResponse)(nil),                // 26: note.DeleteTagResponse
-	(*TemplateResponse)(nil),                 // 27: note.TemplateResponse
-	(*ListTemplatesRequest)(nil),             // 28: note.ListTemplatesRequest
-	(*ListTemplatesResponse)(nil),            // 29: note.ListTemplatesResponse
-	(*GetTemplateRequest)(nil),               // 30: note.GetTemplateRequest
-	(*UploadFileRequest)(nil),                // 31: note.UploadFileRequest
-	(*UploadFileResponse)(nil),               // 32: note.UploadFileResponse
+	(*GetGroupRequest)(nil),                  // 16: note.GetGroupRequest
+	(*ListGroupsResponse)(nil),               // 17: note.ListGroupsResponse
+	(*CreateGroupRequest)(nil),               // 18: note.CreateGroupRequest
+	(*UpdateGroupRequest)(nil),               // 19: note.UpdateGroupRequest
+	(*DeleteGroupRequest)(nil),               // 20: note.DeleteGroupRequest
+	(*DeleteGroupResponse)(nil),              // 21: note.DeleteGroupResponse
+	(*TagResponse)(nil),                      // 22: note.TagResponse
+	(*ListTagsRequest)(nil),                  // 23: note.ListTagsRequest
+	(*ListTagsResponse)(nil),                 // 24: note.ListTagsResponse
+	(*CreateTagRequest)(nil),                 // 25: note.CreateTagRequest
+	(*UpdateTagRequest)(nil),                 // 26: note.UpdateTagRequest
+	(*DeleteTagRequest)(nil),                 // 27: note.DeleteTagRequest
+	(*DeleteTagResponse)(nil),                // 28: note.DeleteTagResponse
+	(*TemplateResponse)(nil),                 // 29: note.TemplateResponse
+	(*ListTemplatesRequest)(nil),             // 30: note.ListTemplatesRequest
+	(*ListTemplatesResponse)(nil),            // 31: note.ListTemplatesResponse
+	(*GetTemplateRequest)(nil),               // 32: note.GetTemplateRequest
+	(*UploadFileRequest)(nil),                // 33: note.UploadFileRequest
+	(*UploadFileResponse)(nil),               // 34: note.UploadFileResponse
 }
 var file_note_note_api_proto_depIdxs = []int32{
 	4,  // 0: note.ListSnippetsResponse.snippets:type_name -> note.SnippetResponse
 	14, // 1: note.ListGroupsResponse.groups:type_name -> note.GroupResponse
-	21, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
-	27, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
+	22, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
+	29, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
 	2,  // 4: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
 	0,  // 5: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
 	1,  // 6: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
@@ -1935,40 +2248,44 @@ var file_note_note_api_proto_depIdxs = []int32{
 	2,  // 15: note.NoteService.ListSharedSnippets:input_type -> note.ListSnippetsRequest
 	2,  // 16: note.NoteService.ListFavoriteSnippets:input_type -> note.ListSnippetsRequest
 	15, // 17: note.NoteService.ListGroups:input_type -> note.ListGroupsRequest
-	17, // 18: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
-	18, // 19: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
-	19, // 20: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
-	22, // 21: note.NoteService.ListTags:input_type -> note.ListTagsRequest
-	24, // 22: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
-	25, // 23: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
-	28, // 24: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
-	30, // 25: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
-	31, // 26: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
-	5,  // 27: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 28: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
-	4,  // 29: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
-	4,  // 30: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
-	7,  // 31: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
-	5,  // 32: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 33: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
-	12, // 34: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	12, // 35: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	4,  // 36: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
-	5,  // 37: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 38: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 39: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
-	16, // 40: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
-	14, // 41: note.NoteService.CreateGroup:output_type -> note.GroupResponse
-	14, // 42: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
-	20, // 43: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
-	23, // 44: note.NoteService.ListTags:output_type -> note.ListTagsResponse
-	21, // 45: note.NoteService.CreateTag:output_type -> note.TagResponse
-	26, // 46: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
-	29, // 47: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
-	27, // 48: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
-	32, // 49: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
-	27, // [27:50] is the sub-list for method output_type
-	4,  // [4:27] is the sub-list for method input_type
+	16, // 18: note.NoteService.GetGroup:input_type -> note.GetGroupRequest
+	18, // 19: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
+	19, // 20: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
+	20, // 21: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
+	23, // 22: note.NoteService.ListTags:input_type -> note.ListTagsRequest
+	25, // 23: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
+	26, // 24: note.NoteService.UpdateTag:input_type -> note.UpdateTagRequest
+	27, // 25: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
+	30, // 26: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
+	32, // 27: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
+	33, // 28: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
+	5,  // 29: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 30: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
+	4,  // 31: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
+	4,  // 32: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
+	7,  // 33: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
+	5,  // 34: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 35: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
+	12, // 36: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	12, // 37: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	4,  // 38: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
+	5,  // 39: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 40: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 41: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
+	17, // 42: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
+	14, // 43: note.NoteService.GetGroup:output_type -> note.GroupResponse
+	14, // 44: note.NoteService.CreateGroup:output_type -> note.GroupResponse
+	14, // 45: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
+	21, // 46: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
+	24, // 47: note.NoteService.ListTags:output_type -> note.ListTagsResponse
+	22, // 48: note.NoteService.CreateTag:output_type -> note.TagResponse
+	22, // 49: note.NoteService.UpdateTag:output_type -> note.TagResponse
+	28, // 50: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
+	31, // 51: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
+	29, // 52: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
+	34, // 53: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
+	29, // [29:54] is the sub-list for method output_type
+	4,  // [4:29] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
@@ -1979,13 +2296,16 @@ func file_note_note_api_proto_init() {
 	if File_note_note_api_proto != nil {
 		return
 	}
+	file_note_note_api_proto_msgTypes[14].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[18].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[19].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_note_note_api_proto_rawDesc), len(file_note_note_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

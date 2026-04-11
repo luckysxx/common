@@ -97,6 +97,12 @@ service NoteService {
         };
     }
 
+    rpc GetGroup (GetGroupRequest) returns (GroupResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/notes/groups/{group_id}"
+        };
+    }
+
     rpc CreateGroup (CreateGroupRequest) returns (GroupResponse) {
         option (google.api.http) = {
             post: "/api/v1/notes/groups"
@@ -128,6 +134,13 @@ service NoteService {
     rpc CreateTag (CreateTagRequest) returns (TagResponse) {
         option (google.api.http) = {
             post: "/api/v1/notes/tags"
+            body: "*"
+        };
+    }
+
+    rpc UpdateTag (UpdateTagRequest) returns (TagResponse) {
+        option (google.api.http) = {
+            put: "/api/v1/notes/tags/{tag_id}"
             body: "*"
         };
     }
@@ -242,17 +255,36 @@ message CreateSnippetFromTemplateRequest {
 message GroupResponse {
     int64 id = 1;
     string name = 2;
+    int64 owner_id = 3;
+    optional int64 parent_id = 4;
+    string description = 5;
+    string visibility = 6;
+    int32 sort_order = 7;
+    int32 children_count = 8;
+    int32 snippet_count = 9;
+    string created_at = 10;
+    string updated_at = 11;
 }
 message ListGroupsRequest {}
+message GetGroupRequest {
+    int64 group_id = 1;
+}
 message ListGroupsResponse {
     repeated GroupResponse groups = 1;
 }
 message CreateGroupRequest {
     string name = 1;
+    optional int64 parent_id = 2;
+    string description = 3;
+    string visibility = 4;
 }
 message UpdateGroupRequest {
     int64 group_id = 1;
     string name = 2;
+    optional int64 parent_id = 3;
+    string description = 4;
+    string visibility = 5;
+    optional int32 sort_order = 6;
 }
 message DeleteGroupRequest {
     int64 group_id = 1;
@@ -265,6 +297,9 @@ message DeleteGroupResponse {
 message TagResponse {
     int64 id = 1;
     string name = 2;
+    int64 owner_id = 3;
+    string color = 4;
+    string created_at = 5;
 }
 message ListTagsRequest {}
 message ListTagsResponse {
@@ -272,6 +307,12 @@ message ListTagsResponse {
 }
 message CreateTagRequest {
     string name = 1;
+    string color = 2;
+}
+message UpdateTagRequest {
+    int64 tag_id = 1;
+    string name = 2;
+    string color = 3;
 }
 message DeleteTagRequest {
     int64 tag_id = 1;

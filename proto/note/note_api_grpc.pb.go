@@ -33,11 +33,13 @@ const (
 	NoteService_ListSharedSnippets_FullMethodName        = "/note.NoteService/ListSharedSnippets"
 	NoteService_ListFavoriteSnippets_FullMethodName      = "/note.NoteService/ListFavoriteSnippets"
 	NoteService_ListGroups_FullMethodName                = "/note.NoteService/ListGroups"
+	NoteService_GetGroup_FullMethodName                  = "/note.NoteService/GetGroup"
 	NoteService_CreateGroup_FullMethodName               = "/note.NoteService/CreateGroup"
 	NoteService_UpdateGroup_FullMethodName               = "/note.NoteService/UpdateGroup"
 	NoteService_DeleteGroup_FullMethodName               = "/note.NoteService/DeleteGroup"
 	NoteService_ListTags_FullMethodName                  = "/note.NoteService/ListTags"
 	NoteService_CreateTag_FullMethodName                 = "/note.NoteService/CreateTag"
+	NoteService_UpdateTag_FullMethodName                 = "/note.NoteService/UpdateTag"
 	NoteService_DeleteTag_FullMethodName                 = "/note.NoteService/DeleteTag"
 	NoteService_ListTemplates_FullMethodName             = "/note.NoteService/ListTemplates"
 	NoteService_GetTemplate_FullMethodName               = "/note.NoteService/GetTemplate"
@@ -63,11 +65,13 @@ type NoteServiceClient interface {
 	ListSharedSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	ListFavoriteSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	ListGroups(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsResponse, error)
+	GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	UpdateGroup(ctx context.Context, in *UpdateGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*DeleteGroupResponse, error)
 	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (*ListTagsResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*TagResponse, error)
+	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*TagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	ListTemplates(ctx context.Context, in *ListTemplatesRequest, opts ...grpc.CallOption) (*ListTemplatesResponse, error)
 	GetTemplate(ctx context.Context, in *GetTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
@@ -223,6 +227,16 @@ func (c *noteServiceClient) ListGroups(ctx context.Context, in *ListGroupsReques
 	return out, nil
 }
 
+func (c *noteServiceClient) GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GroupResponse)
+	err := c.cc.Invoke(ctx, NoteService_GetGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *noteServiceClient) CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GroupResponse)
@@ -267,6 +281,16 @@ func (c *noteServiceClient) CreateTag(ctx context.Context, in *CreateTagRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TagResponse)
 	err := c.cc.Invoke(ctx, NoteService_CreateTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*TagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TagResponse)
+	err := c.cc.Invoke(ctx, NoteService_UpdateTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -332,11 +356,13 @@ type NoteServiceServer interface {
 	ListSharedSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	ListFavoriteSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsResponse, error)
+	GetGroup(context.Context, *GetGroupRequest) (*GroupResponse, error)
 	CreateGroup(context.Context, *CreateGroupRequest) (*GroupResponse, error)
 	UpdateGroup(context.Context, *UpdateGroupRequest) (*GroupResponse, error)
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupResponse, error)
 	ListTags(context.Context, *ListTagsRequest) (*ListTagsResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*TagResponse, error)
+	UpdateTag(context.Context, *UpdateTagRequest) (*TagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	ListTemplates(context.Context, *ListTemplatesRequest) (*ListTemplatesResponse, error)
 	GetTemplate(context.Context, *GetTemplateRequest) (*TemplateResponse, error)
@@ -394,6 +420,9 @@ func (UnimplementedNoteServiceServer) ListFavoriteSnippets(context.Context, *Lis
 func (UnimplementedNoteServiceServer) ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListGroups not implemented")
 }
+func (UnimplementedNoteServiceServer) GetGroup(context.Context, *GetGroupRequest) (*GroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGroup not implemented")
+}
 func (UnimplementedNoteServiceServer) CreateGroup(context.Context, *CreateGroupRequest) (*GroupResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateGroup not implemented")
 }
@@ -408,6 +437,9 @@ func (UnimplementedNoteServiceServer) ListTags(context.Context, *ListTagsRequest
 }
 func (UnimplementedNoteServiceServer) CreateTag(context.Context, *CreateTagRequest) (*TagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateTag not implemented")
+}
+func (UnimplementedNoteServiceServer) UpdateTag(context.Context, *UpdateTagRequest) (*TagResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateTag not implemented")
 }
 func (UnimplementedNoteServiceServer) DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteTag not implemented")
@@ -694,6 +726,24 @@ func _NoteService_ListGroups_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NoteService_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_GetGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).GetGroup(ctx, req.(*GetGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NoteService_CreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateGroupRequest)
 	if err := dec(in); err != nil {
@@ -780,6 +830,24 @@ func _NoteService_CreateTag_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoteServiceServer).CreateTag(ctx, req.(*CreateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_UpdateTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).UpdateTag(ctx, req.(*UpdateTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -920,6 +988,10 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NoteService_ListGroups_Handler,
 		},
 		{
+			MethodName: "GetGroup",
+			Handler:    _NoteService_GetGroup_Handler,
+		},
+		{
 			MethodName: "CreateGroup",
 			Handler:    _NoteService_CreateGroup_Handler,
 		},
@@ -938,6 +1010,10 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTag",
 			Handler:    _NoteService_CreateTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _NoteService_UpdateTag_Handler,
 		},
 		{
 			MethodName: "DeleteTag",
