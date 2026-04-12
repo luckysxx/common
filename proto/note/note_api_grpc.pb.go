@@ -24,6 +24,7 @@ const (
 	NoteService_GetSnippet_FullMethodName                = "/note.NoteService/GetSnippet"
 	NoteService_UpdateSnippet_FullMethodName             = "/note.NoteService/UpdateSnippet"
 	NoteService_DeleteSnippet_FullMethodName             = "/note.NoteService/DeleteSnippet"
+	NoteService_SetSnippetTags_FullMethodName            = "/note.NoteService/SetSnippetTags"
 	NoteService_SearchSnippets_FullMethodName            = "/note.NoteService/SearchSnippets"
 	NoteService_GetPublicSnippet_FullMethodName          = "/note.NoteService/GetPublicSnippet"
 	NoteService_FavoriteSnippet_FullMethodName           = "/note.NoteService/FavoriteSnippet"
@@ -55,6 +56,7 @@ type NoteServiceClient interface {
 	GetSnippet(ctx context.Context, in *GetSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	UpdateSnippet(ctx context.Context, in *UpdateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	DeleteSnippet(ctx context.Context, in *DeleteSnippetRequest, opts ...grpc.CallOption) (*DeleteSnippetResponse, error)
+	SetSnippetTags(ctx context.Context, in *SetSnippetTagsRequest, opts ...grpc.CallOption) (*SetSnippetTagsResponse, error)
 	SearchSnippets(ctx context.Context, in *SearchSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	// 公开片段 — 不加 http 注解，保留手写 handler（无需鉴权）
 	GetPublicSnippet(ctx context.Context, in *GetPublicSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
@@ -131,6 +133,16 @@ func (c *noteServiceClient) DeleteSnippet(ctx context.Context, in *DeleteSnippet
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteSnippetResponse)
 	err := c.cc.Invoke(ctx, NoteService_DeleteSnippet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) SetSnippetTags(ctx context.Context, in *SetSnippetTagsRequest, opts ...grpc.CallOption) (*SetSnippetTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSnippetTagsResponse)
+	err := c.cc.Invoke(ctx, NoteService_SetSnippetTags_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -346,6 +358,7 @@ type NoteServiceServer interface {
 	GetSnippet(context.Context, *GetSnippetRequest) (*SnippetResponse, error)
 	UpdateSnippet(context.Context, *UpdateSnippetRequest) (*SnippetResponse, error)
 	DeleteSnippet(context.Context, *DeleteSnippetRequest) (*DeleteSnippetResponse, error)
+	SetSnippetTags(context.Context, *SetSnippetTagsRequest) (*SetSnippetTagsResponse, error)
 	SearchSnippets(context.Context, *SearchSnippetsRequest) (*ListSnippetsResponse, error)
 	// 公开片段 — 不加 http 注解，保留手写 handler（无需鉴权）
 	GetPublicSnippet(context.Context, *GetPublicSnippetRequest) (*SnippetResponse, error)
@@ -392,6 +405,9 @@ func (UnimplementedNoteServiceServer) UpdateSnippet(context.Context, *UpdateSnip
 }
 func (UnimplementedNoteServiceServer) DeleteSnippet(context.Context, *DeleteSnippetRequest) (*DeleteSnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSnippet not implemented")
+}
+func (UnimplementedNoteServiceServer) SetSnippetTags(context.Context, *SetSnippetTagsRequest) (*SetSnippetTagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSnippetTags not implemented")
 }
 func (UnimplementedNoteServiceServer) SearchSnippets(context.Context, *SearchSnippetsRequest) (*ListSnippetsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SearchSnippets not implemented")
@@ -560,6 +576,24 @@ func _NoteService_DeleteSnippet_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoteServiceServer).DeleteSnippet(ctx, req.(*DeleteSnippetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_SetSnippetTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSnippetTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).SetSnippetTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_SetSnippetTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).SetSnippetTags(ctx, req.(*SetSnippetTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -950,6 +984,10 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSnippet",
 			Handler:    _NoteService_DeleteSnippet_Handler,
+		},
+		{
+			MethodName: "SetSnippetTags",
+			Handler:    _NoteService_SetSnippetTags_Handler,
 		},
 		{
 			MethodName: "SearchSnippets",

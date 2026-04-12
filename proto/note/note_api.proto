@@ -41,6 +41,13 @@ service NoteService {
         };
     }
 
+    rpc SetSnippetTags (SetSnippetTagsRequest) returns (SetSnippetTagsResponse) {
+        option (google.api.http) = {
+            put: "/api/v1/notes/snippets/{snippet_id}/tags"
+            body: "*"
+        };
+    }
+
     rpc SearchSnippets (SearchSnippetsRequest) returns (ListSnippetsResponse) {
         option (google.api.http) = {
             get: "/api/v1/notes/snippets/search"
@@ -227,6 +234,13 @@ message DeleteSnippetRequest {
 message DeleteSnippetResponse {
     int64 id = 1;
 }
+
+message SetSnippetTagsRequest {
+    int64 snippet_id = 1;
+    repeated int64 tag_ids = 2;
+}
+
+message SetSnippetTagsResponse {}
 
 // SearchSnippetsRequest 结构化搜索请求（重设计）
 message SearchSnippetsRequest {
