@@ -196,6 +196,7 @@ message ListSnippetsRequest {
     string keyword = 3;           // 模糊搜索标题
     int32 limit = 4;              // 每页条数，默认 20，最大 100
     string cursor = 5;            // 游标分页（上一页返回的 next_cursor）
+    string sort_by = 6;           // "updated_at" | "created_at" | "title"，默认 "updated_at"
 }
 
 message UpdateSnippetRequest {
@@ -225,6 +226,8 @@ message SnippetResponse {
 
 message ListSnippetsResponse {
     repeated SnippetResponse snippets = 1;
+    string next_cursor = 2;  // 空字符串 = 没有下一页
+    bool has_more = 3;
 }
 
 // ── 扩展请求与响应 ──

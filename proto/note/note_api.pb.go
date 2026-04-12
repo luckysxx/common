@@ -149,6 +149,7 @@ type ListSnippetsRequest struct {
 	Keyword       string                 `protobuf:"bytes,3,opt,name=keyword,proto3" json:"keyword,omitempty"`                       // 模糊搜索标题
 	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`                          // 每页条数，默认 20，最大 100
 	Cursor        string                 `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"`                         // 游标分页（上一页返回的 next_cursor）
+	SortBy        string                 `protobuf:"bytes,6,opt,name=sort_by,json=sortBy,proto3" json:"sort_by,omitempty"`           // "updated_at" | "created_at" | "title"，默认 "updated_at"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -214,6 +215,13 @@ func (x *ListSnippetsRequest) GetLimit() int32 {
 func (x *ListSnippetsRequest) GetCursor() string {
 	if x != nil {
 		return x.Cursor
+	}
+	return ""
+}
+
+func (x *ListSnippetsRequest) GetSortBy() string {
+	if x != nil {
+		return x.SortBy
 	}
 	return ""
 }
@@ -445,6 +453,8 @@ func (x *SnippetResponse) GetTagIds() []int64 {
 type ListSnippetsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Snippets      []*SnippetResponse     `protobuf:"bytes,1,rep,name=snippets,proto3" json:"snippets,omitempty"`
+	NextCursor    string                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"` // 空字符串 = 没有下一页
+	HasMore       bool                   `protobuf:"varint,3,opt,name=has_more,json=hasMore,proto3" json:"has_more,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -484,6 +494,20 @@ func (x *ListSnippetsResponse) GetSnippets() []*SnippetResponse {
 		return x.Snippets
 	}
 	return nil
+}
+
+func (x *ListSnippetsResponse) GetNextCursor() string {
+	if x != nil {
+		return x.NextCursor
+	}
+	return ""
+}
+
+func (x *ListSnippetsResponse) GetHasMore() bool {
+	if x != nil {
+		return x.HasMore
+	}
+	return false
 }
 
 type DeleteSnippetRequest struct {
@@ -2143,13 +2167,14 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\t_group_id\"2\n" +
 	"\x11GetSnippetRequest\x12\x1d\n" +
 	"\n" +
-	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\xb1\x01\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\xca\x01\n" +
 	"\x13ListSnippetsRequest\x12\x1e\n" +
 	"\bgroup_id\x18\x01 \x01(\x03H\x00R\agroupId\x88\x01\x01\x12\x1a\n" +
 	"\x06tag_id\x18\x02 \x01(\x03H\x01R\x05tagId\x88\x01\x01\x12\x18\n" +
 	"\akeyword\x18\x03 \x01(\tR\akeyword\x12\x14\n" +
 	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06cursor\x18\x05 \x01(\tR\x06cursorB\v\n" +
+	"\x06cursor\x18\x05 \x01(\tR\x06cursor\x12\x17\n" +
+	"\asort_by\x18\x06 \x01(\tR\x06sortByB\v\n" +
 	"\t_group_idB\t\n" +
 	"\a_tag_id\"\xa1\x01\n" +
 	"\x14UpdateSnippetRequest\x12\x1d\n" +
@@ -2180,9 +2205,12 @@ const file_note_note_api_proto_rawDesc = "" +
 	"created_at\x18\f \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\r \x01(\tR\tupdatedAt\x12\x17\n" +
-	"\atag_ids\x18\x0e \x03(\x03R\x06tagIds\"I\n" +
+	"\atag_ids\x18\x0e \x03(\x03R\x06tagIds\"\x85\x01\n" +
 	"\x14ListSnippetsResponse\x121\n" +
-	"\bsnippets\x18\x01 \x03(\v2\x15.note.SnippetResponseR\bsnippets\"5\n" +
+	"\bsnippets\x18\x01 \x03(\v2\x15.note.SnippetResponseR\bsnippets\x12\x1f\n" +
+	"\vnext_cursor\x18\x02 \x01(\tR\n" +
+	"nextCursor\x12\x19\n" +
+	"\bhas_more\x18\x03 \x01(\bR\ahasMore\"5\n" +
 	"\x14DeleteSnippetRequest\x12\x1d\n" +
 	"\n" +
 	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"'\n" +
