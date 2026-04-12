@@ -28,6 +28,7 @@ type CreateSnippetRequest struct {
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
 	Language      string                 `protobuf:"bytes,3,opt,name=language,proto3" json:"language,omitempty"`
 	Visibility    string                 `protobuf:"bytes,4,opt,name=visibility,proto3" json:"visibility,omitempty"`
+	GroupId       *int64                 `protobuf:"varint,5,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"` // 可选的所属分组
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -88,6 +89,13 @@ func (x *CreateSnippetRequest) GetVisibility() string {
 		return x.Visibility
 	}
 	return ""
+}
+
+func (x *CreateSnippetRequest) GetGroupId() int64 {
+	if x != nil && x.GroupId != nil {
+		return *x.GroupId
+	}
+	return 0
 }
 
 type GetSnippetRequest struct {
@@ -2027,14 +2035,16 @@ var File_note_note_api_proto protoreflect.FileDescriptor
 
 const file_note_note_api_proto_rawDesc = "" +
 	"\n" +
-	"\x13note/note_api.proto\x12\x04note\x1a\x1cgoogle/api/annotations.proto\"\x82\x01\n" +
+	"\x13note/note_api.proto\x12\x04note\x1a\x1cgoogle/api/annotations.proto\"\xaf\x01\n" +
 	"\x14CreateSnippetRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1a\n" +
 	"\blanguage\x18\x03 \x01(\tR\blanguage\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x04 \x01(\tR\n" +
-	"visibility\"2\n" +
+	"visibility\x12\x1e\n" +
+	"\bgroup_id\x18\x05 \x01(\x03H\x00R\agroupId\x88\x01\x01B\v\n" +
+	"\t_group_id\"2\n" +
 	"\x11GetSnippetRequest\x12\x1d\n" +
 	"\n" +
 	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\xb1\x01\n" +
@@ -2343,6 +2353,7 @@ func file_note_note_api_proto_init() {
 	if File_note_note_api_proto != nil {
 		return
 	}
+	file_note_note_api_proto_msgTypes[0].OneofWrappers = []any{}
 	file_note_note_api_proto_msgTypes[2].OneofWrappers = []any{}
 	file_note_note_api_proto_msgTypes[14].OneofWrappers = []any{}
 	file_note_note_api_proto_msgTypes[18].OneofWrappers = []any{}

@@ -176,6 +176,7 @@ message CreateSnippetRequest {
     string content = 2;
     string language = 3;
     string visibility = 4;
+    optional int64 group_id = 5; // 可选的所属分组
 }
 
 message GetSnippetRequest {
