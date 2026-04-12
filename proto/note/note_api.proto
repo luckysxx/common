@@ -183,6 +183,11 @@ message GetSnippetRequest {
 }
 
 message ListSnippetsRequest {
+    optional int64 group_id = 1;  // 按分组筛选
+    optional int64 tag_id = 2;    // 按标签筛选
+    string keyword = 3;           // 模糊搜索标题
+    int32 limit = 4;              // 每页条数，默认 20，最大 100
+    string cursor = 5;            // 游标分页（上一页返回的 next_cursor）
 }
 
 message UpdateSnippetRequest {

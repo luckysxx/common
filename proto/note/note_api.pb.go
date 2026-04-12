@@ -136,6 +136,11 @@ func (x *GetSnippetRequest) GetSnippetId() int64 {
 
 type ListSnippetsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	GroupId       *int64                 `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"` // 按分组筛选
+	TagId         *int64                 `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3,oneof" json:"tag_id,omitempty"`       // 按标签筛选
+	Keyword       string                 `protobuf:"bytes,3,opt,name=keyword,proto3" json:"keyword,omitempty"`                       // 模糊搜索标题
+	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`                          // 每页条数，默认 20，最大 100
+	Cursor        string                 `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"`                         // 游标分页（上一页返回的 next_cursor）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -168,6 +173,41 @@ func (x *ListSnippetsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListSnippetsRequest.ProtoReflect.Descriptor instead.
 func (*ListSnippetsRequest) Descriptor() ([]byte, []int) {
 	return file_note_note_api_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListSnippetsRequest) GetGroupId() int64 {
+	if x != nil && x.GroupId != nil {
+		return *x.GroupId
+	}
+	return 0
+}
+
+func (x *ListSnippetsRequest) GetTagId() int64 {
+	if x != nil && x.TagId != nil {
+		return *x.TagId
+	}
+	return 0
+}
+
+func (x *ListSnippetsRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+func (x *ListSnippetsRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListSnippetsRequest) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
 }
 
 type UpdateSnippetRequest struct {
@@ -1997,8 +2037,15 @@ const file_note_note_api_proto_rawDesc = "" +
 	"visibility\"2\n" +
 	"\x11GetSnippetRequest\x12\x1d\n" +
 	"\n" +
-	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\x15\n" +
-	"\x13ListSnippetsRequest\"\xa1\x01\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\xb1\x01\n" +
+	"\x13ListSnippetsRequest\x12\x1e\n" +
+	"\bgroup_id\x18\x01 \x01(\x03H\x00R\agroupId\x88\x01\x01\x12\x1a\n" +
+	"\x06tag_id\x18\x02 \x01(\x03H\x01R\x05tagId\x88\x01\x01\x12\x18\n" +
+	"\akeyword\x18\x03 \x01(\tR\akeyword\x12\x14\n" +
+	"\x05limit\x18\x04 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06cursor\x18\x05 \x01(\tR\x06cursorB\v\n" +
+	"\t_group_idB\t\n" +
+	"\a_tag_id\"\xa1\x01\n" +
 	"\x14UpdateSnippetRequest\x12\x1d\n" +
 	"\n" +
 	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\x12\x14\n" +
@@ -2296,6 +2343,7 @@ func file_note_note_api_proto_init() {
 	if File_note_note_api_proto != nil {
 		return
 	}
+	file_note_note_api_proto_msgTypes[2].OneofWrappers = []any{}
 	file_note_note_api_proto_msgTypes[14].OneofWrappers = []any{}
 	file_note_note_api_proto_msgTypes[18].OneofWrappers = []any{}
 	file_note_note_api_proto_msgTypes[19].OneofWrappers = []any{}
