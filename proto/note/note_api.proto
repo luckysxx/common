@@ -48,6 +48,15 @@ service NoteService {
         };
     }
 
+    // MoveSnippet 将片段移动到目标分组并设置排序权重。
+    // group_id 省略时表示收集箱（未分组）；sort_order 省略时服务端自动追加到目标分组末尾。
+    rpc MoveSnippet (MoveSnippetRequest) returns (SnippetResponse) {
+        option (google.api.http) = {
+            put: "/api/v1/notes/snippets/{snippet_id}/move"
+            body: "*"
+        };
+    }
+
     rpc SearchSnippets (SearchSnippetsRequest) returns (ListSnippetsResponse) {
         option (google.api.http) = {
             get: "/api/v1/notes/snippets/search"
@@ -196,7 +205,9 @@ message ListSnippetsRequest {
     string keyword = 3;           // 模糊搜索标题
     int32 limit = 4;              // 每页条数，默认 20，最大 100
     string cursor = 5;            // 游标分页（上一页返回的 next_cursor）
-    string sort_by = 6;           // "updated_at" | "created_at" | "title"，默认 "updated_at"
+    string sort_by = 6;           // "updated_at" | "created_at" | "title" | "manual"，默认 "updated_at"
+    string visibility = 7;        // 按可见性筛选：public / private / ""(全部)
+    string type = 8;              // 按类型筛选：code / note / file / ""(全部)
 }
 
 message UpdateSnippetRequest {
@@ -222,6 +233,7 @@ message SnippetResponse {
     string created_at = 12;
     string updated_at = 13;
     repeated int64 tag_ids = 14;
+    int32 sort_order = 15; // 在所属分组内的排序权重，值越小越靠前
 }
 
 message ListSnippetsResponse {
@@ -245,6 +257,15 @@ message SetSnippetTagsRequest {
 }
 
 message SetSnippetTagsResponse {}
+
+// MoveSnippetRequest 移动片段到指定分组并可选地设置排序权重。
+// group_id 不传表示移动到收集箱（未分组）。
+// sort_order 不传表示追加到目标分组末尾（由服务端计算 max+1）。
+message MoveSnippetRequest {
+    int64 snippet_id = 1;
+    optional int64 group_id = 2;
+    optional int32 sort_order = 3;
+}
 
 // SearchSnippetsRequest 结构化搜索请求（重设计）
 message SearchSnippetsRequest {
