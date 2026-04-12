@@ -309,6 +309,7 @@ type SnippetResponse struct {
 	GroupId       int64                  `protobuf:"varint,11,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	TagIds        []int64                `protobuf:"varint,14,rep,packed,name=tag_ids,json=tagIds,proto3" json:"tag_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -432,6 +433,13 @@ func (x *SnippetResponse) GetUpdatedAt() string {
 		return x.UpdatedAt
 	}
 	return ""
+}
+
+func (x *SnippetResponse) GetTagIds() []int64 {
+	if x != nil {
+		return x.TagIds
+	}
+	return nil
 }
 
 type ListSnippetsResponse struct {
@@ -2152,7 +2160,7 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\blanguage\x18\x04 \x01(\tR\blanguage\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x05 \x01(\tR\n" +
-	"visibility\"\xea\x02\n" +
+	"visibility\"\x83\x03\n" +
 	"\x0fSnippetResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\x03R\aownerId\x12\x14\n" +
@@ -2171,7 +2179,8 @@ const file_note_note_api_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\f \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\tR\tupdatedAt\"I\n" +
+	"updated_at\x18\r \x01(\tR\tupdatedAt\x12\x17\n" +
+	"\atag_ids\x18\x0e \x03(\x03R\x06tagIds\"I\n" +
 	"\x14ListSnippetsResponse\x121\n" +
 	"\bsnippets\x18\x01 \x03(\v2\x15.note.SnippetResponseR\bsnippets\"5\n" +
 	"\x14DeleteSnippetRequest\x12\x1d\n" +
