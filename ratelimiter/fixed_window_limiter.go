@@ -13,7 +13,7 @@ type fixedWindowLimiter struct {
 	logger *zap.Logger
 }
 
-// NewFixedWindowLimiter creates a new Redis-based rate limiter.
+// NewFixedWindowLimiter 创建一个基于 Redis 的固定窗口限流器。
 func NewFixedWindowLimiter(cli *redis.Client, logger *zap.Logger) Limiter {
 	return &fixedWindowLimiter{
 		cli:    cli,
@@ -21,7 +21,7 @@ func NewFixedWindowLimiter(cli *redis.Client, logger *zap.Logger) Limiter {
 	}
 }
 
-// Allow uses a fixed window counter to rate limit requests.
+// Allow 使用固定窗口计数器对请求进行限流。
 func (r *fixedWindowLimiter) Allow(ctx context.Context, key string, limit int, window time.Duration) error {
 	// 使用 Redis 管道 (Pipeline) 原子性地执行 INCR 和 EXPIRE
 	pipe := r.cli.TxPipeline()     //开启管道

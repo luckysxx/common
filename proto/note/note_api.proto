@@ -390,4 +390,7 @@ message UploadFileResponse {
     string id = 1;
     string filename = 2;
     int64 size = 3;
+    string url = 4;           // 文件访问 URL
+    string mime_type = 5;     // MIME 类型
+    string thumbnail_url = 6; // 缩略图 URL（图片类型）
 }
