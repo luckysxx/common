@@ -31,6 +31,7 @@ const (
 	NoteService_FavoriteSnippet_FullMethodName           = "/note.NoteService/FavoriteSnippet"
 	NoteService_UnfavoriteSnippet_FullMethodName         = "/note.NoteService/UnfavoriteSnippet"
 	NoteService_CreateSnippetFromTemplate_FullMethodName = "/note.NoteService/CreateSnippetFromTemplate"
+	NoteService_CreateSnippetFromShare_FullMethodName    = "/note.NoteService/CreateSnippetFromShare"
 	NoteService_ListRecentSnippets_FullMethodName        = "/note.NoteService/ListRecentSnippets"
 	NoteService_ListSharedSnippets_FullMethodName        = "/note.NoteService/ListSharedSnippets"
 	NoteService_ListFavoriteSnippets_FullMethodName      = "/note.NoteService/ListFavoriteSnippets"
@@ -76,6 +77,7 @@ type NoteServiceClient interface {
 	FavoriteSnippet(ctx context.Context, in *FavoriteSnippetRequest, opts ...grpc.CallOption) (*FavoriteSnippetResponse, error)
 	UnfavoriteSnippet(ctx context.Context, in *UnfavoriteSnippetRequest, opts ...grpc.CallOption) (*FavoriteSnippetResponse, error)
 	CreateSnippetFromTemplate(ctx context.Context, in *CreateSnippetFromTemplateRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
+	CreateSnippetFromShare(ctx context.Context, in *CreateSnippetFromShareRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	ListRecentSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	ListSharedSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	ListFavoriteSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
@@ -226,6 +228,16 @@ func (c *noteServiceClient) CreateSnippetFromTemplate(ctx context.Context, in *C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SnippetResponse)
 	err := c.cc.Invoke(ctx, NoteService_CreateSnippetFromTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) CreateSnippetFromShare(ctx context.Context, in *CreateSnippetFromShareRequest, opts ...grpc.CallOption) (*SnippetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SnippetResponse)
+	err := c.cc.Invoke(ctx, NoteService_CreateSnippetFromShare_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -491,6 +503,7 @@ type NoteServiceServer interface {
 	FavoriteSnippet(context.Context, *FavoriteSnippetRequest) (*FavoriteSnippetResponse, error)
 	UnfavoriteSnippet(context.Context, *UnfavoriteSnippetRequest) (*FavoriteSnippetResponse, error)
 	CreateSnippetFromTemplate(context.Context, *CreateSnippetFromTemplateRequest) (*SnippetResponse, error)
+	CreateSnippetFromShare(context.Context, *CreateSnippetFromShareRequest) (*SnippetResponse, error)
 	ListRecentSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	ListSharedSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	ListFavoriteSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
@@ -562,6 +575,9 @@ func (UnimplementedNoteServiceServer) UnfavoriteSnippet(context.Context, *Unfavo
 }
 func (UnimplementedNoteServiceServer) CreateSnippetFromTemplate(context.Context, *CreateSnippetFromTemplateRequest) (*SnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateSnippetFromTemplate not implemented")
+}
+func (UnimplementedNoteServiceServer) CreateSnippetFromShare(context.Context, *CreateSnippetFromShareRequest) (*SnippetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSnippetFromShare not implemented")
 }
 func (UnimplementedNoteServiceServer) ListRecentSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListRecentSnippets not implemented")
@@ -868,6 +884,24 @@ func _NoteService_CreateSnippetFromTemplate_Handler(srv interface{}, ctx context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoteServiceServer).CreateSnippetFromTemplate(ctx, req.(*CreateSnippetFromTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_CreateSnippetFromShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSnippetFromShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).CreateSnippetFromShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_CreateSnippetFromShare_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).CreateSnippetFromShare(ctx, req.(*CreateSnippetFromShareRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1358,6 +1392,10 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSnippetFromTemplate",
 			Handler:    _NoteService_CreateSnippetFromTemplate_Handler,
+		},
+		{
+			MethodName: "CreateSnippetFromShare",
+			Handler:    _NoteService_CreateSnippetFromShare_Handler,
 		},
 		{
 			MethodName: "ListRecentSnippets",

@@ -85,6 +85,13 @@ service NoteService {
         };
     }
 
+    rpc CreateSnippetFromShare (CreateSnippetFromShareRequest) returns (SnippetResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/notes/snippets/from-share"
+            body: "*"
+        };
+    }
+
     // ── 工作区列表 ──
 
     rpc ListRecentSnippets (ListSnippetsRequest) returns (ListSnippetsResponse) {
@@ -354,6 +361,13 @@ message CreateSnippetFromTemplateRequest {
     int64 template_id = 1;
     string title = 2;
     string visibility = 3;
+}
+
+message CreateSnippetFromShareRequest {
+    string token = 1;
+    string password = 2;
+    string title = 3;
+    string visibility = 4;
 }
 
 // ── Group Messages ──
