@@ -201,7 +201,47 @@ service NoteService {
         };
     }
 
-    // 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
+    // ── 分享 ──
+
+    rpc CreateShare (CreateShareRequest) returns (ShareResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/notes/shares"
+            body: "*"
+        };
+    }
+
+    rpc ListMyShares (ListMySharesRequest) returns (ListSharesResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/notes/shares/my"
+        };
+    }
+
+    rpc DeleteShare (DeleteShareRequest) returns (DeleteShareResponse) {
+        option (google.api.http) = {
+            delete: "/api/v1/notes/shares/{share_id}"
+        };
+    }
+
+    // 公开分享 — 不加 http 注解，保留手写 handler（无需鉴权）
+    rpc GetPublicShareByToken (GetPublicShareByTokenRequest) returns (PublicShareResponse);
+
+    // ── Upload ──
+
+    rpc PresignUpload (PresignUploadRequest) returns (PresignUploadResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/notes/uploads/presign"
+            body: "*"
+        };
+    }
+
+    rpc CompleteUpload (CompleteUploadRequest) returns (CompleteUploadResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/notes/uploads/complete"
+            body: "*"
+        };
+    }
+
+    // 文件上传（兼容旧链路）— 不加 http 注解，保留手写 handler（二进制流）
     rpc UploadFile (UploadFileRequest) returns (UploadFileResponse);
 }
 
@@ -430,7 +470,85 @@ message DeleteTemplateResponse {
     string id = 1;
 }
 
+// ── Share ──
+message CreateShareRequest {
+    int64 snippet_id = 1;
+    string kind = 2;
+    string password = 3;
+    string expires_at = 4;
+}
+
+message ListMySharesRequest {
+    string kind = 1;
+}
+
+message ShareResponse {
+    int64 id = 1;
+    string token = 2;
+    string kind = 3;
+    int64 snippet_id = 4;
+    int64 owner_id = 5;
+    bool has_password = 6;
+    string expires_at = 7;
+    int32 view_count = 8;
+    int32 fork_count = 9;
+    string created_at = 10;
+}
+
+message ListSharesResponse {
+    repeated ShareResponse shares = 1;
+}
+
+message DeleteShareRequest {
+    int64 share_id = 1;
+}
+
+message DeleteShareResponse {
+    int64 id = 1;
+}
+
+message GetPublicShareByTokenRequest {
+    string token = 1;
+    string password = 2;
+}
+
+message PublicShareResponse {
+    ShareResponse share = 1;
+    SnippetResponse snippet = 2;
+}
+
 // ── Upload ──
+message PresignUploadRequest {
+    string filename = 1;
+    string mime_type = 2;
+    int64 size = 3;
+}
+
+message PresignUploadResponse {
+    string url = 1;
+    string object_key = 2;
+    string expires_at = 3;
+    map<string, string> headers = 4;
+    string public_url = 5;
+}
+
+message CompleteUploadRequest {
+    string object_key = 1;
+    string filename = 2;
+    int64 size = 3;
+    string mime_type = 4;
+    optional int64 snippet_id = 5;
+}
+
+message CompleteUploadResponse {
+    string filename = 1;
+    int64 size = 2;
+    string url = 3;
+    string mime_type = 4;
+    string thumbnail_url = 5;
+    string object_key = 6;
+}
+
 message UploadFileRequest {
     bytes file_data = 1;
     string filename = 2;

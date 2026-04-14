@@ -48,6 +48,12 @@ const (
 	NoteService_CreateTemplate_FullMethodName            = "/note.NoteService/CreateTemplate"
 	NoteService_UpdateTemplate_FullMethodName            = "/note.NoteService/UpdateTemplate"
 	NoteService_DeleteTemplate_FullMethodName            = "/note.NoteService/DeleteTemplate"
+	NoteService_CreateShare_FullMethodName               = "/note.NoteService/CreateShare"
+	NoteService_ListMyShares_FullMethodName              = "/note.NoteService/ListMyShares"
+	NoteService_DeleteShare_FullMethodName               = "/note.NoteService/DeleteShare"
+	NoteService_GetPublicShareByToken_FullMethodName     = "/note.NoteService/GetPublicShareByToken"
+	NoteService_PresignUpload_FullMethodName             = "/note.NoteService/PresignUpload"
+	NoteService_CompleteUpload_FullMethodName            = "/note.NoteService/CompleteUpload"
 	NoteService_UploadFile_FullMethodName                = "/note.NoteService/UploadFile"
 )
 
@@ -87,7 +93,14 @@ type NoteServiceClient interface {
 	CreateTemplate(ctx context.Context, in *CreateTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
 	UpdateTemplate(ctx context.Context, in *UpdateTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
 	DeleteTemplate(ctx context.Context, in *DeleteTemplateRequest, opts ...grpc.CallOption) (*DeleteTemplateResponse, error)
-	// 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
+	CreateShare(ctx context.Context, in *CreateShareRequest, opts ...grpc.CallOption) (*ShareResponse, error)
+	ListMyShares(ctx context.Context, in *ListMySharesRequest, opts ...grpc.CallOption) (*ListSharesResponse, error)
+	DeleteShare(ctx context.Context, in *DeleteShareRequest, opts ...grpc.CallOption) (*DeleteShareResponse, error)
+	// 公开分享 — 不加 http 注解，保留手写 handler（无需鉴权）
+	GetPublicShareByToken(ctx context.Context, in *GetPublicShareByTokenRequest, opts ...grpc.CallOption) (*PublicShareResponse, error)
+	PresignUpload(ctx context.Context, in *PresignUploadRequest, opts ...grpc.CallOption) (*PresignUploadResponse, error)
+	CompleteUpload(ctx context.Context, in *CompleteUploadRequest, opts ...grpc.CallOption) (*CompleteUploadResponse, error)
+	// 文件上传（兼容旧链路）— 不加 http 注解，保留手写 handler（二进制流）
 	UploadFile(ctx context.Context, in *UploadFileRequest, opts ...grpc.CallOption) (*UploadFileResponse, error)
 }
 
@@ -389,6 +402,66 @@ func (c *noteServiceClient) DeleteTemplate(ctx context.Context, in *DeleteTempla
 	return out, nil
 }
 
+func (c *noteServiceClient) CreateShare(ctx context.Context, in *CreateShareRequest, opts ...grpc.CallOption) (*ShareResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShareResponse)
+	err := c.cc.Invoke(ctx, NoteService_CreateShare_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) ListMyShares(ctx context.Context, in *ListMySharesRequest, opts ...grpc.CallOption) (*ListSharesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSharesResponse)
+	err := c.cc.Invoke(ctx, NoteService_ListMyShares_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) DeleteShare(ctx context.Context, in *DeleteShareRequest, opts ...grpc.CallOption) (*DeleteShareResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteShareResponse)
+	err := c.cc.Invoke(ctx, NoteService_DeleteShare_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) GetPublicShareByToken(ctx context.Context, in *GetPublicShareByTokenRequest, opts ...grpc.CallOption) (*PublicShareResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PublicShareResponse)
+	err := c.cc.Invoke(ctx, NoteService_GetPublicShareByToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) PresignUpload(ctx context.Context, in *PresignUploadRequest, opts ...grpc.CallOption) (*PresignUploadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PresignUploadResponse)
+	err := c.cc.Invoke(ctx, NoteService_PresignUpload_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) CompleteUpload(ctx context.Context, in *CompleteUploadRequest, opts ...grpc.CallOption) (*CompleteUploadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CompleteUploadResponse)
+	err := c.cc.Invoke(ctx, NoteService_CompleteUpload_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *noteServiceClient) UploadFile(ctx context.Context, in *UploadFileRequest, opts ...grpc.CallOption) (*UploadFileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UploadFileResponse)
@@ -435,7 +508,14 @@ type NoteServiceServer interface {
 	CreateTemplate(context.Context, *CreateTemplateRequest) (*TemplateResponse, error)
 	UpdateTemplate(context.Context, *UpdateTemplateRequest) (*TemplateResponse, error)
 	DeleteTemplate(context.Context, *DeleteTemplateRequest) (*DeleteTemplateResponse, error)
-	// 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
+	CreateShare(context.Context, *CreateShareRequest) (*ShareResponse, error)
+	ListMyShares(context.Context, *ListMySharesRequest) (*ListSharesResponse, error)
+	DeleteShare(context.Context, *DeleteShareRequest) (*DeleteShareResponse, error)
+	// 公开分享 — 不加 http 注解，保留手写 handler（无需鉴权）
+	GetPublicShareByToken(context.Context, *GetPublicShareByTokenRequest) (*PublicShareResponse, error)
+	PresignUpload(context.Context, *PresignUploadRequest) (*PresignUploadResponse, error)
+	CompleteUpload(context.Context, *CompleteUploadRequest) (*CompleteUploadResponse, error)
+	// 文件上传（兼容旧链路）— 不加 http 注解，保留手写 handler（二进制流）
 	UploadFile(context.Context, *UploadFileRequest) (*UploadFileResponse, error)
 	mustEmbedUnimplementedNoteServiceServer()
 }
@@ -533,6 +613,24 @@ func (UnimplementedNoteServiceServer) UpdateTemplate(context.Context, *UpdateTem
 }
 func (UnimplementedNoteServiceServer) DeleteTemplate(context.Context, *DeleteTemplateRequest) (*DeleteTemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteTemplate not implemented")
+}
+func (UnimplementedNoteServiceServer) CreateShare(context.Context, *CreateShareRequest) (*ShareResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateShare not implemented")
+}
+func (UnimplementedNoteServiceServer) ListMyShares(context.Context, *ListMySharesRequest) (*ListSharesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListMyShares not implemented")
+}
+func (UnimplementedNoteServiceServer) DeleteShare(context.Context, *DeleteShareRequest) (*DeleteShareResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteShare not implemented")
+}
+func (UnimplementedNoteServiceServer) GetPublicShareByToken(context.Context, *GetPublicShareByTokenRequest) (*PublicShareResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPublicShareByToken not implemented")
+}
+func (UnimplementedNoteServiceServer) PresignUpload(context.Context, *PresignUploadRequest) (*PresignUploadResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PresignUpload not implemented")
+}
+func (UnimplementedNoteServiceServer) CompleteUpload(context.Context, *CompleteUploadRequest) (*CompleteUploadResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CompleteUpload not implemented")
 }
 func (UnimplementedNoteServiceServer) UploadFile(context.Context, *UploadFileRequest) (*UploadFileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UploadFile not implemented")
@@ -1080,6 +1178,114 @@ func _NoteService_DeleteTemplate_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NoteService_CreateShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).CreateShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_CreateShare_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).CreateShare(ctx, req.(*CreateShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_ListMyShares_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMySharesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).ListMyShares(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_ListMyShares_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).ListMyShares(ctx, req.(*ListMySharesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_DeleteShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).DeleteShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_DeleteShare_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).DeleteShare(ctx, req.(*DeleteShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_GetPublicShareByToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPublicShareByTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).GetPublicShareByToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_GetPublicShareByToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).GetPublicShareByToken(ctx, req.(*GetPublicShareByTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_PresignUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PresignUploadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).PresignUpload(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_PresignUpload_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).PresignUpload(ctx, req.(*PresignUploadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_CompleteUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CompleteUploadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).CompleteUpload(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_CompleteUpload_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).CompleteUpload(ctx, req.(*CompleteUploadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NoteService_UploadFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UploadFileRequest)
 	if err := dec(in); err != nil {
@@ -1220,6 +1426,30 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteTemplate",
 			Handler:    _NoteService_DeleteTemplate_Handler,
+		},
+		{
+			MethodName: "CreateShare",
+			Handler:    _NoteService_CreateShare_Handler,
+		},
+		{
+			MethodName: "ListMyShares",
+			Handler:    _NoteService_ListMyShares_Handler,
+		},
+		{
+			MethodName: "DeleteShare",
+			Handler:    _NoteService_DeleteShare_Handler,
+		},
+		{
+			MethodName: "GetPublicShareByToken",
+			Handler:    _NoteService_GetPublicShareByToken_Handler,
+		},
+		{
+			MethodName: "PresignUpload",
+			Handler:    _NoteService_PresignUpload_Handler,
+		},
+		{
+			MethodName: "CompleteUpload",
+			Handler:    _NoteService_CompleteUpload_Handler,
 		},
 		{
 			MethodName: "UploadFile",

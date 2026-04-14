@@ -2429,7 +2429,768 @@ func (x *DeleteTemplateResponse) GetId() string {
 	return ""
 }
 
+// ── Share ──
+type CreateShareRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	Kind          string                 `protobuf:"bytes,2,opt,name=kind,proto3" json:"kind,omitempty"`
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	ExpiresAt     string                 `protobuf:"bytes,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateShareRequest) Reset() {
+	*x = CreateShareRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateShareRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateShareRequest) ProtoMessage() {}
+
+func (x *CreateShareRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateShareRequest.ProtoReflect.Descriptor instead.
+func (*CreateShareRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *CreateShareRequest) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+func (x *CreateShareRequest) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+func (x *CreateShareRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *CreateShareRequest) GetExpiresAt() string {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return ""
+}
+
+type ListMySharesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Kind          string                 `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListMySharesRequest) Reset() {
+	*x = ListMySharesRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMySharesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMySharesRequest) ProtoMessage() {}
+
+func (x *ListMySharesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMySharesRequest.ProtoReflect.Descriptor instead.
+func (*ListMySharesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *ListMySharesRequest) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+type ShareResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	Kind          string                 `protobuf:"bytes,3,opt,name=kind,proto3" json:"kind,omitempty"`
+	SnippetId     int64                  `protobuf:"varint,4,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	OwnerId       int64                  `protobuf:"varint,5,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	HasPassword   bool                   `protobuf:"varint,6,opt,name=has_password,json=hasPassword,proto3" json:"has_password,omitempty"`
+	ExpiresAt     string                 `protobuf:"bytes,7,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	ViewCount     int32                  `protobuf:"varint,8,opt,name=view_count,json=viewCount,proto3" json:"view_count,omitempty"`
+	ForkCount     int32                  `protobuf:"varint,9,opt,name=fork_count,json=forkCount,proto3" json:"fork_count,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShareResponse) Reset() {
+	*x = ShareResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShareResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShareResponse) ProtoMessage() {}
+
+func (x *ShareResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShareResponse.ProtoReflect.Descriptor instead.
+func (*ShareResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ShareResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ShareResponse) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *ShareResponse) GetKind() string {
+	if x != nil {
+		return x.Kind
+	}
+	return ""
+}
+
+func (x *ShareResponse) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+func (x *ShareResponse) GetOwnerId() int64 {
+	if x != nil {
+		return x.OwnerId
+	}
+	return 0
+}
+
+func (x *ShareResponse) GetHasPassword() bool {
+	if x != nil {
+		return x.HasPassword
+	}
+	return false
+}
+
+func (x *ShareResponse) GetExpiresAt() string {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return ""
+}
+
+func (x *ShareResponse) GetViewCount() int32 {
+	if x != nil {
+		return x.ViewCount
+	}
+	return 0
+}
+
+func (x *ShareResponse) GetForkCount() int32 {
+	if x != nil {
+		return x.ForkCount
+	}
+	return 0
+}
+
+func (x *ShareResponse) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+type ListSharesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Shares        []*ShareResponse       `protobuf:"bytes,1,rep,name=shares,proto3" json:"shares,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSharesResponse) Reset() {
+	*x = ListSharesResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSharesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSharesResponse) ProtoMessage() {}
+
+func (x *ListSharesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSharesResponse.ProtoReflect.Descriptor instead.
+func (*ListSharesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *ListSharesResponse) GetShares() []*ShareResponse {
+	if x != nil {
+		return x.Shares
+	}
+	return nil
+}
+
+type DeleteShareRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShareId       int64                  `protobuf:"varint,1,opt,name=share_id,json=shareId,proto3" json:"share_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteShareRequest) Reset() {
+	*x = DeleteShareRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteShareRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteShareRequest) ProtoMessage() {}
+
+func (x *DeleteShareRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteShareRequest.ProtoReflect.Descriptor instead.
+func (*DeleteShareRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *DeleteShareRequest) GetShareId() int64 {
+	if x != nil {
+		return x.ShareId
+	}
+	return 0
+}
+
+type DeleteShareResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteShareResponse) Reset() {
+	*x = DeleteShareResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteShareResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteShareResponse) ProtoMessage() {}
+
+func (x *DeleteShareResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteShareResponse.ProtoReflect.Descriptor instead.
+func (*DeleteShareResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *DeleteShareResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetPublicShareByTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPublicShareByTokenRequest) Reset() {
+	*x = GetPublicShareByTokenRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPublicShareByTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPublicShareByTokenRequest) ProtoMessage() {}
+
+func (x *GetPublicShareByTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPublicShareByTokenRequest.ProtoReflect.Descriptor instead.
+func (*GetPublicShareByTokenRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *GetPublicShareByTokenRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *GetPublicShareByTokenRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type PublicShareResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Share         *ShareResponse         `protobuf:"bytes,1,opt,name=share,proto3" json:"share,omitempty"`
+	Snippet       *SnippetResponse       `protobuf:"bytes,2,opt,name=snippet,proto3" json:"snippet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PublicShareResponse) Reset() {
+	*x = PublicShareResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicShareResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicShareResponse) ProtoMessage() {}
+
+func (x *PublicShareResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicShareResponse.ProtoReflect.Descriptor instead.
+func (*PublicShareResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *PublicShareResponse) GetShare() *ShareResponse {
+	if x != nil {
+		return x.Share
+	}
+	return nil
+}
+
+func (x *PublicShareResponse) GetSnippet() *SnippetResponse {
+	if x != nil {
+		return x.Snippet
+	}
+	return nil
+}
+
 // ── Upload ──
+type PresignUploadRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
+	MimeType      string                 `protobuf:"bytes,2,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PresignUploadRequest) Reset() {
+	*x = PresignUploadRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PresignUploadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PresignUploadRequest) ProtoMessage() {}
+
+func (x *PresignUploadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PresignUploadRequest.ProtoReflect.Descriptor instead.
+func (*PresignUploadRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *PresignUploadRequest) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *PresignUploadRequest) GetMimeType() string {
+	if x != nil {
+		return x.MimeType
+	}
+	return ""
+}
+
+func (x *PresignUploadRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+type PresignUploadResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	ObjectKey     string                 `protobuf:"bytes,2,opt,name=object_key,json=objectKey,proto3" json:"object_key,omitempty"`
+	ExpiresAt     string                 `protobuf:"bytes,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	Headers       map[string]string      `protobuf:"bytes,4,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	PublicUrl     string                 `protobuf:"bytes,5,opt,name=public_url,json=publicUrl,proto3" json:"public_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PresignUploadResponse) Reset() {
+	*x = PresignUploadResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PresignUploadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PresignUploadResponse) ProtoMessage() {}
+
+func (x *PresignUploadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PresignUploadResponse.ProtoReflect.Descriptor instead.
+func (*PresignUploadResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *PresignUploadResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *PresignUploadResponse) GetObjectKey() string {
+	if x != nil {
+		return x.ObjectKey
+	}
+	return ""
+}
+
+func (x *PresignUploadResponse) GetExpiresAt() string {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return ""
+}
+
+func (x *PresignUploadResponse) GetHeaders() map[string]string {
+	if x != nil {
+		return x.Headers
+	}
+	return nil
+}
+
+func (x *PresignUploadResponse) GetPublicUrl() string {
+	if x != nil {
+		return x.PublicUrl
+	}
+	return ""
+}
+
+type CompleteUploadRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ObjectKey     string                 `protobuf:"bytes,1,opt,name=object_key,json=objectKey,proto3" json:"object_key,omitempty"`
+	Filename      string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	MimeType      string                 `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	SnippetId     *int64                 `protobuf:"varint,5,opt,name=snippet_id,json=snippetId,proto3,oneof" json:"snippet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CompleteUploadRequest) Reset() {
+	*x = CompleteUploadRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CompleteUploadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CompleteUploadRequest) ProtoMessage() {}
+
+func (x *CompleteUploadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CompleteUploadRequest.ProtoReflect.Descriptor instead.
+func (*CompleteUploadRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *CompleteUploadRequest) GetObjectKey() string {
+	if x != nil {
+		return x.ObjectKey
+	}
+	return ""
+}
+
+func (x *CompleteUploadRequest) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *CompleteUploadRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *CompleteUploadRequest) GetMimeType() string {
+	if x != nil {
+		return x.MimeType
+	}
+	return ""
+}
+
+func (x *CompleteUploadRequest) GetSnippetId() int64 {
+	if x != nil && x.SnippetId != nil {
+		return *x.SnippetId
+	}
+	return 0
+}
+
+type CompleteUploadResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Url           string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	MimeType      string                 `protobuf:"bytes,4,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	ThumbnailUrl  string                 `protobuf:"bytes,5,opt,name=thumbnail_url,json=thumbnailUrl,proto3" json:"thumbnail_url,omitempty"`
+	ObjectKey     string                 `protobuf:"bytes,6,opt,name=object_key,json=objectKey,proto3" json:"object_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CompleteUploadResponse) Reset() {
+	*x = CompleteUploadResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CompleteUploadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CompleteUploadResponse) ProtoMessage() {}
+
+func (x *CompleteUploadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CompleteUploadResponse.ProtoReflect.Descriptor instead.
+func (*CompleteUploadResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *CompleteUploadResponse) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *CompleteUploadResponse) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *CompleteUploadResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *CompleteUploadResponse) GetMimeType() string {
+	if x != nil {
+		return x.MimeType
+	}
+	return ""
+}
+
+func (x *CompleteUploadResponse) GetThumbnailUrl() string {
+	if x != nil {
+		return x.ThumbnailUrl
+	}
+	return ""
+}
+
+func (x *CompleteUploadResponse) GetObjectKey() string {
+	if x != nil {
+		return x.ObjectKey
+	}
+	return ""
+}
+
 type UploadFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FileData      []byte                 `protobuf:"bytes,1,opt,name=file_data,json=fileData,proto3" json:"file_data,omitempty"`
@@ -2440,7 +3201,7 @@ type UploadFileRequest struct {
 
 func (x *UploadFileRequest) Reset() {
 	*x = UploadFileRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[40]
+	mi := &file_proto_note_note_api_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2452,7 +3213,7 @@ func (x *UploadFileRequest) String() string {
 func (*UploadFileRequest) ProtoMessage() {}
 
 func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[40]
+	mi := &file_proto_note_note_api_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2465,7 +3226,7 @@ func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadFileRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{40}
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *UploadFileRequest) GetFileData() []byte {
@@ -2496,7 +3257,7 @@ type UploadFileResponse struct {
 
 func (x *UploadFileResponse) Reset() {
 	*x = UploadFileResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[41]
+	mi := &file_proto_note_note_api_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2508,7 +3269,7 @@ func (x *UploadFileResponse) String() string {
 func (*UploadFileResponse) ProtoMessage() {}
 
 func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[41]
+	mi := &file_proto_note_note_api_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2521,7 +3282,7 @@ func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileResponse.ProtoReflect.Descriptor instead.
 func (*UploadFileResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{41}
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *UploadFileResponse) GetId() string {
@@ -2786,7 +3547,78 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\vtemplate_id\x18\x01 \x01(\tR\n" +
 	"templateId\"(\n" +
 	"\x16DeleteTemplateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"L\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\x82\x01\n" +
+	"\x12CreateShareRequest\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\x12\x12\n" +
+	"\x04kind\x18\x02 \x01(\tR\x04kind\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x04 \x01(\tR\texpiresAt\")\n" +
+	"\x13ListMySharesRequest\x12\x12\n" +
+	"\x04kind\x18\x01 \x01(\tR\x04kind\"\xa2\x02\n" +
+	"\rShareResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\x12\x12\n" +
+	"\x04kind\x18\x03 \x01(\tR\x04kind\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x04 \x01(\x03R\tsnippetId\x12\x19\n" +
+	"\bowner_id\x18\x05 \x01(\x03R\aownerId\x12!\n" +
+	"\fhas_password\x18\x06 \x01(\bR\vhasPassword\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\a \x01(\tR\texpiresAt\x12\x1d\n" +
+	"\n" +
+	"view_count\x18\b \x01(\x05R\tviewCount\x12\x1d\n" +
+	"\n" +
+	"fork_count\x18\t \x01(\x05R\tforkCount\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\tR\tcreatedAt\"A\n" +
+	"\x12ListSharesResponse\x12+\n" +
+	"\x06shares\x18\x01 \x03(\v2\x13.note.ShareResponseR\x06shares\"/\n" +
+	"\x12DeleteShareRequest\x12\x19\n" +
+	"\bshare_id\x18\x01 \x01(\x03R\ashareId\"%\n" +
+	"\x13DeleteShareResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"P\n" +
+	"\x1cGetPublicShareByTokenRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"q\n" +
+	"\x13PublicShareResponse\x12)\n" +
+	"\x05share\x18\x01 \x01(\v2\x13.note.ShareResponseR\x05share\x12/\n" +
+	"\asnippet\x18\x02 \x01(\v2\x15.note.SnippetResponseR\asnippet\"c\n" +
+	"\x14PresignUploadRequest\x12\x1a\n" +
+	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x1b\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\"\x86\x02\n" +
+	"\x15PresignUploadResponse\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
+	"\n" +
+	"object_key\x18\x02 \x01(\tR\tobjectKey\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x03 \x01(\tR\texpiresAt\x12B\n" +
+	"\aheaders\x18\x04 \x03(\v2(.note.PresignUploadResponse.HeadersEntryR\aheaders\x12\x1d\n" +
+	"\n" +
+	"public_url\x18\x05 \x01(\tR\tpublicUrl\x1a:\n" +
+	"\fHeadersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb6\x01\n" +
+	"\x15CompleteUploadRequest\x12\x1d\n" +
+	"\n" +
+	"object_key\x18\x01 \x01(\tR\tobjectKey\x12\x1a\n" +
+	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x1b\n" +
+	"\tmime_type\x18\x04 \x01(\tR\bmimeType\x12\"\n" +
+	"\n" +
+	"snippet_id\x18\x05 \x01(\x03H\x00R\tsnippetId\x88\x01\x01B\r\n" +
+	"\v_snippet_id\"\xbb\x01\n" +
+	"\x16CompleteUploadResponse\x12\x1a\n" +
+	"\bfilename\x18\x01 \x01(\tR\bfilename\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x03R\x04size\x12\x10\n" +
+	"\x03url\x18\x03 \x01(\tR\x03url\x12\x1b\n" +
+	"\tmime_type\x18\x04 \x01(\tR\bmimeType\x12#\n" +
+	"\rthumbnail_url\x18\x05 \x01(\tR\fthumbnailUrl\x12\x1d\n" +
+	"\n" +
+	"object_key\x18\x06 \x01(\tR\tobjectKey\"L\n" +
 	"\x11UploadFileRequest\x12\x1b\n" +
 	"\tfile_data\x18\x01 \x01(\fR\bfileData\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\"\xa8\x01\n" +
@@ -2796,7 +3628,7 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x1b\n" +
 	"\tmime_type\x18\x05 \x01(\tR\bmimeType\x12#\n" +
-	"\rthumbnail_url\x18\x06 \x01(\tR\fthumbnailUrl2\xd5\x19\n" +
+	"\rthumbnail_url\x18\x06 \x01(\tR\fthumbnailUrl2\xcb\x1e\n" +
 	"\vNoteService\x12h\n" +
 	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/v1/notes/me/snippets\x12e\n" +
 	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/v1/notes/snippets\x12i\n" +
@@ -2828,7 +3660,13 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/notes/templates/{template_id}\x12i\n" +
 	"\x0eCreateTemplate\x12\x1b.note.CreateTemplateRequest\x1a\x16.note.TemplateResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/notes/templates\x12w\n" +
 	"\x0eUpdateTemplate\x12\x1b.note.UpdateTemplateRequest\x1a\x16.note.TemplateResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/v1/notes/templates/{template_id}\x12z\n" +
-	"\x0eDeleteTemplate\x12\x1b.note.DeleteTemplateRequest\x1a\x1c.note.DeleteTemplateResponse\"-\x82\xd3\xe4\x93\x02'*%/api/v1/notes/templates/{template_id}\x12?\n" +
+	"\x0eDeleteTemplate\x12\x1b.note.DeleteTemplateRequest\x1a\x1c.note.DeleteTemplateResponse\"-\x82\xd3\xe4\x93\x02'*%/api/v1/notes/templates/{template_id}\x12]\n" +
+	"\vCreateShare\x12\x18.note.CreateShareRequest\x1a\x13.note.ShareResponse\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/v1/notes/shares\x12d\n" +
+	"\fListMyShares\x12\x19.note.ListMySharesRequest\x1a\x18.note.ListSharesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/notes/shares/my\x12k\n" +
+	"\vDeleteShare\x12\x18.note.DeleteShareRequest\x1a\x19.note.DeleteShareResponse\"'\x82\xd3\xe4\x93\x02!*\x1f/api/v1/notes/shares/{share_id}\x12V\n" +
+	"\x15GetPublicShareByToken\x12\".note.GetPublicShareByTokenRequest\x1a\x19.note.PublicShareResponse\x12r\n" +
+	"\rPresignUpload\x12\x1a.note.PresignUploadRequest\x1a\x1b.note.PresignUploadResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/api/v1/notes/uploads/presign\x12v\n" +
+	"\x0eCompleteUpload\x12\x1b.note.CompleteUploadRequest\x1a\x1c.note.CompleteUploadResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/api/v1/notes/uploads/complete\x12?\n" +
 	"\n" +
 	"UploadFile\x12\x17.note.UploadFileRequest\x1a\x18.note.UploadFileResponseB'Z%github.com/luckysxx/common/proto/noteb\x06proto3"
 
@@ -2844,7 +3682,7 @@ func file_proto_note_note_api_proto_rawDescGZIP() []byte {
 	return file_proto_note_note_api_proto_rawDescData
 }
 
-var file_proto_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
+var file_proto_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
 var file_proto_note_note_api_proto_goTypes = []any{
 	(*CreateSnippetRequest)(nil),             // 0: note.CreateSnippetRequest
 	(*GetSnippetRequest)(nil),                // 1: note.GetSnippetRequest
@@ -2886,79 +3724,108 @@ var file_proto_note_note_api_proto_goTypes = []any{
 	(*UpdateTemplateRequest)(nil),            // 37: note.UpdateTemplateRequest
 	(*DeleteTemplateRequest)(nil),            // 38: note.DeleteTemplateRequest
 	(*DeleteTemplateResponse)(nil),           // 39: note.DeleteTemplateResponse
-	(*UploadFileRequest)(nil),                // 40: note.UploadFileRequest
-	(*UploadFileResponse)(nil),               // 41: note.UploadFileResponse
+	(*CreateShareRequest)(nil),               // 40: note.CreateShareRequest
+	(*ListMySharesRequest)(nil),              // 41: note.ListMySharesRequest
+	(*ShareResponse)(nil),                    // 42: note.ShareResponse
+	(*ListSharesResponse)(nil),               // 43: note.ListSharesResponse
+	(*DeleteShareRequest)(nil),               // 44: note.DeleteShareRequest
+	(*DeleteShareResponse)(nil),              // 45: note.DeleteShareResponse
+	(*GetPublicShareByTokenRequest)(nil),     // 46: note.GetPublicShareByTokenRequest
+	(*PublicShareResponse)(nil),              // 47: note.PublicShareResponse
+	(*PresignUploadRequest)(nil),             // 48: note.PresignUploadRequest
+	(*PresignUploadResponse)(nil),            // 49: note.PresignUploadResponse
+	(*CompleteUploadRequest)(nil),            // 50: note.CompleteUploadRequest
+	(*CompleteUploadResponse)(nil),           // 51: note.CompleteUploadResponse
+	(*UploadFileRequest)(nil),                // 52: note.UploadFileRequest
+	(*UploadFileResponse)(nil),               // 53: note.UploadFileResponse
+	nil,                                      // 54: note.PresignUploadResponse.HeadersEntry
 }
 var file_proto_note_note_api_proto_depIdxs = []int32{
 	4,  // 0: note.ListSnippetsResponse.snippets:type_name -> note.SnippetResponse
 	17, // 1: note.ListGroupsResponse.groups:type_name -> note.GroupResponse
 	25, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
 	32, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
-	2,  // 4: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
-	0,  // 5: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
-	1,  // 6: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
-	3,  // 7: note.NoteService.UpdateSnippet:input_type -> note.UpdateSnippetRequest
-	6,  // 8: note.NoteService.DeleteSnippet:input_type -> note.DeleteSnippetRequest
-	8,  // 9: note.NoteService.SetSnippetTags:input_type -> note.SetSnippetTagsRequest
-	10, // 10: note.NoteService.MoveSnippet:input_type -> note.MoveSnippetRequest
-	11, // 11: note.NoteService.SearchSnippets:input_type -> note.SearchSnippetsRequest
-	12, // 12: note.NoteService.GetPublicSnippet:input_type -> note.GetPublicSnippetRequest
-	13, // 13: note.NoteService.FavoriteSnippet:input_type -> note.FavoriteSnippetRequest
-	14, // 14: note.NoteService.UnfavoriteSnippet:input_type -> note.UnfavoriteSnippetRequest
-	16, // 15: note.NoteService.CreateSnippetFromTemplate:input_type -> note.CreateSnippetFromTemplateRequest
-	2,  // 16: note.NoteService.ListRecentSnippets:input_type -> note.ListSnippetsRequest
-	2,  // 17: note.NoteService.ListSharedSnippets:input_type -> note.ListSnippetsRequest
-	2,  // 18: note.NoteService.ListFavoriteSnippets:input_type -> note.ListSnippetsRequest
-	18, // 19: note.NoteService.ListGroups:input_type -> note.ListGroupsRequest
-	19, // 20: note.NoteService.GetGroup:input_type -> note.GetGroupRequest
-	21, // 21: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
-	22, // 22: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
-	23, // 23: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
-	26, // 24: note.NoteService.ListTags:input_type -> note.ListTagsRequest
-	28, // 25: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
-	29, // 26: note.NoteService.UpdateTag:input_type -> note.UpdateTagRequest
-	30, // 27: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
-	33, // 28: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
-	35, // 29: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
-	36, // 30: note.NoteService.CreateTemplate:input_type -> note.CreateTemplateRequest
-	37, // 31: note.NoteService.UpdateTemplate:input_type -> note.UpdateTemplateRequest
-	38, // 32: note.NoteService.DeleteTemplate:input_type -> note.DeleteTemplateRequest
-	40, // 33: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
-	5,  // 34: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 35: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
-	4,  // 36: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
-	4,  // 37: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
-	7,  // 38: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
-	9,  // 39: note.NoteService.SetSnippetTags:output_type -> note.SetSnippetTagsResponse
-	4,  // 40: note.NoteService.MoveSnippet:output_type -> note.SnippetResponse
-	5,  // 41: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 42: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
-	15, // 43: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	15, // 44: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	4,  // 45: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
-	5,  // 46: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 47: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 48: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
-	20, // 49: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
-	17, // 50: note.NoteService.GetGroup:output_type -> note.GroupResponse
-	17, // 51: note.NoteService.CreateGroup:output_type -> note.GroupResponse
-	17, // 52: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
-	24, // 53: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
-	27, // 54: note.NoteService.ListTags:output_type -> note.ListTagsResponse
-	25, // 55: note.NoteService.CreateTag:output_type -> note.TagResponse
-	25, // 56: note.NoteService.UpdateTag:output_type -> note.TagResponse
-	31, // 57: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
-	34, // 58: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
-	32, // 59: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
-	32, // 60: note.NoteService.CreateTemplate:output_type -> note.TemplateResponse
-	32, // 61: note.NoteService.UpdateTemplate:output_type -> note.TemplateResponse
-	39, // 62: note.NoteService.DeleteTemplate:output_type -> note.DeleteTemplateResponse
-	41, // 63: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
-	34, // [34:64] is the sub-list for method output_type
-	4,  // [4:34] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	42, // 4: note.ListSharesResponse.shares:type_name -> note.ShareResponse
+	42, // 5: note.PublicShareResponse.share:type_name -> note.ShareResponse
+	4,  // 6: note.PublicShareResponse.snippet:type_name -> note.SnippetResponse
+	54, // 7: note.PresignUploadResponse.headers:type_name -> note.PresignUploadResponse.HeadersEntry
+	2,  // 8: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
+	0,  // 9: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
+	1,  // 10: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
+	3,  // 11: note.NoteService.UpdateSnippet:input_type -> note.UpdateSnippetRequest
+	6,  // 12: note.NoteService.DeleteSnippet:input_type -> note.DeleteSnippetRequest
+	8,  // 13: note.NoteService.SetSnippetTags:input_type -> note.SetSnippetTagsRequest
+	10, // 14: note.NoteService.MoveSnippet:input_type -> note.MoveSnippetRequest
+	11, // 15: note.NoteService.SearchSnippets:input_type -> note.SearchSnippetsRequest
+	12, // 16: note.NoteService.GetPublicSnippet:input_type -> note.GetPublicSnippetRequest
+	13, // 17: note.NoteService.FavoriteSnippet:input_type -> note.FavoriteSnippetRequest
+	14, // 18: note.NoteService.UnfavoriteSnippet:input_type -> note.UnfavoriteSnippetRequest
+	16, // 19: note.NoteService.CreateSnippetFromTemplate:input_type -> note.CreateSnippetFromTemplateRequest
+	2,  // 20: note.NoteService.ListRecentSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 21: note.NoteService.ListSharedSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 22: note.NoteService.ListFavoriteSnippets:input_type -> note.ListSnippetsRequest
+	18, // 23: note.NoteService.ListGroups:input_type -> note.ListGroupsRequest
+	19, // 24: note.NoteService.GetGroup:input_type -> note.GetGroupRequest
+	21, // 25: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
+	22, // 26: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
+	23, // 27: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
+	26, // 28: note.NoteService.ListTags:input_type -> note.ListTagsRequest
+	28, // 29: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
+	29, // 30: note.NoteService.UpdateTag:input_type -> note.UpdateTagRequest
+	30, // 31: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
+	33, // 32: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
+	35, // 33: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
+	36, // 34: note.NoteService.CreateTemplate:input_type -> note.CreateTemplateRequest
+	37, // 35: note.NoteService.UpdateTemplate:input_type -> note.UpdateTemplateRequest
+	38, // 36: note.NoteService.DeleteTemplate:input_type -> note.DeleteTemplateRequest
+	40, // 37: note.NoteService.CreateShare:input_type -> note.CreateShareRequest
+	41, // 38: note.NoteService.ListMyShares:input_type -> note.ListMySharesRequest
+	44, // 39: note.NoteService.DeleteShare:input_type -> note.DeleteShareRequest
+	46, // 40: note.NoteService.GetPublicShareByToken:input_type -> note.GetPublicShareByTokenRequest
+	48, // 41: note.NoteService.PresignUpload:input_type -> note.PresignUploadRequest
+	50, // 42: note.NoteService.CompleteUpload:input_type -> note.CompleteUploadRequest
+	52, // 43: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
+	5,  // 44: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 45: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
+	4,  // 46: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
+	4,  // 47: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
+	7,  // 48: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
+	9,  // 49: note.NoteService.SetSnippetTags:output_type -> note.SetSnippetTagsResponse
+	4,  // 50: note.NoteService.MoveSnippet:output_type -> note.SnippetResponse
+	5,  // 51: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 52: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
+	15, // 53: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	15, // 54: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	4,  // 55: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
+	5,  // 56: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 57: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 58: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
+	20, // 59: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
+	17, // 60: note.NoteService.GetGroup:output_type -> note.GroupResponse
+	17, // 61: note.NoteService.CreateGroup:output_type -> note.GroupResponse
+	17, // 62: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
+	24, // 63: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
+	27, // 64: note.NoteService.ListTags:output_type -> note.ListTagsResponse
+	25, // 65: note.NoteService.CreateTag:output_type -> note.TagResponse
+	25, // 66: note.NoteService.UpdateTag:output_type -> note.TagResponse
+	31, // 67: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
+	34, // 68: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
+	32, // 69: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
+	32, // 70: note.NoteService.CreateTemplate:output_type -> note.TemplateResponse
+	32, // 71: note.NoteService.UpdateTemplate:output_type -> note.TemplateResponse
+	39, // 72: note.NoteService.DeleteTemplate:output_type -> note.DeleteTemplateResponse
+	42, // 73: note.NoteService.CreateShare:output_type -> note.ShareResponse
+	43, // 74: note.NoteService.ListMyShares:output_type -> note.ListSharesResponse
+	45, // 75: note.NoteService.DeleteShare:output_type -> note.DeleteShareResponse
+	47, // 76: note.NoteService.GetPublicShareByToken:output_type -> note.PublicShareResponse
+	49, // 77: note.NoteService.PresignUpload:output_type -> note.PresignUploadResponse
+	51, // 78: note.NoteService.CompleteUpload:output_type -> note.CompleteUploadResponse
+	53, // 79: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
+	44, // [44:80] is the sub-list for method output_type
+	8,  // [8:44] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_proto_note_note_api_proto_init() }
@@ -2972,13 +3839,14 @@ func file_proto_note_note_api_proto_init() {
 	file_proto_note_note_api_proto_msgTypes[17].OneofWrappers = []any{}
 	file_proto_note_note_api_proto_msgTypes[21].OneofWrappers = []any{}
 	file_proto_note_note_api_proto_msgTypes[22].OneofWrappers = []any{}
+	file_proto_note_note_api_proto_msgTypes[50].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_note_note_api_proto_rawDesc), len(file_proto_note_note_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   42,
+			NumMessages:   55,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
