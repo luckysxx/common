@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.0
-// source: proto/note/note_api.proto
+// source: note/note_api.proto
 
 package note
 
@@ -24,6 +24,7 @@ const (
 	NoteService_GetSnippet_FullMethodName                = "/note.NoteService/GetSnippet"
 	NoteService_UpdateSnippet_FullMethodName             = "/note.NoteService/UpdateSnippet"
 	NoteService_DeleteSnippet_FullMethodName             = "/note.NoteService/DeleteSnippet"
+	NoteService_RestoreSnippet_FullMethodName            = "/note.NoteService/RestoreSnippet"
 	NoteService_SetSnippetTags_FullMethodName            = "/note.NoteService/SetSnippetTags"
 	NoteService_MoveSnippet_FullMethodName               = "/note.NoteService/MoveSnippet"
 	NoteService_SearchSnippets_FullMethodName            = "/note.NoteService/SearchSnippets"
@@ -67,6 +68,7 @@ type NoteServiceClient interface {
 	GetSnippet(ctx context.Context, in *GetSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	UpdateSnippet(ctx context.Context, in *UpdateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	DeleteSnippet(ctx context.Context, in *DeleteSnippetRequest, opts ...grpc.CallOption) (*DeleteSnippetResponse, error)
+	RestoreSnippet(ctx context.Context, in *RestoreSnippetRequest, opts ...grpc.CallOption) (*RestoreSnippetResponse, error)
 	SetSnippetTags(ctx context.Context, in *SetSnippetTagsRequest, opts ...grpc.CallOption) (*SetSnippetTagsResponse, error)
 	// MoveSnippet 将片段移动到目标分组并设置排序权重。
 	// group_id 省略时表示收集箱（未分组）；sort_order 省略时服务端自动追加到目标分组末尾。
@@ -158,6 +160,16 @@ func (c *noteServiceClient) DeleteSnippet(ctx context.Context, in *DeleteSnippet
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteSnippetResponse)
 	err := c.cc.Invoke(ctx, NoteService_DeleteSnippet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) RestoreSnippet(ctx context.Context, in *RestoreSnippetRequest, opts ...grpc.CallOption) (*RestoreSnippetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RestoreSnippetResponse)
+	err := c.cc.Invoke(ctx, NoteService_RestoreSnippet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -493,6 +505,7 @@ type NoteServiceServer interface {
 	GetSnippet(context.Context, *GetSnippetRequest) (*SnippetResponse, error)
 	UpdateSnippet(context.Context, *UpdateSnippetRequest) (*SnippetResponse, error)
 	DeleteSnippet(context.Context, *DeleteSnippetRequest) (*DeleteSnippetResponse, error)
+	RestoreSnippet(context.Context, *RestoreSnippetRequest) (*RestoreSnippetResponse, error)
 	SetSnippetTags(context.Context, *SetSnippetTagsRequest) (*SetSnippetTagsResponse, error)
 	// MoveSnippet 将片段移动到目标分组并设置排序权重。
 	// group_id 省略时表示收集箱（未分组）；sort_order 省略时服务端自动追加到目标分组末尾。
@@ -554,6 +567,9 @@ func (UnimplementedNoteServiceServer) UpdateSnippet(context.Context, *UpdateSnip
 }
 func (UnimplementedNoteServiceServer) DeleteSnippet(context.Context, *DeleteSnippetRequest) (*DeleteSnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSnippet not implemented")
+}
+func (UnimplementedNoteServiceServer) RestoreSnippet(context.Context, *RestoreSnippetRequest) (*RestoreSnippetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreSnippet not implemented")
 }
 func (UnimplementedNoteServiceServer) SetSnippetTags(context.Context, *SetSnippetTagsRequest) (*SetSnippetTagsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetSnippetTags not implemented")
@@ -758,6 +774,24 @@ func _NoteService_DeleteSnippet_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoteServiceServer).DeleteSnippet(ctx, req.(*DeleteSnippetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_RestoreSnippet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreSnippetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).RestoreSnippet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_RestoreSnippet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).RestoreSnippet(ctx, req.(*RestoreSnippetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1366,6 +1400,10 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NoteService_DeleteSnippet_Handler,
 		},
 		{
+			MethodName: "RestoreSnippet",
+			Handler:    _NoteService_RestoreSnippet_Handler,
+		},
+		{
 			MethodName: "SetSnippetTags",
 			Handler:    _NoteService_SetSnippetTags_Handler,
 		},
@@ -1495,5 +1533,5 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/note/note_api.proto",
+	Metadata: "note/note_api.proto",
 }

@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.0
-// source: proto/note/note_api.proto
+// source: note/note_api.proto
 
 package note
 
@@ -35,7 +35,7 @@ type CreateSnippetRequest struct {
 
 func (x *CreateSnippetRequest) Reset() {
 	*x = CreateSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[0]
+	mi := &file_note_note_api_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *CreateSnippetRequest) String() string {
 func (*CreateSnippetRequest) ProtoMessage() {}
 
 func (x *CreateSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[0]
+	mi := &file_note_note_api_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *CreateSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSnippetRequest.ProtoReflect.Descriptor instead.
 func (*CreateSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{0}
+	return file_note_note_api_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateSnippetRequest) GetTitle() string {
@@ -107,7 +107,7 @@ type GetSnippetRequest struct {
 
 func (x *GetSnippetRequest) Reset() {
 	*x = GetSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[1]
+	mi := &file_note_note_api_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -119,7 +119,7 @@ func (x *GetSnippetRequest) String() string {
 func (*GetSnippetRequest) ProtoMessage() {}
 
 func (x *GetSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[1]
+	mi := &file_note_note_api_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -132,7 +132,7 @@ func (x *GetSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSnippetRequest.ProtoReflect.Descriptor instead.
 func (*GetSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{1}
+	return file_note_note_api_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetSnippetRequest) GetSnippetId() int64 {
@@ -144,21 +144,23 @@ func (x *GetSnippetRequest) GetSnippetId() int64 {
 
 type ListSnippetsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GroupId       *int64                 `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"` // 按分组筛选
-	TagId         *int64                 `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3,oneof" json:"tag_id,omitempty"`       // 按标签筛选
-	Keyword       string                 `protobuf:"bytes,3,opt,name=keyword,proto3" json:"keyword,omitempty"`                       // 模糊搜索标题
-	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`                          // 每页条数，默认 20，最大 100
-	Cursor        string                 `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"`                         // 游标分页（上一页返回的 next_cursor）
-	SortBy        string                 `protobuf:"bytes,6,opt,name=sort_by,json=sortBy,proto3" json:"sort_by,omitempty"`           // "updated_at" | "created_at" | "title" | "manual"，默认 "updated_at"
-	Visibility    string                 `protobuf:"bytes,7,opt,name=visibility,proto3" json:"visibility,omitempty"`                 // 按可见性筛选：public / private / ""(全部)
-	Type          string                 `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`                             // 按类型筛选：code / note / file / ""(全部)
+	GroupId       *int64                 `protobuf:"varint,1,opt,name=group_id,json=groupId,proto3,oneof" json:"group_id,omitempty"`              // 按分组筛选
+	TagId         *int64                 `protobuf:"varint,2,opt,name=tag_id,json=tagId,proto3,oneof" json:"tag_id,omitempty"`                    // 按标签筛选
+	Keyword       string                 `protobuf:"bytes,3,opt,name=keyword,proto3" json:"keyword,omitempty"`                                    // 模糊搜索标题
+	Limit         int32                  `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`                                       // 每页条数，默认 20，最大 100
+	Cursor        string                 `protobuf:"bytes,5,opt,name=cursor,proto3" json:"cursor,omitempty"`                                      // 游标分页（上一页返回的 next_cursor）
+	SortBy        string                 `protobuf:"bytes,6,opt,name=sort_by,json=sortBy,proto3" json:"sort_by,omitempty"`                        // "updated_at" | "created_at" | "title" | "manual"，默认 "updated_at"
+	Visibility    string                 `protobuf:"bytes,7,opt,name=visibility,proto3" json:"visibility,omitempty"`                              // 按可见性筛选：public / private / ""(全部)
+	Type          string                 `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`                                          // 按类型筛选：code / note / file / ""(全部)
+	Status        string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`                                      // 状态筛选：""(默认，只看 active), "active", "trashed"
+	OnlyFavorites bool                   `protobuf:"varint,10,opt,name=only_favorites,json=onlyFavorites,proto3" json:"only_favorites,omitempty"` // 是否仅显示收藏的
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListSnippetsRequest) Reset() {
 	*x = ListSnippetsRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[2]
+	mi := &file_note_note_api_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -170,7 +172,7 @@ func (x *ListSnippetsRequest) String() string {
 func (*ListSnippetsRequest) ProtoMessage() {}
 
 func (x *ListSnippetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[2]
+	mi := &file_note_note_api_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -183,7 +185,7 @@ func (x *ListSnippetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSnippetsRequest.ProtoReflect.Descriptor instead.
 func (*ListSnippetsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{2}
+	return file_note_note_api_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListSnippetsRequest) GetGroupId() int64 {
@@ -242,6 +244,20 @@ func (x *ListSnippetsRequest) GetType() string {
 	return ""
 }
 
+func (x *ListSnippetsRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListSnippetsRequest) GetOnlyFavorites() bool {
+	if x != nil {
+		return x.OnlyFavorites
+	}
+	return false
+}
+
 type UpdateSnippetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
@@ -255,7 +271,7 @@ type UpdateSnippetRequest struct {
 
 func (x *UpdateSnippetRequest) Reset() {
 	*x = UpdateSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[3]
+	mi := &file_note_note_api_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -267,7 +283,7 @@ func (x *UpdateSnippetRequest) String() string {
 func (*UpdateSnippetRequest) ProtoMessage() {}
 
 func (x *UpdateSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[3]
+	mi := &file_note_note_api_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -280,7 +296,7 @@ func (x *UpdateSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSnippetRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{3}
+	return file_note_note_api_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UpdateSnippetRequest) GetSnippetId() int64 {
@@ -335,13 +351,15 @@ type SnippetResponse struct {
 	UpdatedAt     string                 `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	TagIds        []int64                `protobuf:"varint,14,rep,packed,name=tag_ids,json=tagIds,proto3" json:"tag_ids,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,15,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"` // 在所属分组内的排序权重，值越小越靠前
+	IsFavorite    bool                   `protobuf:"varint,16,opt,name=is_favorite,json=isFavorite,proto3" json:"is_favorite,omitempty"`
+	DeletedAt     string                 `protobuf:"bytes,17,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SnippetResponse) Reset() {
 	*x = SnippetResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[4]
+	mi := &file_note_note_api_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -353,7 +371,7 @@ func (x *SnippetResponse) String() string {
 func (*SnippetResponse) ProtoMessage() {}
 
 func (x *SnippetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[4]
+	mi := &file_note_note_api_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -366,7 +384,7 @@ func (x *SnippetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnippetResponse.ProtoReflect.Descriptor instead.
 func (*SnippetResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{4}
+	return file_note_note_api_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SnippetResponse) GetId() int64 {
@@ -474,6 +492,20 @@ func (x *SnippetResponse) GetSortOrder() int32 {
 	return 0
 }
 
+func (x *SnippetResponse) GetIsFavorite() bool {
+	if x != nil {
+		return x.IsFavorite
+	}
+	return false
+}
+
+func (x *SnippetResponse) GetDeletedAt() string {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return ""
+}
+
 type ListSnippetsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Snippets      []*SnippetResponse     `protobuf:"bytes,1,rep,name=snippets,proto3" json:"snippets,omitempty"`
@@ -485,7 +517,7 @@ type ListSnippetsResponse struct {
 
 func (x *ListSnippetsResponse) Reset() {
 	*x = ListSnippetsResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[5]
+	mi := &file_note_note_api_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +529,7 @@ func (x *ListSnippetsResponse) String() string {
 func (*ListSnippetsResponse) ProtoMessage() {}
 
 func (x *ListSnippetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[5]
+	mi := &file_note_note_api_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +542,7 @@ func (x *ListSnippetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSnippetsResponse.ProtoReflect.Descriptor instead.
 func (*ListSnippetsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{5}
+	return file_note_note_api_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListSnippetsResponse) GetSnippets() []*SnippetResponse {
@@ -543,7 +575,7 @@ type DeleteSnippetRequest struct {
 
 func (x *DeleteSnippetRequest) Reset() {
 	*x = DeleteSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[6]
+	mi := &file_note_note_api_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -555,7 +587,7 @@ func (x *DeleteSnippetRequest) String() string {
 func (*DeleteSnippetRequest) ProtoMessage() {}
 
 func (x *DeleteSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[6]
+	mi := &file_note_note_api_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -568,7 +600,7 @@ func (x *DeleteSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSnippetRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{6}
+	return file_note_note_api_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteSnippetRequest) GetSnippetId() int64 {
@@ -587,7 +619,7 @@ type DeleteSnippetResponse struct {
 
 func (x *DeleteSnippetResponse) Reset() {
 	*x = DeleteSnippetResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[7]
+	mi := &file_note_note_api_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -599,7 +631,7 @@ func (x *DeleteSnippetResponse) String() string {
 func (*DeleteSnippetResponse) ProtoMessage() {}
 
 func (x *DeleteSnippetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[7]
+	mi := &file_note_note_api_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -612,10 +644,98 @@ func (x *DeleteSnippetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSnippetResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSnippetResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{7}
+	return file_note_note_api_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteSnippetResponse) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type RestoreSnippetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SnippetId     int64                  `protobuf:"varint,1,opt,name=snippet_id,json=snippetId,proto3" json:"snippet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RestoreSnippetRequest) Reset() {
+	*x = RestoreSnippetRequest{}
+	mi := &file_note_note_api_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RestoreSnippetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestoreSnippetRequest) ProtoMessage() {}
+
+func (x *RestoreSnippetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestoreSnippetRequest.ProtoReflect.Descriptor instead.
+func (*RestoreSnippetRequest) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *RestoreSnippetRequest) GetSnippetId() int64 {
+	if x != nil {
+		return x.SnippetId
+	}
+	return 0
+}
+
+type RestoreSnippetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RestoreSnippetResponse) Reset() {
+	*x = RestoreSnippetResponse{}
+	mi := &file_note_note_api_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RestoreSnippetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestoreSnippetResponse) ProtoMessage() {}
+
+func (x *RestoreSnippetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_note_note_api_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestoreSnippetResponse.ProtoReflect.Descriptor instead.
+func (*RestoreSnippetResponse) Descriptor() ([]byte, []int) {
+	return file_note_note_api_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *RestoreSnippetResponse) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
@@ -632,7 +752,7 @@ type SetSnippetTagsRequest struct {
 
 func (x *SetSnippetTagsRequest) Reset() {
 	*x = SetSnippetTagsRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[8]
+	mi := &file_note_note_api_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -644,7 +764,7 @@ func (x *SetSnippetTagsRequest) String() string {
 func (*SetSnippetTagsRequest) ProtoMessage() {}
 
 func (x *SetSnippetTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[8]
+	mi := &file_note_note_api_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -657,7 +777,7 @@ func (x *SetSnippetTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetSnippetTagsRequest.ProtoReflect.Descriptor instead.
 func (*SetSnippetTagsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{8}
+	return file_note_note_api_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SetSnippetTagsRequest) GetSnippetId() int64 {
@@ -682,7 +802,7 @@ type SetSnippetTagsResponse struct {
 
 func (x *SetSnippetTagsResponse) Reset() {
 	*x = SetSnippetTagsResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[9]
+	mi := &file_note_note_api_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -694,7 +814,7 @@ func (x *SetSnippetTagsResponse) String() string {
 func (*SetSnippetTagsResponse) ProtoMessage() {}
 
 func (x *SetSnippetTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[9]
+	mi := &file_note_note_api_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +827,7 @@ func (x *SetSnippetTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetSnippetTagsResponse.ProtoReflect.Descriptor instead.
 func (*SetSnippetTagsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{9}
+	return file_note_note_api_proto_rawDescGZIP(), []int{11}
 }
 
 // MoveSnippetRequest 移动片段到指定分组并可选地设置排序权重。
@@ -724,7 +844,7 @@ type MoveSnippetRequest struct {
 
 func (x *MoveSnippetRequest) Reset() {
 	*x = MoveSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[10]
+	mi := &file_note_note_api_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +856,7 @@ func (x *MoveSnippetRequest) String() string {
 func (*MoveSnippetRequest) ProtoMessage() {}
 
 func (x *MoveSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[10]
+	mi := &file_note_note_api_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +869,7 @@ func (x *MoveSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveSnippetRequest.ProtoReflect.Descriptor instead.
 func (*MoveSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{10}
+	return file_note_note_api_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *MoveSnippetRequest) GetSnippetId() int64 {
@@ -786,7 +906,7 @@ type SearchSnippetsRequest struct {
 
 func (x *SearchSnippetsRequest) Reset() {
 	*x = SearchSnippetsRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[11]
+	mi := &file_note_note_api_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -798,7 +918,7 @@ func (x *SearchSnippetsRequest) String() string {
 func (*SearchSnippetsRequest) ProtoMessage() {}
 
 func (x *SearchSnippetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[11]
+	mi := &file_note_note_api_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -811,7 +931,7 @@ func (x *SearchSnippetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchSnippetsRequest.ProtoReflect.Descriptor instead.
 func (*SearchSnippetsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{11}
+	return file_note_note_api_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SearchSnippetsRequest) GetKeyword() string {
@@ -851,7 +971,7 @@ type GetPublicSnippetRequest struct {
 
 func (x *GetPublicSnippetRequest) Reset() {
 	*x = GetPublicSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[12]
+	mi := &file_note_note_api_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -863,7 +983,7 @@ func (x *GetPublicSnippetRequest) String() string {
 func (*GetPublicSnippetRequest) ProtoMessage() {}
 
 func (x *GetPublicSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[12]
+	mi := &file_note_note_api_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -876,7 +996,7 @@ func (x *GetPublicSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPublicSnippetRequest.ProtoReflect.Descriptor instead.
 func (*GetPublicSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{12}
+	return file_note_note_api_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetPublicSnippetRequest) GetSnippetId() int64 {
@@ -895,7 +1015,7 @@ type FavoriteSnippetRequest struct {
 
 func (x *FavoriteSnippetRequest) Reset() {
 	*x = FavoriteSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[13]
+	mi := &file_note_note_api_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -907,7 +1027,7 @@ func (x *FavoriteSnippetRequest) String() string {
 func (*FavoriteSnippetRequest) ProtoMessage() {}
 
 func (x *FavoriteSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[13]
+	mi := &file_note_note_api_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -920,7 +1040,7 @@ func (x *FavoriteSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FavoriteSnippetRequest.ProtoReflect.Descriptor instead.
 func (*FavoriteSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{13}
+	return file_note_note_api_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *FavoriteSnippetRequest) GetSnippetId() int64 {
@@ -939,7 +1059,7 @@ type UnfavoriteSnippetRequest struct {
 
 func (x *UnfavoriteSnippetRequest) Reset() {
 	*x = UnfavoriteSnippetRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[14]
+	mi := &file_note_note_api_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -951,7 +1071,7 @@ func (x *UnfavoriteSnippetRequest) String() string {
 func (*UnfavoriteSnippetRequest) ProtoMessage() {}
 
 func (x *UnfavoriteSnippetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[14]
+	mi := &file_note_note_api_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -964,7 +1084,7 @@ func (x *UnfavoriteSnippetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnfavoriteSnippetRequest.ProtoReflect.Descriptor instead.
 func (*UnfavoriteSnippetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{14}
+	return file_note_note_api_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UnfavoriteSnippetRequest) GetSnippetId() int64 {
@@ -984,7 +1104,7 @@ type FavoriteSnippetResponse struct {
 
 func (x *FavoriteSnippetResponse) Reset() {
 	*x = FavoriteSnippetResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[15]
+	mi := &file_note_note_api_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -996,7 +1116,7 @@ func (x *FavoriteSnippetResponse) String() string {
 func (*FavoriteSnippetResponse) ProtoMessage() {}
 
 func (x *FavoriteSnippetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[15]
+	mi := &file_note_note_api_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1009,7 +1129,7 @@ func (x *FavoriteSnippetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FavoriteSnippetResponse.ProtoReflect.Descriptor instead.
 func (*FavoriteSnippetResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{15}
+	return file_note_note_api_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *FavoriteSnippetResponse) GetSnippetId() int64 {
@@ -1037,7 +1157,7 @@ type CreateSnippetFromTemplateRequest struct {
 
 func (x *CreateSnippetFromTemplateRequest) Reset() {
 	*x = CreateSnippetFromTemplateRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[16]
+	mi := &file_note_note_api_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1049,7 +1169,7 @@ func (x *CreateSnippetFromTemplateRequest) String() string {
 func (*CreateSnippetFromTemplateRequest) ProtoMessage() {}
 
 func (x *CreateSnippetFromTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[16]
+	mi := &file_note_note_api_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1062,7 +1182,7 @@ func (x *CreateSnippetFromTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSnippetFromTemplateRequest.ProtoReflect.Descriptor instead.
 func (*CreateSnippetFromTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{16}
+	return file_note_note_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateSnippetFromTemplateRequest) GetTemplateId() int64 {
@@ -1098,7 +1218,7 @@ type CreateSnippetFromShareRequest struct {
 
 func (x *CreateSnippetFromShareRequest) Reset() {
 	*x = CreateSnippetFromShareRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[17]
+	mi := &file_note_note_api_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1110,7 +1230,7 @@ func (x *CreateSnippetFromShareRequest) String() string {
 func (*CreateSnippetFromShareRequest) ProtoMessage() {}
 
 func (x *CreateSnippetFromShareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[17]
+	mi := &file_note_note_api_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1123,7 +1243,7 @@ func (x *CreateSnippetFromShareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSnippetFromShareRequest.ProtoReflect.Descriptor instead.
 func (*CreateSnippetFromShareRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{17}
+	return file_note_note_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CreateSnippetFromShareRequest) GetToken() string {
@@ -1174,7 +1294,7 @@ type GroupResponse struct {
 
 func (x *GroupResponse) Reset() {
 	*x = GroupResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[18]
+	mi := &file_note_note_api_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1186,7 +1306,7 @@ func (x *GroupResponse) String() string {
 func (*GroupResponse) ProtoMessage() {}
 
 func (x *GroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[18]
+	mi := &file_note_note_api_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1199,7 +1319,7 @@ func (x *GroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupResponse.ProtoReflect.Descriptor instead.
 func (*GroupResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{18}
+	return file_note_note_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GroupResponse) GetId() int64 {
@@ -1287,7 +1407,7 @@ type ListGroupsRequest struct {
 
 func (x *ListGroupsRequest) Reset() {
 	*x = ListGroupsRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[19]
+	mi := &file_note_note_api_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1299,7 +1419,7 @@ func (x *ListGroupsRequest) String() string {
 func (*ListGroupsRequest) ProtoMessage() {}
 
 func (x *ListGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[19]
+	mi := &file_note_note_api_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1312,7 +1432,7 @@ func (x *ListGroupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{19}
+	return file_note_note_api_proto_rawDescGZIP(), []int{21}
 }
 
 type GetGroupRequest struct {
@@ -1324,7 +1444,7 @@ type GetGroupRequest struct {
 
 func (x *GetGroupRequest) Reset() {
 	*x = GetGroupRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[20]
+	mi := &file_note_note_api_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1336,7 +1456,7 @@ func (x *GetGroupRequest) String() string {
 func (*GetGroupRequest) ProtoMessage() {}
 
 func (x *GetGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[20]
+	mi := &file_note_note_api_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1349,7 +1469,7 @@ func (x *GetGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGroupRequest.ProtoReflect.Descriptor instead.
 func (*GetGroupRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{20}
+	return file_note_note_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetGroupRequest) GetGroupId() int64 {
@@ -1368,7 +1488,7 @@ type ListGroupsResponse struct {
 
 func (x *ListGroupsResponse) Reset() {
 	*x = ListGroupsResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[21]
+	mi := &file_note_note_api_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1380,7 +1500,7 @@ func (x *ListGroupsResponse) String() string {
 func (*ListGroupsResponse) ProtoMessage() {}
 
 func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[21]
+	mi := &file_note_note_api_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1393,7 +1513,7 @@ func (x *ListGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{21}
+	return file_note_note_api_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListGroupsResponse) GetGroups() []*GroupResponse {
@@ -1415,7 +1535,7 @@ type CreateGroupRequest struct {
 
 func (x *CreateGroupRequest) Reset() {
 	*x = CreateGroupRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[22]
+	mi := &file_note_note_api_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1427,7 +1547,7 @@ func (x *CreateGroupRequest) String() string {
 func (*CreateGroupRequest) ProtoMessage() {}
 
 func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[22]
+	mi := &file_note_note_api_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1440,7 +1560,7 @@ func (x *CreateGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGroupRequest.ProtoReflect.Descriptor instead.
 func (*CreateGroupRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{22}
+	return file_note_note_api_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CreateGroupRequest) GetName() string {
@@ -1485,7 +1605,7 @@ type UpdateGroupRequest struct {
 
 func (x *UpdateGroupRequest) Reset() {
 	*x = UpdateGroupRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[23]
+	mi := &file_note_note_api_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1497,7 +1617,7 @@ func (x *UpdateGroupRequest) String() string {
 func (*UpdateGroupRequest) ProtoMessage() {}
 
 func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[23]
+	mi := &file_note_note_api_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1510,7 +1630,7 @@ func (x *UpdateGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateGroupRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{23}
+	return file_note_note_api_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *UpdateGroupRequest) GetGroupId() int64 {
@@ -1564,7 +1684,7 @@ type DeleteGroupRequest struct {
 
 func (x *DeleteGroupRequest) Reset() {
 	*x = DeleteGroupRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[24]
+	mi := &file_note_note_api_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1576,7 +1696,7 @@ func (x *DeleteGroupRequest) String() string {
 func (*DeleteGroupRequest) ProtoMessage() {}
 
 func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[24]
+	mi := &file_note_note_api_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1589,7 +1709,7 @@ func (x *DeleteGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupRequest.ProtoReflect.Descriptor instead.
 func (*DeleteGroupRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{24}
+	return file_note_note_api_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DeleteGroupRequest) GetGroupId() int64 {
@@ -1608,7 +1728,7 @@ type DeleteGroupResponse struct {
 
 func (x *DeleteGroupResponse) Reset() {
 	*x = DeleteGroupResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[25]
+	mi := &file_note_note_api_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1620,7 +1740,7 @@ func (x *DeleteGroupResponse) String() string {
 func (*DeleteGroupResponse) ProtoMessage() {}
 
 func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[25]
+	mi := &file_note_note_api_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1633,7 +1753,7 @@ func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupResponse.ProtoReflect.Descriptor instead.
 func (*DeleteGroupResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{25}
+	return file_note_note_api_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DeleteGroupResponse) GetId() int64 {
@@ -1657,7 +1777,7 @@ type TagResponse struct {
 
 func (x *TagResponse) Reset() {
 	*x = TagResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[26]
+	mi := &file_note_note_api_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1669,7 +1789,7 @@ func (x *TagResponse) String() string {
 func (*TagResponse) ProtoMessage() {}
 
 func (x *TagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[26]
+	mi := &file_note_note_api_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1682,7 +1802,7 @@ func (x *TagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagResponse.ProtoReflect.Descriptor instead.
 func (*TagResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{26}
+	return file_note_note_api_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *TagResponse) GetId() int64 {
@@ -1728,7 +1848,7 @@ type ListTagsRequest struct {
 
 func (x *ListTagsRequest) Reset() {
 	*x = ListTagsRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[27]
+	mi := &file_note_note_api_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1740,7 +1860,7 @@ func (x *ListTagsRequest) String() string {
 func (*ListTagsRequest) ProtoMessage() {}
 
 func (x *ListTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[27]
+	mi := &file_note_note_api_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1753,7 +1873,7 @@ func (x *ListTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTagsRequest.ProtoReflect.Descriptor instead.
 func (*ListTagsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{27}
+	return file_note_note_api_proto_rawDescGZIP(), []int{29}
 }
 
 type ListTagsResponse struct {
@@ -1765,7 +1885,7 @@ type ListTagsResponse struct {
 
 func (x *ListTagsResponse) Reset() {
 	*x = ListTagsResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[28]
+	mi := &file_note_note_api_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1777,7 +1897,7 @@ func (x *ListTagsResponse) String() string {
 func (*ListTagsResponse) ProtoMessage() {}
 
 func (x *ListTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[28]
+	mi := &file_note_note_api_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1790,7 +1910,7 @@ func (x *ListTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTagsResponse.ProtoReflect.Descriptor instead.
 func (*ListTagsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{28}
+	return file_note_note_api_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ListTagsResponse) GetTags() []*TagResponse {
@@ -1810,7 +1930,7 @@ type CreateTagRequest struct {
 
 func (x *CreateTagRequest) Reset() {
 	*x = CreateTagRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[29]
+	mi := &file_note_note_api_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1822,7 +1942,7 @@ func (x *CreateTagRequest) String() string {
 func (*CreateTagRequest) ProtoMessage() {}
 
 func (x *CreateTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[29]
+	mi := &file_note_note_api_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1835,7 +1955,7 @@ func (x *CreateTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTagRequest.ProtoReflect.Descriptor instead.
 func (*CreateTagRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{29}
+	return file_note_note_api_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *CreateTagRequest) GetName() string {
@@ -1863,7 +1983,7 @@ type UpdateTagRequest struct {
 
 func (x *UpdateTagRequest) Reset() {
 	*x = UpdateTagRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[30]
+	mi := &file_note_note_api_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1875,7 +1995,7 @@ func (x *UpdateTagRequest) String() string {
 func (*UpdateTagRequest) ProtoMessage() {}
 
 func (x *UpdateTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[30]
+	mi := &file_note_note_api_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1888,7 +2008,7 @@ func (x *UpdateTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTagRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTagRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{30}
+	return file_note_note_api_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UpdateTagRequest) GetTagId() int64 {
@@ -1921,7 +2041,7 @@ type DeleteTagRequest struct {
 
 func (x *DeleteTagRequest) Reset() {
 	*x = DeleteTagRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[31]
+	mi := &file_note_note_api_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1933,7 +2053,7 @@ func (x *DeleteTagRequest) String() string {
 func (*DeleteTagRequest) ProtoMessage() {}
 
 func (x *DeleteTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[31]
+	mi := &file_note_note_api_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1946,7 +2066,7 @@ func (x *DeleteTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTagRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTagRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{31}
+	return file_note_note_api_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *DeleteTagRequest) GetTagId() int64 {
@@ -1965,7 +2085,7 @@ type DeleteTagResponse struct {
 
 func (x *DeleteTagResponse) Reset() {
 	*x = DeleteTagResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[32]
+	mi := &file_note_note_api_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1977,7 +2097,7 @@ func (x *DeleteTagResponse) String() string {
 func (*DeleteTagResponse) ProtoMessage() {}
 
 func (x *DeleteTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[32]
+	mi := &file_note_note_api_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1990,7 +2110,7 @@ func (x *DeleteTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTagResponse.ProtoReflect.Descriptor instead.
 func (*DeleteTagResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{32}
+	return file_note_note_api_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *DeleteTagResponse) GetId() int64 {
@@ -2019,7 +2139,7 @@ type TemplateResponse struct {
 
 func (x *TemplateResponse) Reset() {
 	*x = TemplateResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[33]
+	mi := &file_note_note_api_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2031,7 +2151,7 @@ func (x *TemplateResponse) String() string {
 func (*TemplateResponse) ProtoMessage() {}
 
 func (x *TemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[33]
+	mi := &file_note_note_api_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2044,7 +2164,7 @@ func (x *TemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TemplateResponse.ProtoReflect.Descriptor instead.
 func (*TemplateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{33}
+	return file_note_note_api_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *TemplateResponse) GetId() string {
@@ -2126,7 +2246,7 @@ type ListTemplatesRequest struct {
 
 func (x *ListTemplatesRequest) Reset() {
 	*x = ListTemplatesRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[34]
+	mi := &file_note_note_api_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2138,7 +2258,7 @@ func (x *ListTemplatesRequest) String() string {
 func (*ListTemplatesRequest) ProtoMessage() {}
 
 func (x *ListTemplatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[34]
+	mi := &file_note_note_api_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2151,7 +2271,7 @@ func (x *ListTemplatesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTemplatesRequest.ProtoReflect.Descriptor instead.
 func (*ListTemplatesRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{34}
+	return file_note_note_api_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListTemplatesRequest) GetCategory() string {
@@ -2170,7 +2290,7 @@ type ListTemplatesResponse struct {
 
 func (x *ListTemplatesResponse) Reset() {
 	*x = ListTemplatesResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[35]
+	mi := &file_note_note_api_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2182,7 +2302,7 @@ func (x *ListTemplatesResponse) String() string {
 func (*ListTemplatesResponse) ProtoMessage() {}
 
 func (x *ListTemplatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[35]
+	mi := &file_note_note_api_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2195,7 +2315,7 @@ func (x *ListTemplatesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTemplatesResponse.ProtoReflect.Descriptor instead.
 func (*ListTemplatesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{35}
+	return file_note_note_api_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListTemplatesResponse) GetTemplates() []*TemplateResponse {
@@ -2214,7 +2334,7 @@ type GetTemplateRequest struct {
 
 func (x *GetTemplateRequest) Reset() {
 	*x = GetTemplateRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[36]
+	mi := &file_note_note_api_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2226,7 +2346,7 @@ func (x *GetTemplateRequest) String() string {
 func (*GetTemplateRequest) ProtoMessage() {}
 
 func (x *GetTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[36]
+	mi := &file_note_note_api_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2239,7 +2359,7 @@ func (x *GetTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTemplateRequest.ProtoReflect.Descriptor instead.
 func (*GetTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{36}
+	return file_note_note_api_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetTemplateRequest) GetTemplateId() string {
@@ -2262,7 +2382,7 @@ type CreateTemplateRequest struct {
 
 func (x *CreateTemplateRequest) Reset() {
 	*x = CreateTemplateRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[37]
+	mi := &file_note_note_api_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2274,7 +2394,7 @@ func (x *CreateTemplateRequest) String() string {
 func (*CreateTemplateRequest) ProtoMessage() {}
 
 func (x *CreateTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[37]
+	mi := &file_note_note_api_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2287,7 +2407,7 @@ func (x *CreateTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTemplateRequest.ProtoReflect.Descriptor instead.
 func (*CreateTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{37}
+	return file_note_note_api_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *CreateTemplateRequest) GetName() string {
@@ -2339,7 +2459,7 @@ type UpdateTemplateRequest struct {
 
 func (x *UpdateTemplateRequest) Reset() {
 	*x = UpdateTemplateRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[38]
+	mi := &file_note_note_api_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2351,7 +2471,7 @@ func (x *UpdateTemplateRequest) String() string {
 func (*UpdateTemplateRequest) ProtoMessage() {}
 
 func (x *UpdateTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[38]
+	mi := &file_note_note_api_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2364,7 +2484,7 @@ func (x *UpdateTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTemplateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{38}
+	return file_note_note_api_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UpdateTemplateRequest) GetTemplateId() string {
@@ -2418,7 +2538,7 @@ type DeleteTemplateRequest struct {
 
 func (x *DeleteTemplateRequest) Reset() {
 	*x = DeleteTemplateRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[39]
+	mi := &file_note_note_api_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2430,7 +2550,7 @@ func (x *DeleteTemplateRequest) String() string {
 func (*DeleteTemplateRequest) ProtoMessage() {}
 
 func (x *DeleteTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[39]
+	mi := &file_note_note_api_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2443,7 +2563,7 @@ func (x *DeleteTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTemplateRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{39}
+	return file_note_note_api_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *DeleteTemplateRequest) GetTemplateId() string {
@@ -2462,7 +2582,7 @@ type DeleteTemplateResponse struct {
 
 func (x *DeleteTemplateResponse) Reset() {
 	*x = DeleteTemplateResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[40]
+	mi := &file_note_note_api_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2474,7 +2594,7 @@ func (x *DeleteTemplateResponse) String() string {
 func (*DeleteTemplateResponse) ProtoMessage() {}
 
 func (x *DeleteTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[40]
+	mi := &file_note_note_api_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2487,7 +2607,7 @@ func (x *DeleteTemplateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTemplateResponse.ProtoReflect.Descriptor instead.
 func (*DeleteTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{40}
+	return file_note_note_api_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *DeleteTemplateResponse) GetId() string {
@@ -2510,7 +2630,7 @@ type CreateShareRequest struct {
 
 func (x *CreateShareRequest) Reset() {
 	*x = CreateShareRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[41]
+	mi := &file_note_note_api_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2522,7 +2642,7 @@ func (x *CreateShareRequest) String() string {
 func (*CreateShareRequest) ProtoMessage() {}
 
 func (x *CreateShareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[41]
+	mi := &file_note_note_api_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2535,7 +2655,7 @@ func (x *CreateShareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateShareRequest.ProtoReflect.Descriptor instead.
 func (*CreateShareRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{41}
+	return file_note_note_api_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *CreateShareRequest) GetSnippetId() int64 {
@@ -2575,7 +2695,7 @@ type ListMySharesRequest struct {
 
 func (x *ListMySharesRequest) Reset() {
 	*x = ListMySharesRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[42]
+	mi := &file_note_note_api_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2587,7 +2707,7 @@ func (x *ListMySharesRequest) String() string {
 func (*ListMySharesRequest) ProtoMessage() {}
 
 func (x *ListMySharesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[42]
+	mi := &file_note_note_api_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2600,7 +2720,7 @@ func (x *ListMySharesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMySharesRequest.ProtoReflect.Descriptor instead.
 func (*ListMySharesRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{42}
+	return file_note_note_api_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *ListMySharesRequest) GetKind() string {
@@ -2628,7 +2748,7 @@ type ShareResponse struct {
 
 func (x *ShareResponse) Reset() {
 	*x = ShareResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[43]
+	mi := &file_note_note_api_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2640,7 +2760,7 @@ func (x *ShareResponse) String() string {
 func (*ShareResponse) ProtoMessage() {}
 
 func (x *ShareResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[43]
+	mi := &file_note_note_api_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2653,7 +2773,7 @@ func (x *ShareResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShareResponse.ProtoReflect.Descriptor instead.
 func (*ShareResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{43}
+	return file_note_note_api_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *ShareResponse) GetId() int64 {
@@ -2735,7 +2855,7 @@ type ListSharesResponse struct {
 
 func (x *ListSharesResponse) Reset() {
 	*x = ListSharesResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[44]
+	mi := &file_note_note_api_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2747,7 +2867,7 @@ func (x *ListSharesResponse) String() string {
 func (*ListSharesResponse) ProtoMessage() {}
 
 func (x *ListSharesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[44]
+	mi := &file_note_note_api_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2760,7 +2880,7 @@ func (x *ListSharesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSharesResponse.ProtoReflect.Descriptor instead.
 func (*ListSharesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{44}
+	return file_note_note_api_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListSharesResponse) GetShares() []*ShareResponse {
@@ -2779,7 +2899,7 @@ type DeleteShareRequest struct {
 
 func (x *DeleteShareRequest) Reset() {
 	*x = DeleteShareRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[45]
+	mi := &file_note_note_api_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2791,7 +2911,7 @@ func (x *DeleteShareRequest) String() string {
 func (*DeleteShareRequest) ProtoMessage() {}
 
 func (x *DeleteShareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[45]
+	mi := &file_note_note_api_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2804,7 +2924,7 @@ func (x *DeleteShareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteShareRequest.ProtoReflect.Descriptor instead.
 func (*DeleteShareRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{45}
+	return file_note_note_api_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *DeleteShareRequest) GetShareId() int64 {
@@ -2823,7 +2943,7 @@ type DeleteShareResponse struct {
 
 func (x *DeleteShareResponse) Reset() {
 	*x = DeleteShareResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[46]
+	mi := &file_note_note_api_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2835,7 +2955,7 @@ func (x *DeleteShareResponse) String() string {
 func (*DeleteShareResponse) ProtoMessage() {}
 
 func (x *DeleteShareResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[46]
+	mi := &file_note_note_api_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2848,7 +2968,7 @@ func (x *DeleteShareResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteShareResponse.ProtoReflect.Descriptor instead.
 func (*DeleteShareResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{46}
+	return file_note_note_api_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *DeleteShareResponse) GetId() int64 {
@@ -2868,7 +2988,7 @@ type GetPublicShareByTokenRequest struct {
 
 func (x *GetPublicShareByTokenRequest) Reset() {
 	*x = GetPublicShareByTokenRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[47]
+	mi := &file_note_note_api_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2880,7 +3000,7 @@ func (x *GetPublicShareByTokenRequest) String() string {
 func (*GetPublicShareByTokenRequest) ProtoMessage() {}
 
 func (x *GetPublicShareByTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[47]
+	mi := &file_note_note_api_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2893,7 +3013,7 @@ func (x *GetPublicShareByTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPublicShareByTokenRequest.ProtoReflect.Descriptor instead.
 func (*GetPublicShareByTokenRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{47}
+	return file_note_note_api_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *GetPublicShareByTokenRequest) GetToken() string {
@@ -2920,7 +3040,7 @@ type PublicShareResponse struct {
 
 func (x *PublicShareResponse) Reset() {
 	*x = PublicShareResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[48]
+	mi := &file_note_note_api_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2932,7 +3052,7 @@ func (x *PublicShareResponse) String() string {
 func (*PublicShareResponse) ProtoMessage() {}
 
 func (x *PublicShareResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[48]
+	mi := &file_note_note_api_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2945,7 +3065,7 @@ func (x *PublicShareResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicShareResponse.ProtoReflect.Descriptor instead.
 func (*PublicShareResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{48}
+	return file_note_note_api_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *PublicShareResponse) GetShare() *ShareResponse {
@@ -2974,7 +3094,7 @@ type PresignUploadRequest struct {
 
 func (x *PresignUploadRequest) Reset() {
 	*x = PresignUploadRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[49]
+	mi := &file_note_note_api_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2986,7 +3106,7 @@ func (x *PresignUploadRequest) String() string {
 func (*PresignUploadRequest) ProtoMessage() {}
 
 func (x *PresignUploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[49]
+	mi := &file_note_note_api_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2999,7 +3119,7 @@ func (x *PresignUploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PresignUploadRequest.ProtoReflect.Descriptor instead.
 func (*PresignUploadRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{49}
+	return file_note_note_api_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *PresignUploadRequest) GetFilename() string {
@@ -3036,7 +3156,7 @@ type PresignUploadResponse struct {
 
 func (x *PresignUploadResponse) Reset() {
 	*x = PresignUploadResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[50]
+	mi := &file_note_note_api_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3048,7 +3168,7 @@ func (x *PresignUploadResponse) String() string {
 func (*PresignUploadResponse) ProtoMessage() {}
 
 func (x *PresignUploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[50]
+	mi := &file_note_note_api_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3061,7 +3181,7 @@ func (x *PresignUploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PresignUploadResponse.ProtoReflect.Descriptor instead.
 func (*PresignUploadResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{50}
+	return file_note_note_api_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *PresignUploadResponse) GetUrl() string {
@@ -3112,7 +3232,7 @@ type CompleteUploadRequest struct {
 
 func (x *CompleteUploadRequest) Reset() {
 	*x = CompleteUploadRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[51]
+	mi := &file_note_note_api_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3124,7 +3244,7 @@ func (x *CompleteUploadRequest) String() string {
 func (*CompleteUploadRequest) ProtoMessage() {}
 
 func (x *CompleteUploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[51]
+	mi := &file_note_note_api_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3137,7 +3257,7 @@ func (x *CompleteUploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteUploadRequest.ProtoReflect.Descriptor instead.
 func (*CompleteUploadRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{51}
+	return file_note_note_api_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *CompleteUploadRequest) GetObjectKey() string {
@@ -3189,7 +3309,7 @@ type CompleteUploadResponse struct {
 
 func (x *CompleteUploadResponse) Reset() {
 	*x = CompleteUploadResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[52]
+	mi := &file_note_note_api_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3201,7 +3321,7 @@ func (x *CompleteUploadResponse) String() string {
 func (*CompleteUploadResponse) ProtoMessage() {}
 
 func (x *CompleteUploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[52]
+	mi := &file_note_note_api_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3214,7 +3334,7 @@ func (x *CompleteUploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteUploadResponse.ProtoReflect.Descriptor instead.
 func (*CompleteUploadResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{52}
+	return file_note_note_api_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *CompleteUploadResponse) GetFilename() string {
@@ -3269,7 +3389,7 @@ type UploadFileRequest struct {
 
 func (x *UploadFileRequest) Reset() {
 	*x = UploadFileRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[53]
+	mi := &file_note_note_api_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3281,7 +3401,7 @@ func (x *UploadFileRequest) String() string {
 func (*UploadFileRequest) ProtoMessage() {}
 
 func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[53]
+	mi := &file_note_note_api_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3294,7 +3414,7 @@ func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadFileRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{53}
+	return file_note_note_api_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *UploadFileRequest) GetFileData() []byte {
@@ -3325,7 +3445,7 @@ type UploadFileResponse struct {
 
 func (x *UploadFileResponse) Reset() {
 	*x = UploadFileResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[54]
+	mi := &file_note_note_api_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3337,7 +3457,7 @@ func (x *UploadFileResponse) String() string {
 func (*UploadFileResponse) ProtoMessage() {}
 
 func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[54]
+	mi := &file_note_note_api_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3350,7 +3470,7 @@ func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileResponse.ProtoReflect.Descriptor instead.
 func (*UploadFileResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{54}
+	return file_note_note_api_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *UploadFileResponse) GetId() string {
@@ -3395,11 +3515,11 @@ func (x *UploadFileResponse) GetThumbnailUrl() string {
 	return ""
 }
 
-var File_proto_note_note_api_proto protoreflect.FileDescriptor
+var File_note_note_api_proto protoreflect.FileDescriptor
 
-const file_proto_note_note_api_proto_rawDesc = "" +
+const file_note_note_api_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/note/note_api.proto\x12\x04note\x1a\x1cgoogle/api/annotations.proto\"\xaf\x01\n" +
+	"\x13note/note_api.proto\x12\x04note\x1a\x1cgoogle/api/annotations.proto\"\xaf\x01\n" +
 	"\x14CreateSnippetRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1a\n" +
@@ -3411,7 +3531,7 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\t_group_id\"2\n" +
 	"\x11GetSnippetRequest\x12\x1d\n" +
 	"\n" +
-	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\xfe\x01\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"\xbd\x02\n" +
 	"\x13ListSnippetsRequest\x12\x1e\n" +
 	"\bgroup_id\x18\x01 \x01(\x03H\x00R\agroupId\x88\x01\x01\x12\x1a\n" +
 	"\x06tag_id\x18\x02 \x01(\x03H\x01R\x05tagId\x88\x01\x01\x12\x18\n" +
@@ -3422,7 +3542,10 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\n" +
 	"visibility\x18\a \x01(\tR\n" +
 	"visibility\x12\x12\n" +
-	"\x04type\x18\b \x01(\tR\x04typeB\v\n" +
+	"\x04type\x18\b \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12%\n" +
+	"\x0eonly_favorites\x18\n" +
+	" \x01(\bR\ronlyFavoritesB\v\n" +
 	"\t_group_idB\t\n" +
 	"\a_tag_id\"\xa1\x01\n" +
 	"\x14UpdateSnippetRequest\x12\x1d\n" +
@@ -3433,7 +3556,7 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\blanguage\x18\x04 \x01(\tR\blanguage\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x05 \x01(\tR\n" +
-	"visibility\"\xa2\x03\n" +
+	"visibility\"\xe2\x03\n" +
 	"\x0fSnippetResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bowner_id\x18\x02 \x01(\x03R\aownerId\x12\x14\n" +
@@ -3455,7 +3578,11 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"updated_at\x18\r \x01(\tR\tupdatedAt\x12\x17\n" +
 	"\atag_ids\x18\x0e \x03(\x03R\x06tagIds\x12\x1d\n" +
 	"\n" +
-	"sort_order\x18\x0f \x01(\x05R\tsortOrder\"\x85\x01\n" +
+	"sort_order\x18\x0f \x01(\x05R\tsortOrder\x12\x1f\n" +
+	"\vis_favorite\x18\x10 \x01(\bR\n" +
+	"isFavorite\x12\x1d\n" +
+	"\n" +
+	"deleted_at\x18\x11 \x01(\tR\tdeletedAt\"\x85\x01\n" +
 	"\x14ListSnippetsResponse\x121\n" +
 	"\bsnippets\x18\x01 \x03(\v2\x15.note.SnippetResponseR\bsnippets\x12\x1f\n" +
 	"\vnext_cursor\x18\x02 \x01(\tR\n" +
@@ -3465,6 +3592,11 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\n" +
 	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"'\n" +
 	"\x15DeleteSnippetResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"6\n" +
+	"\x15RestoreSnippetRequest\x12\x1d\n" +
+	"\n" +
+	"snippet_id\x18\x01 \x01(\x03R\tsnippetId\"(\n" +
+	"\x16RestoreSnippetResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"O\n" +
 	"\x15SetSnippetTagsRequest\x12\x1d\n" +
 	"\n" +
@@ -3703,7 +3835,7 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x1b\n" +
 	"\tmime_type\x18\x05 \x01(\tR\bmimeType\x12#\n" +
-	"\rthumbnail_url\x18\x06 \x01(\tR\fthumbnailUrl2\xd0\x1f\n" +
+	"\rthumbnail_url\x18\x06 \x01(\tR\fthumbnailUrl2\xd3 \n" +
 	"\vNoteService\x12h\n" +
 	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/v1/notes/me/snippets\x12e\n" +
 	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/v1/notes/snippets\x12i\n" +
@@ -3711,6 +3843,7 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"GetSnippet\x12\x17.note.GetSnippetRequest\x1a\x15.note.SnippetResponse\"+\x82\xd3\xe4\x93\x02%\x12#/api/v1/notes/snippets/{snippet_id}\x12r\n" +
 	"\rUpdateSnippet\x12\x1a.note.UpdateSnippetRequest\x1a\x15.note.SnippetResponse\".\x82\xd3\xe4\x93\x02(:\x01*\x1a#/api/v1/notes/snippets/{snippet_id}\x12u\n" +
 	"\rDeleteSnippet\x12\x1a.note.DeleteSnippetRequest\x1a\x1b.note.DeleteSnippetResponse\"+\x82\xd3\xe4\x93\x02%*#/api/v1/notes/snippets/{snippet_id}\x12\x80\x01\n" +
+	"\x0eRestoreSnippet\x12\x1b.note.RestoreSnippetRequest\x1a\x1c.note.RestoreSnippetResponse\"3\x82\xd3\xe4\x93\x02-\x1a+/api/v1/notes/snippets/{snippet_id}/restore\x12\x80\x01\n" +
 	"\x0eSetSnippetTags\x12\x1b.note.SetSnippetTagsRequest\x1a\x1c.note.SetSnippetTagsResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\x1a(/api/v1/notes/snippets/{snippet_id}/tags\x12s\n" +
 	"\vMoveSnippet\x12\x18.note.MoveSnippetRequest\x1a\x15.note.SnippetResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\x1a(/api/v1/notes/snippets/{snippet_id}/move\x12p\n" +
 	"\x0eSearchSnippets\x12\x1b.note.SearchSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/notes/snippets/search\x12H\n" +
@@ -3747,19 +3880,19 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"UploadFile\x12\x17.note.UploadFileRequest\x1a\x18.note.UploadFileResponseB'Z%github.com/luckysxx/common/proto/noteb\x06proto3"
 
 var (
-	file_proto_note_note_api_proto_rawDescOnce sync.Once
-	file_proto_note_note_api_proto_rawDescData []byte
+	file_note_note_api_proto_rawDescOnce sync.Once
+	file_note_note_api_proto_rawDescData []byte
 )
 
-func file_proto_note_note_api_proto_rawDescGZIP() []byte {
-	file_proto_note_note_api_proto_rawDescOnce.Do(func() {
-		file_proto_note_note_api_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_note_note_api_proto_rawDesc), len(file_proto_note_note_api_proto_rawDesc)))
+func file_note_note_api_proto_rawDescGZIP() []byte {
+	file_note_note_api_proto_rawDescOnce.Do(func() {
+		file_note_note_api_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_note_note_api_proto_rawDesc), len(file_note_note_api_proto_rawDesc)))
 	})
-	return file_proto_note_note_api_proto_rawDescData
+	return file_note_note_api_proto_rawDescData
 }
 
-var file_proto_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
-var file_proto_note_note_api_proto_goTypes = []any{
+var file_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
+var file_note_note_api_proto_goTypes = []any{
 	(*CreateSnippetRequest)(nil),             // 0: note.CreateSnippetRequest
 	(*GetSnippetRequest)(nil),                // 1: note.GetSnippetRequest
 	(*ListSnippetsRequest)(nil),              // 2: note.ListSnippetsRequest
@@ -3768,172 +3901,176 @@ var file_proto_note_note_api_proto_goTypes = []any{
 	(*ListSnippetsResponse)(nil),             // 5: note.ListSnippetsResponse
 	(*DeleteSnippetRequest)(nil),             // 6: note.DeleteSnippetRequest
 	(*DeleteSnippetResponse)(nil),            // 7: note.DeleteSnippetResponse
-	(*SetSnippetTagsRequest)(nil),            // 8: note.SetSnippetTagsRequest
-	(*SetSnippetTagsResponse)(nil),           // 9: note.SetSnippetTagsResponse
-	(*MoveSnippetRequest)(nil),               // 10: note.MoveSnippetRequest
-	(*SearchSnippetsRequest)(nil),            // 11: note.SearchSnippetsRequest
-	(*GetPublicSnippetRequest)(nil),          // 12: note.GetPublicSnippetRequest
-	(*FavoriteSnippetRequest)(nil),           // 13: note.FavoriteSnippetRequest
-	(*UnfavoriteSnippetRequest)(nil),         // 14: note.UnfavoriteSnippetRequest
-	(*FavoriteSnippetResponse)(nil),          // 15: note.FavoriteSnippetResponse
-	(*CreateSnippetFromTemplateRequest)(nil), // 16: note.CreateSnippetFromTemplateRequest
-	(*CreateSnippetFromShareRequest)(nil),    // 17: note.CreateSnippetFromShareRequest
-	(*GroupResponse)(nil),                    // 18: note.GroupResponse
-	(*ListGroupsRequest)(nil),                // 19: note.ListGroupsRequest
-	(*GetGroupRequest)(nil),                  // 20: note.GetGroupRequest
-	(*ListGroupsResponse)(nil),               // 21: note.ListGroupsResponse
-	(*CreateGroupRequest)(nil),               // 22: note.CreateGroupRequest
-	(*UpdateGroupRequest)(nil),               // 23: note.UpdateGroupRequest
-	(*DeleteGroupRequest)(nil),               // 24: note.DeleteGroupRequest
-	(*DeleteGroupResponse)(nil),              // 25: note.DeleteGroupResponse
-	(*TagResponse)(nil),                      // 26: note.TagResponse
-	(*ListTagsRequest)(nil),                  // 27: note.ListTagsRequest
-	(*ListTagsResponse)(nil),                 // 28: note.ListTagsResponse
-	(*CreateTagRequest)(nil),                 // 29: note.CreateTagRequest
-	(*UpdateTagRequest)(nil),                 // 30: note.UpdateTagRequest
-	(*DeleteTagRequest)(nil),                 // 31: note.DeleteTagRequest
-	(*DeleteTagResponse)(nil),                // 32: note.DeleteTagResponse
-	(*TemplateResponse)(nil),                 // 33: note.TemplateResponse
-	(*ListTemplatesRequest)(nil),             // 34: note.ListTemplatesRequest
-	(*ListTemplatesResponse)(nil),            // 35: note.ListTemplatesResponse
-	(*GetTemplateRequest)(nil),               // 36: note.GetTemplateRequest
-	(*CreateTemplateRequest)(nil),            // 37: note.CreateTemplateRequest
-	(*UpdateTemplateRequest)(nil),            // 38: note.UpdateTemplateRequest
-	(*DeleteTemplateRequest)(nil),            // 39: note.DeleteTemplateRequest
-	(*DeleteTemplateResponse)(nil),           // 40: note.DeleteTemplateResponse
-	(*CreateShareRequest)(nil),               // 41: note.CreateShareRequest
-	(*ListMySharesRequest)(nil),              // 42: note.ListMySharesRequest
-	(*ShareResponse)(nil),                    // 43: note.ShareResponse
-	(*ListSharesResponse)(nil),               // 44: note.ListSharesResponse
-	(*DeleteShareRequest)(nil),               // 45: note.DeleteShareRequest
-	(*DeleteShareResponse)(nil),              // 46: note.DeleteShareResponse
-	(*GetPublicShareByTokenRequest)(nil),     // 47: note.GetPublicShareByTokenRequest
-	(*PublicShareResponse)(nil),              // 48: note.PublicShareResponse
-	(*PresignUploadRequest)(nil),             // 49: note.PresignUploadRequest
-	(*PresignUploadResponse)(nil),            // 50: note.PresignUploadResponse
-	(*CompleteUploadRequest)(nil),            // 51: note.CompleteUploadRequest
-	(*CompleteUploadResponse)(nil),           // 52: note.CompleteUploadResponse
-	(*UploadFileRequest)(nil),                // 53: note.UploadFileRequest
-	(*UploadFileResponse)(nil),               // 54: note.UploadFileResponse
-	nil,                                      // 55: note.PresignUploadResponse.HeadersEntry
+	(*RestoreSnippetRequest)(nil),            // 8: note.RestoreSnippetRequest
+	(*RestoreSnippetResponse)(nil),           // 9: note.RestoreSnippetResponse
+	(*SetSnippetTagsRequest)(nil),            // 10: note.SetSnippetTagsRequest
+	(*SetSnippetTagsResponse)(nil),           // 11: note.SetSnippetTagsResponse
+	(*MoveSnippetRequest)(nil),               // 12: note.MoveSnippetRequest
+	(*SearchSnippetsRequest)(nil),            // 13: note.SearchSnippetsRequest
+	(*GetPublicSnippetRequest)(nil),          // 14: note.GetPublicSnippetRequest
+	(*FavoriteSnippetRequest)(nil),           // 15: note.FavoriteSnippetRequest
+	(*UnfavoriteSnippetRequest)(nil),         // 16: note.UnfavoriteSnippetRequest
+	(*FavoriteSnippetResponse)(nil),          // 17: note.FavoriteSnippetResponse
+	(*CreateSnippetFromTemplateRequest)(nil), // 18: note.CreateSnippetFromTemplateRequest
+	(*CreateSnippetFromShareRequest)(nil),    // 19: note.CreateSnippetFromShareRequest
+	(*GroupResponse)(nil),                    // 20: note.GroupResponse
+	(*ListGroupsRequest)(nil),                // 21: note.ListGroupsRequest
+	(*GetGroupRequest)(nil),                  // 22: note.GetGroupRequest
+	(*ListGroupsResponse)(nil),               // 23: note.ListGroupsResponse
+	(*CreateGroupRequest)(nil),               // 24: note.CreateGroupRequest
+	(*UpdateGroupRequest)(nil),               // 25: note.UpdateGroupRequest
+	(*DeleteGroupRequest)(nil),               // 26: note.DeleteGroupRequest
+	(*DeleteGroupResponse)(nil),              // 27: note.DeleteGroupResponse
+	(*TagResponse)(nil),                      // 28: note.TagResponse
+	(*ListTagsRequest)(nil),                  // 29: note.ListTagsRequest
+	(*ListTagsResponse)(nil),                 // 30: note.ListTagsResponse
+	(*CreateTagRequest)(nil),                 // 31: note.CreateTagRequest
+	(*UpdateTagRequest)(nil),                 // 32: note.UpdateTagRequest
+	(*DeleteTagRequest)(nil),                 // 33: note.DeleteTagRequest
+	(*DeleteTagResponse)(nil),                // 34: note.DeleteTagResponse
+	(*TemplateResponse)(nil),                 // 35: note.TemplateResponse
+	(*ListTemplatesRequest)(nil),             // 36: note.ListTemplatesRequest
+	(*ListTemplatesResponse)(nil),            // 37: note.ListTemplatesResponse
+	(*GetTemplateRequest)(nil),               // 38: note.GetTemplateRequest
+	(*CreateTemplateRequest)(nil),            // 39: note.CreateTemplateRequest
+	(*UpdateTemplateRequest)(nil),            // 40: note.UpdateTemplateRequest
+	(*DeleteTemplateRequest)(nil),            // 41: note.DeleteTemplateRequest
+	(*DeleteTemplateResponse)(nil),           // 42: note.DeleteTemplateResponse
+	(*CreateShareRequest)(nil),               // 43: note.CreateShareRequest
+	(*ListMySharesRequest)(nil),              // 44: note.ListMySharesRequest
+	(*ShareResponse)(nil),                    // 45: note.ShareResponse
+	(*ListSharesResponse)(nil),               // 46: note.ListSharesResponse
+	(*DeleteShareRequest)(nil),               // 47: note.DeleteShareRequest
+	(*DeleteShareResponse)(nil),              // 48: note.DeleteShareResponse
+	(*GetPublicShareByTokenRequest)(nil),     // 49: note.GetPublicShareByTokenRequest
+	(*PublicShareResponse)(nil),              // 50: note.PublicShareResponse
+	(*PresignUploadRequest)(nil),             // 51: note.PresignUploadRequest
+	(*PresignUploadResponse)(nil),            // 52: note.PresignUploadResponse
+	(*CompleteUploadRequest)(nil),            // 53: note.CompleteUploadRequest
+	(*CompleteUploadResponse)(nil),           // 54: note.CompleteUploadResponse
+	(*UploadFileRequest)(nil),                // 55: note.UploadFileRequest
+	(*UploadFileResponse)(nil),               // 56: note.UploadFileResponse
+	nil,                                      // 57: note.PresignUploadResponse.HeadersEntry
 }
-var file_proto_note_note_api_proto_depIdxs = []int32{
+var file_note_note_api_proto_depIdxs = []int32{
 	4,  // 0: note.ListSnippetsResponse.snippets:type_name -> note.SnippetResponse
-	18, // 1: note.ListGroupsResponse.groups:type_name -> note.GroupResponse
-	26, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
-	33, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
-	43, // 4: note.ListSharesResponse.shares:type_name -> note.ShareResponse
-	43, // 5: note.PublicShareResponse.share:type_name -> note.ShareResponse
+	20, // 1: note.ListGroupsResponse.groups:type_name -> note.GroupResponse
+	28, // 2: note.ListTagsResponse.tags:type_name -> note.TagResponse
+	35, // 3: note.ListTemplatesResponse.templates:type_name -> note.TemplateResponse
+	45, // 4: note.ListSharesResponse.shares:type_name -> note.ShareResponse
+	45, // 5: note.PublicShareResponse.share:type_name -> note.ShareResponse
 	4,  // 6: note.PublicShareResponse.snippet:type_name -> note.SnippetResponse
-	55, // 7: note.PresignUploadResponse.headers:type_name -> note.PresignUploadResponse.HeadersEntry
+	57, // 7: note.PresignUploadResponse.headers:type_name -> note.PresignUploadResponse.HeadersEntry
 	2,  // 8: note.NoteService.ListSnippets:input_type -> note.ListSnippetsRequest
 	0,  // 9: note.NoteService.CreateSnippet:input_type -> note.CreateSnippetRequest
 	1,  // 10: note.NoteService.GetSnippet:input_type -> note.GetSnippetRequest
 	3,  // 11: note.NoteService.UpdateSnippet:input_type -> note.UpdateSnippetRequest
 	6,  // 12: note.NoteService.DeleteSnippet:input_type -> note.DeleteSnippetRequest
-	8,  // 13: note.NoteService.SetSnippetTags:input_type -> note.SetSnippetTagsRequest
-	10, // 14: note.NoteService.MoveSnippet:input_type -> note.MoveSnippetRequest
-	11, // 15: note.NoteService.SearchSnippets:input_type -> note.SearchSnippetsRequest
-	12, // 16: note.NoteService.GetPublicSnippet:input_type -> note.GetPublicSnippetRequest
-	13, // 17: note.NoteService.FavoriteSnippet:input_type -> note.FavoriteSnippetRequest
-	14, // 18: note.NoteService.UnfavoriteSnippet:input_type -> note.UnfavoriteSnippetRequest
-	16, // 19: note.NoteService.CreateSnippetFromTemplate:input_type -> note.CreateSnippetFromTemplateRequest
-	17, // 20: note.NoteService.CreateSnippetFromShare:input_type -> note.CreateSnippetFromShareRequest
-	2,  // 21: note.NoteService.ListRecentSnippets:input_type -> note.ListSnippetsRequest
-	2,  // 22: note.NoteService.ListSharedSnippets:input_type -> note.ListSnippetsRequest
-	2,  // 23: note.NoteService.ListFavoriteSnippets:input_type -> note.ListSnippetsRequest
-	19, // 24: note.NoteService.ListGroups:input_type -> note.ListGroupsRequest
-	20, // 25: note.NoteService.GetGroup:input_type -> note.GetGroupRequest
-	22, // 26: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
-	23, // 27: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
-	24, // 28: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
-	27, // 29: note.NoteService.ListTags:input_type -> note.ListTagsRequest
-	29, // 30: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
-	30, // 31: note.NoteService.UpdateTag:input_type -> note.UpdateTagRequest
-	31, // 32: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
-	34, // 33: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
-	36, // 34: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
-	37, // 35: note.NoteService.CreateTemplate:input_type -> note.CreateTemplateRequest
-	38, // 36: note.NoteService.UpdateTemplate:input_type -> note.UpdateTemplateRequest
-	39, // 37: note.NoteService.DeleteTemplate:input_type -> note.DeleteTemplateRequest
-	41, // 38: note.NoteService.CreateShare:input_type -> note.CreateShareRequest
-	42, // 39: note.NoteService.ListMyShares:input_type -> note.ListMySharesRequest
-	45, // 40: note.NoteService.DeleteShare:input_type -> note.DeleteShareRequest
-	47, // 41: note.NoteService.GetPublicShareByToken:input_type -> note.GetPublicShareByTokenRequest
-	49, // 42: note.NoteService.PresignUpload:input_type -> note.PresignUploadRequest
-	51, // 43: note.NoteService.CompleteUpload:input_type -> note.CompleteUploadRequest
-	53, // 44: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
-	5,  // 45: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 46: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
-	4,  // 47: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
-	4,  // 48: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
-	7,  // 49: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
-	9,  // 50: note.NoteService.SetSnippetTags:output_type -> note.SetSnippetTagsResponse
-	4,  // 51: note.NoteService.MoveSnippet:output_type -> note.SnippetResponse
-	5,  // 52: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 53: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
-	15, // 54: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	15, // 55: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	4,  // 56: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
-	4,  // 57: note.NoteService.CreateSnippetFromShare:output_type -> note.SnippetResponse
-	5,  // 58: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 59: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 60: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
-	21, // 61: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
-	18, // 62: note.NoteService.GetGroup:output_type -> note.GroupResponse
-	18, // 63: note.NoteService.CreateGroup:output_type -> note.GroupResponse
-	18, // 64: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
-	25, // 65: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
-	28, // 66: note.NoteService.ListTags:output_type -> note.ListTagsResponse
-	26, // 67: note.NoteService.CreateTag:output_type -> note.TagResponse
-	26, // 68: note.NoteService.UpdateTag:output_type -> note.TagResponse
-	32, // 69: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
-	35, // 70: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
-	33, // 71: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
-	33, // 72: note.NoteService.CreateTemplate:output_type -> note.TemplateResponse
-	33, // 73: note.NoteService.UpdateTemplate:output_type -> note.TemplateResponse
-	40, // 74: note.NoteService.DeleteTemplate:output_type -> note.DeleteTemplateResponse
-	43, // 75: note.NoteService.CreateShare:output_type -> note.ShareResponse
-	44, // 76: note.NoteService.ListMyShares:output_type -> note.ListSharesResponse
-	46, // 77: note.NoteService.DeleteShare:output_type -> note.DeleteShareResponse
-	48, // 78: note.NoteService.GetPublicShareByToken:output_type -> note.PublicShareResponse
-	50, // 79: note.NoteService.PresignUpload:output_type -> note.PresignUploadResponse
-	52, // 80: note.NoteService.CompleteUpload:output_type -> note.CompleteUploadResponse
-	54, // 81: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
-	45, // [45:82] is the sub-list for method output_type
-	8,  // [8:45] is the sub-list for method input_type
+	8,  // 13: note.NoteService.RestoreSnippet:input_type -> note.RestoreSnippetRequest
+	10, // 14: note.NoteService.SetSnippetTags:input_type -> note.SetSnippetTagsRequest
+	12, // 15: note.NoteService.MoveSnippet:input_type -> note.MoveSnippetRequest
+	13, // 16: note.NoteService.SearchSnippets:input_type -> note.SearchSnippetsRequest
+	14, // 17: note.NoteService.GetPublicSnippet:input_type -> note.GetPublicSnippetRequest
+	15, // 18: note.NoteService.FavoriteSnippet:input_type -> note.FavoriteSnippetRequest
+	16, // 19: note.NoteService.UnfavoriteSnippet:input_type -> note.UnfavoriteSnippetRequest
+	18, // 20: note.NoteService.CreateSnippetFromTemplate:input_type -> note.CreateSnippetFromTemplateRequest
+	19, // 21: note.NoteService.CreateSnippetFromShare:input_type -> note.CreateSnippetFromShareRequest
+	2,  // 22: note.NoteService.ListRecentSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 23: note.NoteService.ListSharedSnippets:input_type -> note.ListSnippetsRequest
+	2,  // 24: note.NoteService.ListFavoriteSnippets:input_type -> note.ListSnippetsRequest
+	21, // 25: note.NoteService.ListGroups:input_type -> note.ListGroupsRequest
+	22, // 26: note.NoteService.GetGroup:input_type -> note.GetGroupRequest
+	24, // 27: note.NoteService.CreateGroup:input_type -> note.CreateGroupRequest
+	25, // 28: note.NoteService.UpdateGroup:input_type -> note.UpdateGroupRequest
+	26, // 29: note.NoteService.DeleteGroup:input_type -> note.DeleteGroupRequest
+	29, // 30: note.NoteService.ListTags:input_type -> note.ListTagsRequest
+	31, // 31: note.NoteService.CreateTag:input_type -> note.CreateTagRequest
+	32, // 32: note.NoteService.UpdateTag:input_type -> note.UpdateTagRequest
+	33, // 33: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
+	36, // 34: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
+	38, // 35: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
+	39, // 36: note.NoteService.CreateTemplate:input_type -> note.CreateTemplateRequest
+	40, // 37: note.NoteService.UpdateTemplate:input_type -> note.UpdateTemplateRequest
+	41, // 38: note.NoteService.DeleteTemplate:input_type -> note.DeleteTemplateRequest
+	43, // 39: note.NoteService.CreateShare:input_type -> note.CreateShareRequest
+	44, // 40: note.NoteService.ListMyShares:input_type -> note.ListMySharesRequest
+	47, // 41: note.NoteService.DeleteShare:input_type -> note.DeleteShareRequest
+	49, // 42: note.NoteService.GetPublicShareByToken:input_type -> note.GetPublicShareByTokenRequest
+	51, // 43: note.NoteService.PresignUpload:input_type -> note.PresignUploadRequest
+	53, // 44: note.NoteService.CompleteUpload:input_type -> note.CompleteUploadRequest
+	55, // 45: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
+	5,  // 46: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 47: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
+	4,  // 48: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
+	4,  // 49: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
+	7,  // 50: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
+	9,  // 51: note.NoteService.RestoreSnippet:output_type -> note.RestoreSnippetResponse
+	11, // 52: note.NoteService.SetSnippetTags:output_type -> note.SetSnippetTagsResponse
+	4,  // 53: note.NoteService.MoveSnippet:output_type -> note.SnippetResponse
+	5,  // 54: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 55: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
+	17, // 56: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	17, // 57: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	4,  // 58: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
+	4,  // 59: note.NoteService.CreateSnippetFromShare:output_type -> note.SnippetResponse
+	5,  // 60: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 61: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 62: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
+	23, // 63: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
+	20, // 64: note.NoteService.GetGroup:output_type -> note.GroupResponse
+	20, // 65: note.NoteService.CreateGroup:output_type -> note.GroupResponse
+	20, // 66: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
+	27, // 67: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
+	30, // 68: note.NoteService.ListTags:output_type -> note.ListTagsResponse
+	28, // 69: note.NoteService.CreateTag:output_type -> note.TagResponse
+	28, // 70: note.NoteService.UpdateTag:output_type -> note.TagResponse
+	34, // 71: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
+	37, // 72: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
+	35, // 73: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
+	35, // 74: note.NoteService.CreateTemplate:output_type -> note.TemplateResponse
+	35, // 75: note.NoteService.UpdateTemplate:output_type -> note.TemplateResponse
+	42, // 76: note.NoteService.DeleteTemplate:output_type -> note.DeleteTemplateResponse
+	45, // 77: note.NoteService.CreateShare:output_type -> note.ShareResponse
+	46, // 78: note.NoteService.ListMyShares:output_type -> note.ListSharesResponse
+	48, // 79: note.NoteService.DeleteShare:output_type -> note.DeleteShareResponse
+	50, // 80: note.NoteService.GetPublicShareByToken:output_type -> note.PublicShareResponse
+	52, // 81: note.NoteService.PresignUpload:output_type -> note.PresignUploadResponse
+	54, // 82: note.NoteService.CompleteUpload:output_type -> note.CompleteUploadResponse
+	56, // 83: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
+	46, // [46:84] is the sub-list for method output_type
+	8,  // [8:46] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name
 }
 
-func init() { file_proto_note_note_api_proto_init() }
-func file_proto_note_note_api_proto_init() {
-	if File_proto_note_note_api_proto != nil {
+func init() { file_note_note_api_proto_init() }
+func file_note_note_api_proto_init() {
+	if File_note_note_api_proto != nil {
 		return
 	}
-	file_proto_note_note_api_proto_msgTypes[0].OneofWrappers = []any{}
-	file_proto_note_note_api_proto_msgTypes[2].OneofWrappers = []any{}
-	file_proto_note_note_api_proto_msgTypes[10].OneofWrappers = []any{}
-	file_proto_note_note_api_proto_msgTypes[18].OneofWrappers = []any{}
-	file_proto_note_note_api_proto_msgTypes[22].OneofWrappers = []any{}
-	file_proto_note_note_api_proto_msgTypes[23].OneofWrappers = []any{}
-	file_proto_note_note_api_proto_msgTypes[51].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[0].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[2].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[12].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[20].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[24].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[25].OneofWrappers = []any{}
+	file_note_note_api_proto_msgTypes[53].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_note_note_api_proto_rawDesc), len(file_proto_note_note_api_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_note_note_api_proto_rawDesc), len(file_note_note_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   56,
+			NumMessages:   58,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_note_note_api_proto_goTypes,
-		DependencyIndexes: file_proto_note_note_api_proto_depIdxs,
-		MessageInfos:      file_proto_note_note_api_proto_msgTypes,
+		GoTypes:           file_note_note_api_proto_goTypes,
+		DependencyIndexes: file_note_note_api_proto_depIdxs,
+		MessageInfos:      file_note_note_api_proto_msgTypes,
 	}.Build()
-	File_proto_note_note_api_proto = out.File
-	file_proto_note_note_api_proto_goTypes = nil
-	file_proto_note_note_api_proto_depIdxs = nil
+	File_note_note_api_proto = out.File
+	file_note_note_api_proto_goTypes = nil
+	file_note_note_api_proto_depIdxs = nil
 }

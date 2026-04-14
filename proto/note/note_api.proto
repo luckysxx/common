@@ -41,6 +41,12 @@ service NoteService {
         };
     }
 
+    rpc RestoreSnippet (RestoreSnippetRequest) returns (RestoreSnippetResponse) {
+        option (google.api.http) = {
+            put: "/api/v1/notes/snippets/{snippet_id}/restore"
+        };
+    }
+
     rpc SetSnippetTags (SetSnippetTagsRequest) returns (SetSnippetTagsResponse) {
         option (google.api.http) = {
             put: "/api/v1/notes/snippets/{snippet_id}/tags"
@@ -275,6 +281,8 @@ message ListSnippetsRequest {
     string sort_by = 6;           // "updated_at" | "created_at" | "title" | "manual"，默认 "updated_at"
     string visibility = 7;        // 按可见性筛选：public / private / ""(全部)
     string type = 8;              // 按类型筛选：code / note / file / ""(全部)
+    string status = 9;            // 状态筛选：""(默认，只看 active), "active", "trashed"
+    bool only_favorites = 10;     // 是否仅显示收藏的
 }
 
 message UpdateSnippetRequest {
@@ -301,6 +309,8 @@ message SnippetResponse {
     string updated_at = 13;
     repeated int64 tag_ids = 14;
     int32 sort_order = 15; // 在所属分组内的排序权重，值越小越靠前
+    bool is_favorite = 16;
+    string deleted_at = 17;
 }
 
 message ListSnippetsResponse {
@@ -315,6 +325,13 @@ message DeleteSnippetRequest {
     int64 snippet_id = 1;
 }
 message DeleteSnippetResponse {
+    int64 id = 1;
+}
+
+message RestoreSnippetRequest {
+    int64 snippet_id = 1;
+}
+message RestoreSnippetResponse {
     int64 id = 1;
 }
 
