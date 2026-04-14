@@ -45,6 +45,9 @@ const (
 	NoteService_DeleteTag_FullMethodName                 = "/note.NoteService/DeleteTag"
 	NoteService_ListTemplates_FullMethodName             = "/note.NoteService/ListTemplates"
 	NoteService_GetTemplate_FullMethodName               = "/note.NoteService/GetTemplate"
+	NoteService_CreateTemplate_FullMethodName            = "/note.NoteService/CreateTemplate"
+	NoteService_UpdateTemplate_FullMethodName            = "/note.NoteService/UpdateTemplate"
+	NoteService_DeleteTemplate_FullMethodName            = "/note.NoteService/DeleteTemplate"
 	NoteService_UploadFile_FullMethodName                = "/note.NoteService/UploadFile"
 )
 
@@ -81,6 +84,9 @@ type NoteServiceClient interface {
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	ListTemplates(ctx context.Context, in *ListTemplatesRequest, opts ...grpc.CallOption) (*ListTemplatesResponse, error)
 	GetTemplate(ctx context.Context, in *GetTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
+	CreateTemplate(ctx context.Context, in *CreateTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
+	UpdateTemplate(ctx context.Context, in *UpdateTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error)
+	DeleteTemplate(ctx context.Context, in *DeleteTemplateRequest, opts ...grpc.CallOption) (*DeleteTemplateResponse, error)
 	// 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
 	UploadFile(ctx context.Context, in *UploadFileRequest, opts ...grpc.CallOption) (*UploadFileResponse, error)
 }
@@ -353,6 +359,36 @@ func (c *noteServiceClient) GetTemplate(ctx context.Context, in *GetTemplateRequ
 	return out, nil
 }
 
+func (c *noteServiceClient) CreateTemplate(ctx context.Context, in *CreateTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TemplateResponse)
+	err := c.cc.Invoke(ctx, NoteService_CreateTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) UpdateTemplate(ctx context.Context, in *UpdateTemplateRequest, opts ...grpc.CallOption) (*TemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TemplateResponse)
+	err := c.cc.Invoke(ctx, NoteService_UpdateTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) DeleteTemplate(ctx context.Context, in *DeleteTemplateRequest, opts ...grpc.CallOption) (*DeleteTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTemplateResponse)
+	err := c.cc.Invoke(ctx, NoteService_DeleteTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *noteServiceClient) UploadFile(ctx context.Context, in *UploadFileRequest, opts ...grpc.CallOption) (*UploadFileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UploadFileResponse)
@@ -396,6 +432,9 @@ type NoteServiceServer interface {
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	ListTemplates(context.Context, *ListTemplatesRequest) (*ListTemplatesResponse, error)
 	GetTemplate(context.Context, *GetTemplateRequest) (*TemplateResponse, error)
+	CreateTemplate(context.Context, *CreateTemplateRequest) (*TemplateResponse, error)
+	UpdateTemplate(context.Context, *UpdateTemplateRequest) (*TemplateResponse, error)
+	DeleteTemplate(context.Context, *DeleteTemplateRequest) (*DeleteTemplateResponse, error)
 	// 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
 	UploadFile(context.Context, *UploadFileRequest) (*UploadFileResponse, error)
 	mustEmbedUnimplementedNoteServiceServer()
@@ -485,6 +524,15 @@ func (UnimplementedNoteServiceServer) ListTemplates(context.Context, *ListTempla
 }
 func (UnimplementedNoteServiceServer) GetTemplate(context.Context, *GetTemplateRequest) (*TemplateResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetTemplate not implemented")
+}
+func (UnimplementedNoteServiceServer) CreateTemplate(context.Context, *CreateTemplateRequest) (*TemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateTemplate not implemented")
+}
+func (UnimplementedNoteServiceServer) UpdateTemplate(context.Context, *UpdateTemplateRequest) (*TemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateTemplate not implemented")
+}
+func (UnimplementedNoteServiceServer) DeleteTemplate(context.Context, *DeleteTemplateRequest) (*DeleteTemplateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteTemplate not implemented")
 }
 func (UnimplementedNoteServiceServer) UploadFile(context.Context, *UploadFileRequest) (*UploadFileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UploadFile not implemented")
@@ -978,6 +1026,60 @@ func _NoteService_GetTemplate_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NoteService_CreateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).CreateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_CreateTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).CreateTemplate(ctx, req.(*CreateTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_UpdateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).UpdateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_UpdateTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).UpdateTemplate(ctx, req.(*UpdateTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_DeleteTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).DeleteTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_DeleteTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).DeleteTemplate(ctx, req.(*DeleteTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NoteService_UploadFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UploadFileRequest)
 	if err := dec(in); err != nil {
@@ -1106,6 +1208,18 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTemplate",
 			Handler:    _NoteService_GetTemplate_Handler,
+		},
+		{
+			MethodName: "CreateTemplate",
+			Handler:    _NoteService_CreateTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateTemplate",
+			Handler:    _NoteService_UpdateTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteTemplate",
+			Handler:    _NoteService_DeleteTemplate_Handler,
 		},
 		{
 			MethodName: "UploadFile",

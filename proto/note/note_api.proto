@@ -181,6 +181,26 @@ service NoteService {
         };
     }
 
+    rpc CreateTemplate (CreateTemplateRequest) returns (TemplateResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/notes/templates"
+            body: "*"
+        };
+    }
+
+    rpc UpdateTemplate (UpdateTemplateRequest) returns (TemplateResponse) {
+        option (google.api.http) = {
+            put: "/api/v1/notes/templates/{template_id}"
+            body: "*"
+        };
+    }
+
+    rpc DeleteTemplate (DeleteTemplateRequest) returns (DeleteTemplateResponse) {
+        option (google.api.http) = {
+            delete: "/api/v1/notes/templates/{template_id}"
+        };
+    }
+
     // 文件上传 — 不加 http 注解，保留手写 handler（二进制流）
     rpc UploadFile (UploadFileRequest) returns (UploadFileResponse);
 }
@@ -372,13 +392,42 @@ message TemplateResponse {
     string name = 2;
     string language = 3;
     string content = 4;
+    string description = 5;
+    string category = 6;
+    bool   is_system = 7;
+    int64  owner_id = 8;
+    string created_at = 9;
+    string updated_at = 10;
 }
-message ListTemplatesRequest {}
+message ListTemplatesRequest {
+    string category = 1;  // 按分类过滤，空字符串 = 全部
+}
 message ListTemplatesResponse {
     repeated TemplateResponse templates = 1;
 }
 message GetTemplateRequest {
     string template_id = 1;
+}
+message CreateTemplateRequest {
+    string name = 1;
+    string language = 2;
+    string content = 3;
+    string description = 4;
+    string category = 5;
+}
+message UpdateTemplateRequest {
+    string template_id = 1;
+    string name = 2;
+    string language = 3;
+    string content = 4;
+    string description = 5;
+    string category = 6;
+}
+message DeleteTemplateRequest {
+    string template_id = 1;
+}
+message DeleteTemplateResponse {
+    string id = 1;
 }
 
 // ── Upload ──

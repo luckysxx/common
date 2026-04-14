@@ -1939,6 +1939,12 @@ type TemplateResponse struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Language      string                 `protobuf:"bytes,3,opt,name=language,proto3" json:"language,omitempty"`
 	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Category      string                 `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"`
+	IsSystem      bool                   `protobuf:"varint,7,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
+	OwnerId       int64                  `protobuf:"varint,8,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2001,8 +2007,51 @@ func (x *TemplateResponse) GetContent() string {
 	return ""
 }
 
+func (x *TemplateResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *TemplateResponse) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *TemplateResponse) GetIsSystem() bool {
+	if x != nil {
+		return x.IsSystem
+	}
+	return false
+}
+
+func (x *TemplateResponse) GetOwnerId() int64 {
+	if x != nil {
+		return x.OwnerId
+	}
+	return 0
+}
+
+func (x *TemplateResponse) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *TemplateResponse) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
 type ListTemplatesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Category      string                 `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"` // 按分类过滤，空字符串 = 全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2035,6 +2084,13 @@ func (x *ListTemplatesRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListTemplatesRequest.ProtoReflect.Descriptor instead.
 func (*ListTemplatesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_note_note_api_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ListTemplatesRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
 }
 
 type ListTemplatesResponse struct {
@@ -2125,6 +2181,254 @@ func (x *GetTemplateRequest) GetTemplateId() string {
 	return ""
 }
 
+type CreateTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Language      string                 `protobuf:"bytes,2,opt,name=language,proto3" json:"language,omitempty"`
+	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Category      string                 `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTemplateRequest) Reset() {
+	*x = CreateTemplateRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTemplateRequest) ProtoMessage() {}
+
+func (x *CreateTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTemplateRequest.ProtoReflect.Descriptor instead.
+func (*CreateTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *CreateTemplateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateTemplateRequest) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+func (x *CreateTemplateRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *CreateTemplateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateTemplateRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+type UpdateTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TemplateId    string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Language      string                 `protobuf:"bytes,3,opt,name=language,proto3" json:"language,omitempty"`
+	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Category      string                 `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTemplateRequest) Reset() {
+	*x = UpdateTemplateRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTemplateRequest) ProtoMessage() {}
+
+func (x *UpdateTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTemplateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *UpdateTemplateRequest) GetTemplateId() string {
+	if x != nil {
+		return x.TemplateId
+	}
+	return ""
+}
+
+func (x *UpdateTemplateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateTemplateRequest) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+func (x *UpdateTemplateRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *UpdateTemplateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateTemplateRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+type DeleteTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TemplateId    string                 `protobuf:"bytes,1,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateRequest) Reset() {
+	*x = DeleteTemplateRequest{}
+	mi := &file_proto_note_note_api_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateRequest) ProtoMessage() {}
+
+func (x *DeleteTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *DeleteTemplateRequest) GetTemplateId() string {
+	if x != nil {
+		return x.TemplateId
+	}
+	return ""
+}
+
+type DeleteTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteTemplateResponse) Reset() {
+	*x = DeleteTemplateResponse{}
+	mi := &file_proto_note_note_api_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTemplateResponse) ProtoMessage() {}
+
+func (x *DeleteTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_note_note_api_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTemplateResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *DeleteTemplateResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 // ── Upload ──
 type UploadFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -2136,7 +2440,7 @@ type UploadFileRequest struct {
 
 func (x *UploadFileRequest) Reset() {
 	*x = UploadFileRequest{}
-	mi := &file_proto_note_note_api_proto_msgTypes[36]
+	mi := &file_proto_note_note_api_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2148,7 +2452,7 @@ func (x *UploadFileRequest) String() string {
 func (*UploadFileRequest) ProtoMessage() {}
 
 func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[36]
+	mi := &file_proto_note_note_api_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2161,7 +2465,7 @@ func (x *UploadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadFileRequest) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{36}
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UploadFileRequest) GetFileData() []byte {
@@ -2192,7 +2496,7 @@ type UploadFileResponse struct {
 
 func (x *UploadFileResponse) Reset() {
 	*x = UploadFileResponse{}
-	mi := &file_proto_note_note_api_proto_msgTypes[37]
+	mi := &file_proto_note_note_api_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2204,7 +2508,7 @@ func (x *UploadFileResponse) String() string {
 func (*UploadFileResponse) ProtoMessage() {}
 
 func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_note_note_api_proto_msgTypes[37]
+	mi := &file_proto_note_note_api_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2217,7 +2521,7 @@ func (x *UploadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadFileResponse.ProtoReflect.Descriptor instead.
 func (*UploadFileResponse) Descriptor() ([]byte, []int) {
-	return file_proto_note_note_api_proto_rawDescGZIP(), []int{37}
+	return file_proto_note_note_api_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *UploadFileResponse) GetId() string {
@@ -2442,18 +2746,47 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\x10DeleteTagRequest\x12\x15\n" +
 	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\"#\n" +
 	"\x11DeleteTagResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"l\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\xa0\x02\n" +
 	"\x10TemplateResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
 	"\blanguage\x18\x03 \x01(\tR\blanguage\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\"\x16\n" +
-	"\x14ListTemplatesRequest\"M\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bcategory\x18\x06 \x01(\tR\bcategory\x12\x1b\n" +
+	"\tis_system\x18\a \x01(\bR\bisSystem\x12\x19\n" +
+	"\bowner_id\x18\b \x01(\x03R\aownerId\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\t \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\n" +
+	" \x01(\tR\tupdatedAt\"2\n" +
+	"\x14ListTemplatesRequest\x12\x1a\n" +
+	"\bcategory\x18\x01 \x01(\tR\bcategory\"M\n" +
 	"\x15ListTemplatesResponse\x124\n" +
 	"\ttemplates\x18\x01 \x03(\v2\x16.note.TemplateResponseR\ttemplates\"5\n" +
 	"\x12GetTemplateRequest\x12\x1f\n" +
 	"\vtemplate_id\x18\x01 \x01(\tR\n" +
-	"templateId\"L\n" +
+	"templateId\"\x9f\x01\n" +
+	"\x15CreateTemplateRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
+	"\blanguage\x18\x02 \x01(\tR\blanguage\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bcategory\x18\x05 \x01(\tR\bcategory\"\xc0\x01\n" +
+	"\x15UpdateTemplateRequest\x12\x1f\n" +
+	"\vtemplate_id\x18\x01 \x01(\tR\n" +
+	"templateId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
+	"\blanguage\x18\x03 \x01(\tR\blanguage\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bcategory\x18\x06 \x01(\tR\bcategory\"8\n" +
+	"\x15DeleteTemplateRequest\x12\x1f\n" +
+	"\vtemplate_id\x18\x01 \x01(\tR\n" +
+	"templateId\"(\n" +
+	"\x16DeleteTemplateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"L\n" +
 	"\x11UploadFileRequest\x12\x1b\n" +
 	"\tfile_data\x18\x01 \x01(\fR\bfileData\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\"\xa8\x01\n" +
@@ -2463,7 +2796,7 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x1b\n" +
 	"\tmime_type\x18\x05 \x01(\tR\bmimeType\x12#\n" +
-	"\rthumbnail_url\x18\x06 \x01(\tR\fthumbnailUrl2\xf5\x16\n" +
+	"\rthumbnail_url\x18\x06 \x01(\tR\fthumbnailUrl2\xd5\x19\n" +
 	"\vNoteService\x12h\n" +
 	"\fListSnippets\x12\x19.note.ListSnippetsRequest\x1a\x1a.note.ListSnippetsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/v1/notes/me/snippets\x12e\n" +
 	"\rCreateSnippet\x12\x1a.note.CreateSnippetRequest\x1a\x15.note.SnippetResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/api/v1/notes/snippets\x12i\n" +
@@ -2492,7 +2825,10 @@ const file_proto_note_note_api_proto_rawDesc = "" +
 	"\tUpdateTag\x12\x16.note.UpdateTagRequest\x1a\x11.note.TagResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\x1a\x1b/api/v1/notes/tags/{tag_id}\x12a\n" +
 	"\tDeleteTag\x12\x16.note.DeleteTagRequest\x1a\x17.note.DeleteTagResponse\"#\x82\xd3\xe4\x93\x02\x1d*\x1b/api/v1/notes/tags/{tag_id}\x12i\n" +
 	"\rListTemplates\x12\x1a.note.ListTemplatesRequest\x1a\x1b.note.ListTemplatesResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/api/v1/notes/templates\x12n\n" +
-	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/notes/templates/{template_id}\x12?\n" +
+	"\vGetTemplate\x12\x18.note.GetTemplateRequest\x1a\x16.note.TemplateResponse\"-\x82\xd3\xe4\x93\x02'\x12%/api/v1/notes/templates/{template_id}\x12i\n" +
+	"\x0eCreateTemplate\x12\x1b.note.CreateTemplateRequest\x1a\x16.note.TemplateResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/notes/templates\x12w\n" +
+	"\x0eUpdateTemplate\x12\x1b.note.UpdateTemplateRequest\x1a\x16.note.TemplateResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\x1a%/api/v1/notes/templates/{template_id}\x12z\n" +
+	"\x0eDeleteTemplate\x12\x1b.note.DeleteTemplateRequest\x1a\x1c.note.DeleteTemplateResponse\"-\x82\xd3\xe4\x93\x02'*%/api/v1/notes/templates/{template_id}\x12?\n" +
 	"\n" +
 	"UploadFile\x12\x17.note.UploadFileRequest\x1a\x18.note.UploadFileResponseB'Z%github.com/luckysxx/common/proto/noteb\x06proto3"
 
@@ -2508,7 +2844,7 @@ func file_proto_note_note_api_proto_rawDescGZIP() []byte {
 	return file_proto_note_note_api_proto_rawDescData
 }
 
-var file_proto_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_proto_note_note_api_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_proto_note_note_api_proto_goTypes = []any{
 	(*CreateSnippetRequest)(nil),             // 0: note.CreateSnippetRequest
 	(*GetSnippetRequest)(nil),                // 1: note.GetSnippetRequest
@@ -2546,8 +2882,12 @@ var file_proto_note_note_api_proto_goTypes = []any{
 	(*ListTemplatesRequest)(nil),             // 33: note.ListTemplatesRequest
 	(*ListTemplatesResponse)(nil),            // 34: note.ListTemplatesResponse
 	(*GetTemplateRequest)(nil),               // 35: note.GetTemplateRequest
-	(*UploadFileRequest)(nil),                // 36: note.UploadFileRequest
-	(*UploadFileResponse)(nil),               // 37: note.UploadFileResponse
+	(*CreateTemplateRequest)(nil),            // 36: note.CreateTemplateRequest
+	(*UpdateTemplateRequest)(nil),            // 37: note.UpdateTemplateRequest
+	(*DeleteTemplateRequest)(nil),            // 38: note.DeleteTemplateRequest
+	(*DeleteTemplateResponse)(nil),           // 39: note.DeleteTemplateResponse
+	(*UploadFileRequest)(nil),                // 40: note.UploadFileRequest
+	(*UploadFileResponse)(nil),               // 41: note.UploadFileResponse
 }
 var file_proto_note_note_api_proto_depIdxs = []int32{
 	4,  // 0: note.ListSnippetsResponse.snippets:type_name -> note.SnippetResponse
@@ -2580,36 +2920,42 @@ var file_proto_note_note_api_proto_depIdxs = []int32{
 	30, // 27: note.NoteService.DeleteTag:input_type -> note.DeleteTagRequest
 	33, // 28: note.NoteService.ListTemplates:input_type -> note.ListTemplatesRequest
 	35, // 29: note.NoteService.GetTemplate:input_type -> note.GetTemplateRequest
-	36, // 30: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
-	5,  // 31: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 32: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
-	4,  // 33: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
-	4,  // 34: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
-	7,  // 35: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
-	9,  // 36: note.NoteService.SetSnippetTags:output_type -> note.SetSnippetTagsResponse
-	4,  // 37: note.NoteService.MoveSnippet:output_type -> note.SnippetResponse
-	5,  // 38: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
-	4,  // 39: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
-	15, // 40: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	15, // 41: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
-	4,  // 42: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
-	5,  // 43: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 44: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
-	5,  // 45: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
-	20, // 46: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
-	17, // 47: note.NoteService.GetGroup:output_type -> note.GroupResponse
-	17, // 48: note.NoteService.CreateGroup:output_type -> note.GroupResponse
-	17, // 49: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
-	24, // 50: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
-	27, // 51: note.NoteService.ListTags:output_type -> note.ListTagsResponse
-	25, // 52: note.NoteService.CreateTag:output_type -> note.TagResponse
-	25, // 53: note.NoteService.UpdateTag:output_type -> note.TagResponse
-	31, // 54: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
-	34, // 55: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
-	32, // 56: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
-	37, // 57: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
-	31, // [31:58] is the sub-list for method output_type
-	4,  // [4:31] is the sub-list for method input_type
+	36, // 30: note.NoteService.CreateTemplate:input_type -> note.CreateTemplateRequest
+	37, // 31: note.NoteService.UpdateTemplate:input_type -> note.UpdateTemplateRequest
+	38, // 32: note.NoteService.DeleteTemplate:input_type -> note.DeleteTemplateRequest
+	40, // 33: note.NoteService.UploadFile:input_type -> note.UploadFileRequest
+	5,  // 34: note.NoteService.ListSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 35: note.NoteService.CreateSnippet:output_type -> note.SnippetResponse
+	4,  // 36: note.NoteService.GetSnippet:output_type -> note.SnippetResponse
+	4,  // 37: note.NoteService.UpdateSnippet:output_type -> note.SnippetResponse
+	7,  // 38: note.NoteService.DeleteSnippet:output_type -> note.DeleteSnippetResponse
+	9,  // 39: note.NoteService.SetSnippetTags:output_type -> note.SetSnippetTagsResponse
+	4,  // 40: note.NoteService.MoveSnippet:output_type -> note.SnippetResponse
+	5,  // 41: note.NoteService.SearchSnippets:output_type -> note.ListSnippetsResponse
+	4,  // 42: note.NoteService.GetPublicSnippet:output_type -> note.SnippetResponse
+	15, // 43: note.NoteService.FavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	15, // 44: note.NoteService.UnfavoriteSnippet:output_type -> note.FavoriteSnippetResponse
+	4,  // 45: note.NoteService.CreateSnippetFromTemplate:output_type -> note.SnippetResponse
+	5,  // 46: note.NoteService.ListRecentSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 47: note.NoteService.ListSharedSnippets:output_type -> note.ListSnippetsResponse
+	5,  // 48: note.NoteService.ListFavoriteSnippets:output_type -> note.ListSnippetsResponse
+	20, // 49: note.NoteService.ListGroups:output_type -> note.ListGroupsResponse
+	17, // 50: note.NoteService.GetGroup:output_type -> note.GroupResponse
+	17, // 51: note.NoteService.CreateGroup:output_type -> note.GroupResponse
+	17, // 52: note.NoteService.UpdateGroup:output_type -> note.GroupResponse
+	24, // 53: note.NoteService.DeleteGroup:output_type -> note.DeleteGroupResponse
+	27, // 54: note.NoteService.ListTags:output_type -> note.ListTagsResponse
+	25, // 55: note.NoteService.CreateTag:output_type -> note.TagResponse
+	25, // 56: note.NoteService.UpdateTag:output_type -> note.TagResponse
+	31, // 57: note.NoteService.DeleteTag:output_type -> note.DeleteTagResponse
+	34, // 58: note.NoteService.ListTemplates:output_type -> note.ListTemplatesResponse
+	32, // 59: note.NoteService.GetTemplate:output_type -> note.TemplateResponse
+	32, // 60: note.NoteService.CreateTemplate:output_type -> note.TemplateResponse
+	32, // 61: note.NoteService.UpdateTemplate:output_type -> note.TemplateResponse
+	39, // 62: note.NoteService.DeleteTemplate:output_type -> note.DeleteTemplateResponse
+	41, // 63: note.NoteService.UploadFile:output_type -> note.UploadFileResponse
+	34, // [34:64] is the sub-list for method output_type
+	4,  // [4:34] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
@@ -2632,7 +2978,7 @@ func file_proto_note_note_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_note_note_api_proto_rawDesc), len(file_proto_note_note_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   38,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
