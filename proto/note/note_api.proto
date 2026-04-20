@@ -28,6 +28,12 @@ service NoteService {
         };
     }
 
+    rpc GetSnippetAIMetadata (GetSnippetAIMetadataRequest) returns (SnippetAIMetadataResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/notes/snippets/{snippet_id}/ai"
+        };
+    }
+
     rpc UpdateSnippet (UpdateSnippetRequest) returns (SnippetResponse) {
         option (google.api.http) = {
             put: "/api/v1/notes/snippets/{snippet_id}"
@@ -271,6 +277,10 @@ message GetSnippetRequest {
     int64 snippet_id = 1;
 }
 
+message GetSnippetAIMetadataRequest {
+    int64 snippet_id = 1;
+}
+
 message ListSnippetsRequest {
     optional int64 group_id = 1;  // 按分组筛选
     optional int64 tag_id = 2;    // 按标签筛选
@@ -357,6 +367,22 @@ message SearchSnippetsRequest {
 
 message GetPublicSnippetRequest {
     int64 snippet_id = 1;
+}
+
+message AITodoItem {
+    string text = 1;
+    string priority = 2;
+    bool done = 3;
+}
+
+message SnippetAIMetadataResponse {
+    int64 snippet_id = 1;
+    string summary = 2;
+    repeated string suggested_tags = 3;
+    repeated AITodoItem todos = 4;
+    string model = 5;
+    string prompt_version = 6;
+    string updated_at = 7;
 }
 
 message FavoriteSnippetRequest {

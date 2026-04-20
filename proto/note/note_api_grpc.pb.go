@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.0
-// source: proto/note/note_api.proto
+// source: note/note_api.proto
 
 package note
 
@@ -22,6 +22,7 @@ const (
 	NoteService_ListSnippets_FullMethodName              = "/note.NoteService/ListSnippets"
 	NoteService_CreateSnippet_FullMethodName             = "/note.NoteService/CreateSnippet"
 	NoteService_GetSnippet_FullMethodName                = "/note.NoteService/GetSnippet"
+	NoteService_GetSnippetAIMetadata_FullMethodName      = "/note.NoteService/GetSnippetAIMetadata"
 	NoteService_UpdateSnippet_FullMethodName             = "/note.NoteService/UpdateSnippet"
 	NoteService_DeleteSnippet_FullMethodName             = "/note.NoteService/DeleteSnippet"
 	NoteService_RestoreSnippet_FullMethodName            = "/note.NoteService/RestoreSnippet"
@@ -66,6 +67,7 @@ type NoteServiceClient interface {
 	ListSnippets(ctx context.Context, in *ListSnippetsRequest, opts ...grpc.CallOption) (*ListSnippetsResponse, error)
 	CreateSnippet(ctx context.Context, in *CreateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	GetSnippet(ctx context.Context, in *GetSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
+	GetSnippetAIMetadata(ctx context.Context, in *GetSnippetAIMetadataRequest, opts ...grpc.CallOption) (*SnippetAIMetadataResponse, error)
 	UpdateSnippet(ctx context.Context, in *UpdateSnippetRequest, opts ...grpc.CallOption) (*SnippetResponse, error)
 	DeleteSnippet(ctx context.Context, in *DeleteSnippetRequest, opts ...grpc.CallOption) (*DeleteSnippetResponse, error)
 	RestoreSnippet(ctx context.Context, in *RestoreSnippetRequest, opts ...grpc.CallOption) (*RestoreSnippetResponse, error)
@@ -140,6 +142,16 @@ func (c *noteServiceClient) GetSnippet(ctx context.Context, in *GetSnippetReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SnippetResponse)
 	err := c.cc.Invoke(ctx, NoteService_GetSnippet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteServiceClient) GetSnippetAIMetadata(ctx context.Context, in *GetSnippetAIMetadataRequest, opts ...grpc.CallOption) (*SnippetAIMetadataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SnippetAIMetadataResponse)
+	err := c.cc.Invoke(ctx, NoteService_GetSnippetAIMetadata_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -503,6 +515,7 @@ type NoteServiceServer interface {
 	ListSnippets(context.Context, *ListSnippetsRequest) (*ListSnippetsResponse, error)
 	CreateSnippet(context.Context, *CreateSnippetRequest) (*SnippetResponse, error)
 	GetSnippet(context.Context, *GetSnippetRequest) (*SnippetResponse, error)
+	GetSnippetAIMetadata(context.Context, *GetSnippetAIMetadataRequest) (*SnippetAIMetadataResponse, error)
 	UpdateSnippet(context.Context, *UpdateSnippetRequest) (*SnippetResponse, error)
 	DeleteSnippet(context.Context, *DeleteSnippetRequest) (*DeleteSnippetResponse, error)
 	RestoreSnippet(context.Context, *RestoreSnippetRequest) (*RestoreSnippetResponse, error)
@@ -561,6 +574,9 @@ func (UnimplementedNoteServiceServer) CreateSnippet(context.Context, *CreateSnip
 }
 func (UnimplementedNoteServiceServer) GetSnippet(context.Context, *GetSnippetRequest) (*SnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSnippet not implemented")
+}
+func (UnimplementedNoteServiceServer) GetSnippetAIMetadata(context.Context, *GetSnippetAIMetadataRequest) (*SnippetAIMetadataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSnippetAIMetadata not implemented")
 }
 func (UnimplementedNoteServiceServer) UpdateSnippet(context.Context, *UpdateSnippetRequest) (*SnippetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateSnippet not implemented")
@@ -738,6 +754,24 @@ func _NoteService_GetSnippet_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NoteServiceServer).GetSnippet(ctx, req.(*GetSnippetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteService_GetSnippetAIMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSnippetAIMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteServiceServer).GetSnippetAIMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoteService_GetSnippetAIMetadata_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteServiceServer).GetSnippetAIMetadata(ctx, req.(*GetSnippetAIMetadataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1392,6 +1426,10 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NoteService_GetSnippet_Handler,
 		},
 		{
+			MethodName: "GetSnippetAIMetadata",
+			Handler:    _NoteService_GetSnippetAIMetadata_Handler,
+		},
+		{
 			MethodName: "UpdateSnippet",
 			Handler:    _NoteService_UpdateSnippet_Handler,
 		},
@@ -1533,5 +1571,5 @@ var NoteService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/note/note_api.proto",
+	Metadata: "note/note_api.proto",
 }
